@@ -1,0 +1,44 @@
+{
+  "name": "bracketsextensiontweetbot",
+  "version": "0.0.1",
+  "main": "lib/bracketsextensiontweetbot.js",
+  "description": "Tweet about new and updated Brackets extensions",
+  "homepage": "http://github.com/ingorichter/BracketsExtensionTweetBot",
+  "bugs": "https://github.com/ingorichter/bracketsextensiontweetbot/issues",
+  "author": {
+    "name": "Ingo Richter",
+    "email": "ingo.richter@gmail.com",
+    "url": "http://ingorichter.blogspot.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ingorichter/bracketsextensiontweetbot"
+  },
+  "licenses": [
+    {
+      "type": "MIT"
+    }
+  ],
+  "bin": {
+      "btb": "bin/bracketsextensiontweetbot.js"
+  },
+  "devDependencies": {
+    "matchdep": "~0.1.1",
+    "grunt-contrib-jshint": "~0.6.0",
+    "grunt-contrib-watch": "~0.5.0",
+    "grunt-contrib-coffee": "~0.7.0",
+    "grunt-simple-mocha": "~0.4.0",
+    "grunt-contrib-clean": "~0.5.0",
+    "sinon-chai": "~2.4.0",
+    "chai": "~1.7.2",
+    "mocha": "~1.12.1",
+    "sinon": "~1.7.3"
+  },
+  "dependencies": {
+    "bluebird": "~0.11.6-0",
+    "lodash": "~2.4.1",
+    "request-json": "~0.4.6",
+    "request": "~2.33.0",
+    "twit": "~1.1.12"
+  }
+}
