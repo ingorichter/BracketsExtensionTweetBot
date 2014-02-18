@@ -99,6 +99,19 @@ module.exports = function (grunt) {
         ],
       },
     },
+    coffeelint: {
+      app: ['src/*.coffee', 'test/*.coffee'],
+      tests: {
+        files: {
+          src: ['tests/*.coffee']
+        },
+        options: {
+          'no_trailing_whitespace': {
+            'level': 'error'
+          }
+        }
+      }
+    },
   });
 
   grunt.registerTask('coverageBackend', 'Test backend files as well as code coverage.', function () {
@@ -107,7 +120,7 @@ module.exports = function (grunt) {
     var path = './test/support/runner.js';
 
     var options = {
-      cmd: 'istanbul',
+      cmd: './node_modules/.bin/istanbul',
       grunt: false,
       args: [
         'cover',
@@ -153,5 +166,5 @@ module.exports = function (grunt) {
     'clean',
     'coffee',
     'coverageBackend'
-  ])
+  ]);
 };
