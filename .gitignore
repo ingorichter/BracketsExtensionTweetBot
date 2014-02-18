@@ -2,3 +2,4 @@
 npm-debug.log
 .oldExtensionRegistries
 /test/dist/
+/coverage/

@@ -1,15 +1,15 @@
+
 /*
  * BracketsExtensionTweetBot
  * http://github.com/ingorichter/BracketsExtensionTweetBot
  *
  * Copyright (c) 2014 Ingo Richter
  * Licensed under the MIT license.
-*/
-
+ */
 
 (function() {
   'use strict';
-  var BRACKETS_REGISTRY_JSON, REGISTRY_JSON, T, TWITTER_CONFIG, Twit, createChangeset, createNotification, downloadExtensionRegistry, fs, https, loadLocalRegistry, path, promise, readFile, request, rockAndRoll, swapRegistryFiles, tweet, twitterConf, writeFile, zlib,
+  var BRACKETS_REGISTRY_JSON, NOTIFICATION_TYPE, REGISTRY_BASEURL, REGISTRY_JSON, T, TWITTER_CONFIG, Twit, createChangeset, createNotification, downloadExtensionRegistry, downloadUrl, fs, https, loadLocalRegistry, path, promise, readFile, request, rockAndRoll, swapRegistryFiles, tweet, twitterConf, writeFile, zlib,
     __hasProp = {}.hasOwnProperty;
 
   fs = require("fs");
@@ -30,7 +30,14 @@
 
   Twit = require('twit');
 
-  BRACKETS_REGISTRY_JSON = "https://s3.amazonaws.com/extend.brackets/registry.json";
+  NOTIFICATION_TYPE = {
+    'UPDATE': 'UPDATE',
+    'NEW': 'NEW'
+  };
+
+  REGISTRY_BASEURL = 'https://s3.amazonaws.com/extend.brackets';
+
+  BRACKETS_REGISTRY_JSON = "" + REGISTRY_BASEURL + "/registry.json";
 
   TWITTER_CONFIG = path.resolve(__dirname, '../twitterconfig.json');
 
@@ -79,8 +86,12 @@
     return deferred.promise;
   };
 
+  downloadUrl = function(extension) {
+    return "" + REGISTRY_BASEURL + "/" + extension.metadata.name + "/" + extension.metadata.name + "-" + extension.metadata.version + ".zip";
+  };
+
   createChangeset = function(oldRegistry, newRegistry) {
-    var changeRecord, changesets, extension, extensionName, previousExtension, type;
+    var changeRecord, changesets, extension, extensionName, previousExtension, type, _homepage, _ref;
     changesets = [];
     for (extensionName in newRegistry) {
       if (!__hasProp.call(newRegistry, extensionName)) continue;
@@ -88,21 +99,26 @@
       previousExtension = oldRegistry != null ? oldRegistry[extensionName] : void 0;
       if (previousExtension) {
         if (extension.versions.length > previousExtension.versions.length) {
-          type = "UPDATE";
+          type = NOTIFICATION_TYPE.UPDATE;
         }
         if (extension.versions.length === previousExtension.versions.length) {
           type = void 0;
         }
       } else {
-        type = "NEW";
+        type = NOTIFICATION_TYPE.NEW;
       }
-      if (type === "UPDATE" || type === "NEW") {
+      if (type === NOTIFICATION_TYPE.UPDATE || type === NOTIFICATION_TYPE.NEW) {
+        _homepage = extension.metadata.homepage;
+        if (!_homepage) {
+          _homepage = (_ref = extension.metadata.repository) != null ? _ref.url : void 0;
+        }
         changeRecord = {
           type: type,
           title: extension.metadata.title,
           version: extension.metadata.version,
-          downloadUrl: 'https://s3.amazonaws.com/extend.brackets/' + extension.metadata.name + "/" + extension.metadata.name + "-" + extension.metadata.version + ".zip",
-          description: extension.metadata.description
+          downloadUrl: downloadUrl(extension),
+          description: extension.metadata.description,
+          homepage: _homepage != null ? _homepage : ""
         };
         changesets.push(changeRecord);
       }
@@ -111,7 +127,7 @@
   };
 
   createNotification = function(changeRecord) {
-    return "" + changeRecord.title + " - " + changeRecord.version + " (" + changeRecord.type + ") " + changeRecord.downloadUrl + " @brackets";
+    return "" + changeRecord.title + " - " + changeRecord.version + " (" + changeRecord.type + ") " + changeRecord.homepage + " " + changeRecord.downloadUrl + " @brackets";
   };
 
   T = new Twit(twitterConf);
