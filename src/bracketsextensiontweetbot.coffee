@@ -92,7 +92,7 @@ createChangeset = (oldRegistry, newRegistry) ->
 
             changeRecord = {
                 type: type,
-                title: extension.metadata.title,
+                title: extension.metadata.title ? extension.metadata.name,
                 version: extension.metadata.version,
                 downloadUrl: downloadUrl(extension),
                 description: extension.metadata.description,

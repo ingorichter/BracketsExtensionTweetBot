@@ -91,7 +91,7 @@
   };
 
   createChangeset = function(oldRegistry, newRegistry) {
-    var changeRecord, changesets, extension, extensionName, previousExtension, type, _homepage, _ref;
+    var changeRecord, changesets, extension, extensionName, previousExtension, type, _homepage, _ref, _ref1;
     changesets = [];
     for (extensionName in newRegistry) {
       if (!__hasProp.call(newRegistry, extensionName)) continue;
@@ -114,7 +114,7 @@
         }
         changeRecord = {
           type: type,
-          title: extension.metadata.title,
+          title: (_ref1 = extension.metadata.title) != null ? _ref1 : extension.metadata.name,
           version: extension.metadata.version,
           downloadUrl: downloadUrl(extension),
           description: extension.metadata.description,
