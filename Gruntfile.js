@@ -1,8 +1,12 @@
+/*global module, require, process*/
+/*jshint strict:false */
+/*jslint node: true */
+
 'use strict';
 
 module.exports = function (grunt) {
   // load all grunt tasks
-  require('matchdep').filterDev('grunt-*').forEach(function(contrib) {
+  require('matchdep').filterDev('grunt-*').forEach(function (contrib) {
     grunt.log.ok([contrib + " is loaded"]);
     grunt.loadNpmTasks(contrib);
   });
@@ -29,7 +33,7 @@ module.exports = function (grunt) {
             ]
           }
         ]
-      },
+      }
     },
     coffee: {
       dist: {
@@ -57,7 +61,7 @@ module.exports = function (grunt) {
       },
       gruntfile: {
         src: 'Gruntfile.js'
-      },
+      }
     },
     watch: {
       gruntfile: {
@@ -76,12 +80,12 @@ module.exports = function (grunt) {
     simplemocha: {
       options: {
         globals: [
-        'sinon',
-        'chai',
-        'should',
-        'expect',
-        'assert',
-        'AssertionError',
+          'sinon',
+          'chai',
+          'should',
+          'expect',
+          'assert',
+          'AssertionError'
         ],
         timeout: 3000,
         ignoreLeaks: false,
@@ -95,23 +99,21 @@ module.exports = function (grunt) {
           'test/support/globals.js',
 
           // tests
-          'test/dist/**/*.spec.js',
-        ],
-      },
+          'test/dist/**/*.spec.js'
+        ]
+      }
     },
     coffeelint: {
       app: ['src/*.coffee', 'test/*.coffee'],
       tests: {
         files: {
           src: ['tests/*.coffee']
-        },
-        options: {
-          'no_trailing_whitespace': {
-            'level': 'error'
-          }
         }
+      },
+      options: {
+        configFile: '.coffeelintrc'
       }
-    },
+    }
   });
 
   grunt.registerTask('coverageBackend', 'Test backend files as well as code coverage.', function () {
@@ -132,8 +134,8 @@ module.exports = function (grunt) {
       ],
       opts: {
         // preserve colors for stdout in terminal
-        stdio: 'inherit',
-      },
+        stdio: 'inherit'
+      }
     };
 
     function doneFunction(error, result) {
@@ -154,12 +156,12 @@ module.exports = function (grunt) {
 
 
   // Default task.
-  grunt.registerTask('default', ['coffee', 'jshint']);
+  grunt.registerTask('default', ['coffee', 'coffeelint', 'jshint']);
 
   grunt.registerTask('test', [
     'clean',
     'coffee',
-    'simplemocha:backend',
+    'simplemocha:backend'
   ]);
 
   grunt.registerTask('coverage', [

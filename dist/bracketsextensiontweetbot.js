@@ -91,17 +91,18 @@
   };
 
   createChangeset = function(oldRegistry, newRegistry) {
-    var changeRecord, changesets, extension, extensionName, previousExtension, type, _homepage, _ref, _ref1;
+    var changeRecord, changesets, extension, extensionName, previousExtension, previousVersionsCount, type, _homepage, _ref, _ref1;
     changesets = [];
     for (extensionName in newRegistry) {
       if (!__hasProp.call(newRegistry, extensionName)) continue;
       extension = newRegistry[extensionName];
       previousExtension = oldRegistry != null ? oldRegistry[extensionName] : void 0;
       if (previousExtension) {
-        if (extension.versions.length > previousExtension.versions.length) {
+        previousVersionsCount = previousExtension.versions.length;
+        if (extension.versions.length > previousVersionsCount) {
           type = NOTIFICATION_TYPE.UPDATE;
         }
-        if (extension.versions.length === previousExtension.versions.length) {
+        if (extension.versions.length === previousVersionsCount) {
           type = void 0;
         }
       } else {

@@ -4,7 +4,7 @@
   "main": "lib/bracketsextensiontweetbot.js",
   "description": "Tweet about new and updated Brackets extensions",
   "homepage": "http://github.com/ingorichter/BracketsExtensionTweetBot",
-  "bugs": "https://github.com/ingorichter/bracketsextensiontweetbot/issues",
+  "bugs": "https://github.com/ingorichter/BracketsExtensionTweetBot/issues",
   "author": {
     "name": "Ingo Richter",
     "email": "ingo.richter@gmail.com",
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ingorichter/bracketsextensiontweetbot"
+    "url": "https://github.com/ingorichter/BracketsExtensionTweetBot"
   },
   "licenses": [
     {
@@ -22,25 +22,28 @@
   "bin": {
     "btb": "bin/bracketsextensiontweetbot.js"
   },
+  "scripts": {
+    "test": "grunt test"
+  },
   "devDependencies": {
-    "matchdep": "~0.1.1",
-    "grunt-contrib-jshint": "~0.6.0",
-    "grunt-contrib-watch": "~0.5.0",
-    "grunt-contrib-coffee": "~0.10.0",
+    "matchdep": "~0.3.0",
+    "grunt-contrib-jshint": "~0.10.0",
+    "grunt-contrib-watch": "~0.6.1",
+    "grunt-contrib-coffee": "~0.10.1",
     "grunt-simple-mocha": "~0.4.0",
     "grunt-contrib-clean": "~0.5.0",
-    "sinon-chai": "~2.4.0",
-    "chai": "~1.7.2",
-    "mocha": "~1.12.1",
-    "sinon": "~1.7.3",
-    "grunt-coffeelint": "0.0.8",
-    "istanbul": "~0.1.22"
+    "sinon-chai": "~2.5.0",
+    "chai": "~1.9.1",
+    "mocha": "~1.18.2",
+    "sinon": "~1.9.1",
+    "grunt-coffeelint": "0.0.10",
+    "istanbul": "~0.2.7"
   },
   "dependencies": {
-    "bluebird": "~0.11.6-0",
+    "bluebird": "~1.2.3",
     "lodash": "~2.4.1",
-    "request-json": "~0.4.6",
-    "request": "~2.33.0",
-    "twit": "~1.1.12"
+    "request-json": "~0.4.10",
+    "request": "~2.34.0",
+    "twit": "~1.1.14"
   }
 }

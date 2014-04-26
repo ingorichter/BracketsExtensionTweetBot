@@ -20,8 +20,8 @@ request = require("request")
 Twit = require('twit')
 
 NOTIFICATION_TYPE = {
-    'UPDATE': 'UPDATE',
-    'NEW': 'NEW'
+  'UPDATE': 'UPDATE',
+  'NEW': 'NEW'
 }
 
 REGISTRY_BASEURL = 'https://s3.amazonaws.com/extend.brackets'
@@ -33,109 +33,113 @@ REGISTRY_JSON = path.resolve(__dirname, '../extensionRegistry.json')
 twitterConf = JSON.parse(fs.readFileSync(TWITTER_CONFIG))
 
 loadLocalRegistry = ->
-    deferred = promise.defer()
+  deferred = promise.defer()
 
-    p = readFile(REGISTRY_JSON)
+  p = readFile(REGISTRY_JSON)
 
-    p.then (data) -> deferred.resolve JSON.parse(data)
+  p.then (data) -> deferred.resolve JSON.parse(data)
 
-    p.catch((err) ->
-        ## file doesn't exist
-        if (err.cause.errno is 34)
-            deferred.resolve {}
-        else
-            deferred.reject err
-    )
+  p.catch((err) ->
+    ## file doesn't exist
+    if (err.cause.errno is 34)
+      deferred.resolve {}
+    else
+      deferred.reject err
+  )
 
-    return deferred.promise
+  return deferred.promise
 
 downloadExtensionRegistry = ->
-    deferred = promise.defer()
+  deferred = promise.defer()
 
-    request {uri: BRACKETS_REGISTRY_JSON, json: true, encoding: null}, (err, resp, body) ->
+  request {uri: BRACKETS_REGISTRY_JSON, json: true, encoding: null}, (err, resp, body) ->
+    if err
+      deferred.reject err
+      return
+    else
+      zlib.gunzip body, (err, buffer) ->
         if err
-            deferred.reject err
-            return
+          console.error err
+          deferred.reject err
+          return
         else
-            zlib.gunzip body, (err, buffer) ->
-                if err
-                    console.error err
-                    deferred.reject err
-                    return
-                else
-                    deferred.resolve(JSON.parse(buffer.toString()))
-                    return
-            return
+          deferred.resolve(JSON.parse(buffer.toString()))
+          return
+      return
 
-    deferred.promise
+  deferred.promise
 
 downloadUrl = (extension) ->
-    "#{REGISTRY_BASEURL}/#{extension.metadata.name}/#{extension.metadata.name}-#{extension.metadata.version}.zip"
+  "#{REGISTRY_BASEURL}/#{extension.metadata.name}/#{extension.metadata.name}-#{extension.metadata.version}.zip"
 
 createChangeset = (oldRegistry, newRegistry) ->
-    changesets = []
+  changesets = []
 
-    for own extensionName, extension of newRegistry
-        previousExtension = oldRegistry?[extensionName]
+  for own extensionName, extension of newRegistry
+    previousExtension = oldRegistry?[extensionName]
 
-        if previousExtension
-            type = NOTIFICATION_TYPE.UPDATE if extension.versions.length > previousExtension.versions.length
-            type = undefined if extension.versions.length is previousExtension.versions.length
-        else type = NOTIFICATION_TYPE.NEW
+    if previousExtension
+      previousVersionsCount = previousExtension.versions.length
+      type = NOTIFICATION_TYPE.UPDATE if extension.versions.length > previousVersionsCount
+      type = undefined if extension.versions.length is previousVersionsCount
+    else type = NOTIFICATION_TYPE.NEW
 
-        if type is NOTIFICATION_TYPE.UPDATE or type is NOTIFICATION_TYPE.NEW
-            # determine what to provide for homepage if the homepage isn't available
+    if type is NOTIFICATION_TYPE.UPDATE or type is NOTIFICATION_TYPE.NEW
+      # determine what to provide for homepage if the homepage isn't available
+      _homepage = extension.metadata.homepage
+      if not _homepage
+        _homepage = extension.metadata.repository?.url
 
-            _homepage = extension.metadata.homepage
-            if not _homepage
-                _homepage = extension.metadata.repository?.url
+      changeRecord = {
+        type: type,
+        title: extension.metadata.title ? extension.metadata.name,
+        version: extension.metadata.version,
+        downloadUrl: downloadUrl(extension),
+        description: extension.metadata.description,
+        homepage: _homepage ? ""
+      }
 
-            changeRecord = {
-                type: type,
-                title: extension.metadata.title ? extension.metadata.name,
-                version: extension.metadata.version,
-                downloadUrl: downloadUrl(extension),
-                description: extension.metadata.description,
-                homepage: _homepage ? ""
-            }
+      changesets.push changeRecord
 
-            changesets.push changeRecord
-
-    changesets
+  changesets
 
 #
 # createNotification
 #
 createNotification = (changeRecord) ->
-    "#{changeRecord.title} - #{changeRecord.version} (#{changeRecord.type}) #{changeRecord.homepage} #{changeRecord.downloadUrl} @brackets"
+  "#{changeRecord.title} - #{changeRecord.version}
+ (#{changeRecord.type}) #{changeRecord.homepage} #{changeRecord.downloadUrl} @brackets"
 
 T = new Twit(twitterConf)
 
 tweet = (data) ->
-    T.post 'statuses/update', { status: data }, (err, reply) ->
-        console.log(err) if err
+  T.post 'statuses/update', { status: data }, (err, reply) ->
+    console.log(err) if err
 
-    return
+  return
 
 swapRegistryFiles = (newContent) ->
-    extRegBackupDir = path.resolve(__dirname, "../.oldExtensionRegistries")
-    fs.mkdirSync(extRegBackupDir) if not fs.existsSync(extRegBackupDir)
+  extRegBackupDir = path.resolve(__dirname, "../.oldExtensionRegistries")
+  fs.mkdirSync(extRegBackupDir) if not fs.existsSync(extRegBackupDir)
 
-    d = new Date()
+  d = new Date()
 
-    fs.createReadStream(REGISTRY_JSON).pipe(fs.createWriteStream(path.join(extRegBackupDir, "#{d.getTime()}-extensionRegistry.json")))
-    fs.writeFileSync(REGISTRY_JSON, JSON.stringify(newContent))
-    return
+  fs.createReadStream(REGISTRY_JSON).pipe(
+    fs.createWriteStream(path.join(extRegBackupDir, "#{d.getTime()}-extensionRegistry.json")))
 
+  fs.writeFileSync(REGISTRY_JSON, JSON.stringify(newContent))
+  return
+
+# This is the main function
 rockAndRoll = ->
-    loadLocalRegistry().then (oldRegistry) ->
-        downloadExtensionRegistry().then (newRegistry) ->
-            notifications = createChangeset(oldRegistry, newRegistry).map (changeRecord) ->
-                createNotification changeRecord
+  loadLocalRegistry().then (oldRegistry) ->
+    downloadExtensionRegistry().then (newRegistry) ->
+      notifications = createChangeset(oldRegistry, newRegistry).map (changeRecord) ->
+        createNotification changeRecord
 
-            tweet notification for notification in notifications
+      tweet notification for notification in notifications
 
-            swapRegistryFiles(newRegistry)
+      swapRegistryFiles(newRegistry)
 
 # API
 exports.createChangeset = createChangeset
