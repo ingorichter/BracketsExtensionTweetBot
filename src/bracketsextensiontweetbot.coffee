@@ -29,8 +29,13 @@ BRACKETS_REGISTRY_JSON = "#{REGISTRY_BASEURL}/registry.json"
 TWITTER_CONFIG = path.resolve(__dirname, '../twitterconfig.json')
 REGISTRY_JSON = path.resolve(__dirname, '../extensionRegistry.json')
 
-# read twitter config file
-twitterConf = JSON.parse(fs.readFileSync(TWITTER_CONFIG))
+class TwitterPublisher
+  constructor: (@config) ->
+    @T = new Twit(@config)
+
+  post: (tweet) ->
+    @T.post 'statuses/update', { status: tweet }, (err, reply) ->
+      console.log(err) if err
 
 loadLocalRegistry = ->
   deferred = promise.defer()
@@ -110,14 +115,6 @@ createNotification = (changeRecord) ->
   "#{changeRecord.title} - #{changeRecord.version}
  (#{changeRecord.type}) #{changeRecord.homepage} #{changeRecord.downloadUrl} @brackets"
 
-T = new Twit(twitterConf)
-
-tweet = (data) ->
-  T.post 'statuses/update', { status: data }, (err, reply) ->
-    console.log(err) if err
-
-  return
-
 swapRegistryFiles = (newContent) ->
   extRegBackupDir = path.resolve(__dirname, "../.oldExtensionRegistries")
   fs.mkdirSync(extRegBackupDir) if not fs.existsSync(extRegBackupDir)
@@ -137,12 +134,15 @@ rockAndRoll = ->
       notifications = createChangeset(oldRegistry, newRegistry).map (changeRecord) ->
         createNotification changeRecord
 
-      tweet notification for notification in notifications
+      # read twitter config file
+      twitterConf = JSON.parse(fs.readFileSync(TWITTER_CONFIG))
+
+      twitterPublisher = new TwitterPublisher twitterConf
+      twitterPublisher.post notification for notification in notifications
 
       swapRegistryFiles(newRegistry)
 
 # API
 exports.createChangeset = createChangeset
 exports.createNotification = createNotification
-exports.tweet = tweet
 exports.rockAndRoll = rockAndRoll

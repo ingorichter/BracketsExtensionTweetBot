@@ -9,7 +9,7 @@
 
 (function() {
   'use strict';
-  var BRACKETS_REGISTRY_JSON, NOTIFICATION_TYPE, REGISTRY_BASEURL, REGISTRY_JSON, T, TWITTER_CONFIG, Twit, createChangeset, createNotification, downloadExtensionRegistry, downloadUrl, fs, https, loadLocalRegistry, path, promise, readFile, request, rockAndRoll, swapRegistryFiles, tweet, twitterConf, writeFile, zlib,
+  var BRACKETS_REGISTRY_JSON, NOTIFICATION_TYPE, REGISTRY_BASEURL, REGISTRY_JSON, TWITTER_CONFIG, Twit, TwitterPublisher, createChangeset, createNotification, downloadExtensionRegistry, downloadUrl, fs, https, loadLocalRegistry, path, promise, readFile, request, rockAndRoll, swapRegistryFiles, writeFile, zlib,
     __hasProp = {}.hasOwnProperty;
 
   fs = require("fs");
@@ -43,7 +43,25 @@
 
   REGISTRY_JSON = path.resolve(__dirname, '../extensionRegistry.json');
 
-  twitterConf = JSON.parse(fs.readFileSync(TWITTER_CONFIG));
+  TwitterPublisher = (function() {
+    function TwitterPublisher(config) {
+      this.config = config;
+      this.T = new Twit(this.config);
+    }
+
+    TwitterPublisher.prototype.post = function(tweet) {
+      return this.T.post('statuses/update', {
+        status: tweet
+      }, function(err, reply) {
+        if (err) {
+          return console.log(err);
+        }
+      });
+    };
+
+    return TwitterPublisher;
+
+  })();
 
   loadLocalRegistry = function() {
     var deferred, p;
@@ -131,18 +149,6 @@
     return "" + changeRecord.title + " - " + changeRecord.version + " (" + changeRecord.type + ") " + changeRecord.homepage + " " + changeRecord.downloadUrl + " @brackets";
   };
 
-  T = new Twit(twitterConf);
-
-  tweet = function(data) {
-    T.post('statuses/update', {
-      status: data
-    }, function(err, reply) {
-      if (err) {
-        return console.log(err);
-      }
-    });
-  };
-
   swapRegistryFiles = function(newContent) {
     var d, extRegBackupDir;
     extRegBackupDir = path.resolve(__dirname, "../.oldExtensionRegistries");
@@ -157,13 +163,15 @@
   rockAndRoll = function() {
     return loadLocalRegistry().then(function(oldRegistry) {
       return downloadExtensionRegistry().then(function(newRegistry) {
-        var notification, notifications, _i, _len;
+        var notification, notifications, twitterConf, twitterPublisher, _i, _len;
         notifications = createChangeset(oldRegistry, newRegistry).map(function(changeRecord) {
           return createNotification(changeRecord);
         });
+        twitterConf = JSON.parse(fs.readFileSync(TWITTER_CONFIG));
+        twitterPublisher = new TwitterPublisher(twitterConf);
         for (_i = 0, _len = notifications.length; _i < _len; _i++) {
           notification = notifications[_i];
-          tweet(notification);
+          twitterPublisher.post(notification);
         }
         return swapRegistryFiles(newRegistry);
       });
@@ -173,8 +181,6 @@
   exports.createChangeset = createChangeset;
 
   exports.createNotification = createNotification;
-
-  exports.tweet = tweet;
 
   exports.rockAndRoll = rockAndRoll;
 

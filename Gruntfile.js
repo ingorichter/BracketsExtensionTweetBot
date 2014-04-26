@@ -156,7 +156,7 @@ module.exports = function (grunt) {
 
 
   // Default task.
-  grunt.registerTask('default', ['coffee', 'coffeelint', 'jshint']);
+  grunt.registerTask('default', ['coffeelint', 'coffee', 'jshint']);
 
   grunt.registerTask('test', [
     'clean',
