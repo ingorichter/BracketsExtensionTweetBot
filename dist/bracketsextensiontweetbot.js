@@ -9,26 +9,22 @@
 
 (function() {
   'use strict';
-  var BRACKETS_REGISTRY_JSON, NOTIFICATION_TYPE, REGISTRY_BASEURL, REGISTRY_JSON, TWITTER_CONFIG, Twit, TwitterPublisher, createChangeset, createNotification, downloadExtensionRegistry, downloadUrl, fs, https, loadLocalRegistry, path, promise, readFile, request, rockAndRoll, swapRegistryFiles, writeFile, zlib,
+  var BRACKETS_REGISTRY_JSON, NOTIFICATION_TYPE, REGISTRY_BASEURL, REGISTRY_JSON, TWITTER_CONFIG, TwitterPublisher, createChangeset, createNotification, downloadExtensionRegistry, downloadUrl, fs, https, loadLocalRegistry, path, promise, request, rockAndRoll, swapRegistryFiles, zlib,
     __hasProp = {}.hasOwnProperty;
 
-  fs = require("fs");
+  path = require('path');
 
-  path = require("path");
+  zlib = require('zlib');
 
-  zlib = require("zlib");
+  https = require('https');
 
-  https = require("https");
+  promise = require('bluebird');
 
-  promise = require("bluebird");
+  fs = promise.promisifyAll(require('fs'));
 
-  readFile = promise.promisify(require("fs").readFile);
+  request = require('request');
 
-  writeFile = promise.promisify(require("fs").writeFile);
-
-  request = require("request");
-
-  Twit = require('twit');
+  TwitterPublisher = require('./TwitterPublisher');
 
   NOTIFICATION_TYPE = {
     'UPDATE': 'UPDATE',
@@ -42,26 +38,6 @@
   TWITTER_CONFIG = path.resolve(__dirname, '../twitterconfig.json');
 
   REGISTRY_JSON = path.resolve(__dirname, '../extensionRegistry.json');
-
-  TwitterPublisher = (function() {
-    function TwitterPublisher(config) {
-      this.config = config;
-      this.T = new Twit(this.config);
-    }
-
-    TwitterPublisher.prototype.post = function(tweet) {
-      return this.T.post('statuses/update', {
-        status: tweet
-      }, function(err, reply) {
-        if (err) {
-          return console.log(err);
-        }
-      });
-    };
-
-    return TwitterPublisher;
-
-  })();
 
   loadLocalRegistry = function() {
     var deferred, p;

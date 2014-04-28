@@ -9,15 +9,13 @@
 
 'use strict'
 
-fs = require("fs")
-path = require("path")
-zlib = require("zlib")
-https = require("https")
-promise = require("bluebird")
-readFile = promise.promisify(require("fs").readFile)
-writeFile = promise.promisify(require("fs").writeFile)
-request = require("request")
-Twit = require('twit')
+path = require 'path'
+zlib = require 'zlib'
+https = require 'https'
+promise = require 'bluebird'
+fs = promise.promisifyAll(require 'fs')
+request = require 'request'
+TwitterPublisher = require './TwitterPublisher'
 
 NOTIFICATION_TYPE = {
   'UPDATE': 'UPDATE',
@@ -28,14 +26,6 @@ REGISTRY_BASEURL = 'https://s3.amazonaws.com/extend.brackets'
 BRACKETS_REGISTRY_JSON = "#{REGISTRY_BASEURL}/registry.json"
 TWITTER_CONFIG = path.resolve(__dirname, '../twitterconfig.json')
 REGISTRY_JSON = path.resolve(__dirname, '../extensionRegistry.json')
-
-class TwitterPublisher
-  constructor: (@config) ->
-    @T = new Twit(@config)
-
-  post: (tweet) ->
-    @T.post 'statuses/update', { status: tweet }, (err, reply) ->
-      console.log(err) if err
 
 loadLocalRegistry = ->
   deferred = promise.defer()
