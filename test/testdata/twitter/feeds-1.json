@@ -1,0 +1,2495 @@
+[
+  {
+    "created_at": "Sun May 04 17:00:04 +0000 2014",
+    "id": 463000114898800640,
+    "id_str": "463000114898800640",
+    "text": "Rename JavaScript Identifier - 0.2.6 (UPDATE) https://t.co/gUfv5C4cSY https://t.co/wKjI0D84lt @brackets",
+    "source": "<a href=\"http://brackets-registry.aboutweb.com\" rel=\"nofollow\">BracketsExtensionsUpdateBot</a>",
+    "truncated": false,
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user": {
+      "id": 2333068014,
+      "id_str": "2333068014",
+      "name": "Brackets Extensions",
+      "screen_name": "brktsextensions",
+      "location": "San Francisco",
+      "description": "I'm a bot. I'll keep you updated about new and updated @brackets extensions. I'm officially working on behalf of @ingorichter.",
+      "url": "http://t.co/cxBnd5Ehom",
+      "entities": {
+        "url": {
+          "urls": [
+            {
+              "url": "http://t.co/cxBnd5Ehom",
+              "expanded_url": "http://brackets-registry.aboutweb.com",
+              "display_url": "brackets-registry.aboutweb.com",
+              "indices": [
+                0,
+                22
+              ]
+            }
+          ]
+        },
+        "description": {
+          "urls": []
+        }
+      },
+      "protected": false,
+      "followers_count": 80,
+      "friends_count": 1,
+      "listed_count": 2,
+      "created_at": "Sat Feb 08 07:46:26 +0000 2014",
+      "favourites_count": 1,
+      "utc_offset": null,
+      "time_zone": null,
+      "geo_enabled": false,
+      "verified": false,
+      "statuses_count": 452,
+      "lang": "en",
+      "contributors_enabled": false,
+      "is_translator": false,
+      "is_translation_enabled": false,
+      "profile_background_color": "C0DEED",
+      "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+      "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+      "profile_background_tile": false,
+      "profile_image_url": "http://pbs.twimg.com/profile_images/435843580435787776/Dbi7lvn1_normal.png",
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/435843580435787776/Dbi7lvn1_normal.png",
+      "profile_link_color": "0084B4",
+      "profile_sidebar_border_color": "C0DEED",
+      "profile_sidebar_fill_color": "DDEEF6",
+      "profile_text_color": "333333",
+      "profile_use_background_image": true,
+      "default_profile": true,
+      "default_profile_image": false,
+      "following": false,
+      "follow_request_sent": false,
+      "notifications": false
+    },
+    "geo": null,
+    "coordinates": null,
+    "place": null,
+    "contributors": null,
+    "retweet_count": 0,
+    "favorite_count": 0,
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "urls": [
+        {
+          "url": "https://t.co/gUfv5C4cSY",
+          "expanded_url": "https://github.com/asgerf/bracket-rename",
+          "display_url": "github.com/asgerf/bracket…",
+          "indices": [
+            46,
+            69
+          ]
+        },
+        {
+          "url": "https://t.co/wKjI0D84lt",
+          "expanded_url": "https://s3.amazonaws.com/extend.brackets/asgerf.bracket-rename/asgerf.bracket-rename-0.2.6.zip",
+          "display_url": "s3.amazonaws.com/extend.bracket…",
+          "indices": [
+            70,
+            93
+          ]
+        }
+      ],
+      "user_mentions": [
+        {
+          "screen_name": "brackets",
+          "name": "Brackets",
+          "id": 531428881,
+          "id_str": "531428881",
+          "indices": [
+            94,
+            103
+          ]
+        }
+      ]
+    },
+    "favorited": false,
+    "retweeted": false,
+    "possibly_sensitive": false,
+    "lang": "sk"
+  },
+  {
+    "created_at": "Sun May 04 17:00:04 +0000 2014",
+    "id": 463000114693304300,
+    "id_str": "463000114693304320",
+    "text": "Emacs keybindings - 1.0.7 (UPDATE) https://t.co/SyXcMaMlKl https://t.co/xWGbQTm5Pi @brackets",
+    "source": "<a href=\"http://brackets-registry.aboutweb.com\" rel=\"nofollow\">BracketsExtensionsUpdateBot</a>",
+    "truncated": false,
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user": {
+      "id": 2333068014,
+      "id_str": "2333068014",
+      "name": "Brackets Extensions",
+      "screen_name": "brktsextensions",
+      "location": "San Francisco",
+      "description": "I'm a bot. I'll keep you updated about new and updated @brackets extensions. I'm officially working on behalf of @ingorichter.",
+      "url": "http://t.co/cxBnd5Ehom",
+      "entities": {
+        "url": {
+          "urls": [
+            {
+              "url": "http://t.co/cxBnd5Ehom",
+              "expanded_url": "http://brackets-registry.aboutweb.com",
+              "display_url": "brackets-registry.aboutweb.com",
+              "indices": [
+                0,
+                22
+              ]
+            }
+          ]
+        },
+        "description": {
+          "urls": []
+        }
+      },
+      "protected": false,
+      "followers_count": 80,
+      "friends_count": 1,
+      "listed_count": 2,
+      "created_at": "Sat Feb 08 07:46:26 +0000 2014",
+      "favourites_count": 1,
+      "utc_offset": null,
+      "time_zone": null,
+      "geo_enabled": false,
+      "verified": false,
+      "statuses_count": 452,
+      "lang": "en",
+      "contributors_enabled": false,
+      "is_translator": false,
+      "is_translation_enabled": false,
+      "profile_background_color": "C0DEED",
+      "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+      "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+      "profile_background_tile": false,
+      "profile_image_url": "http://pbs.twimg.com/profile_images/435843580435787776/Dbi7lvn1_normal.png",
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/435843580435787776/Dbi7lvn1_normal.png",
+      "profile_link_color": "0084B4",
+      "profile_sidebar_border_color": "C0DEED",
+      "profile_sidebar_fill_color": "DDEEF6",
+      "profile_text_color": "333333",
+      "profile_use_background_image": true,
+      "default_profile": true,
+      "default_profile_image": false,
+      "following": false,
+      "follow_request_sent": false,
+      "notifications": false
+    },
+    "geo": null,
+    "coordinates": null,
+    "place": null,
+    "contributors": null,
+    "retweet_count": 0,
+    "favorite_count": 0,
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "urls": [
+        {
+          "url": "https://t.co/SyXcMaMlKl",
+          "expanded_url": "https://github.com/ahmadnazir/brackets-emacs",
+          "display_url": "github.com/ahmadnazir/bra…",
+          "indices": [
+            35,
+            58
+          ]
+        },
+        {
+          "url": "https://t.co/xWGbQTm5Pi",
+          "expanded_url": "https://s3.amazonaws.com/extend.brackets/ahmadnazir.brackets-emacs/ahmadnazir.brackets-emacs-1.0.7.zip",
+          "display_url": "s3.amazonaws.com/extend.bracket…",
+          "indices": [
+            59,
+            82
+          ]
+        }
+      ],
+      "user_mentions": [
+        {
+          "screen_name": "brackets",
+          "name": "Brackets",
+          "id": 531428881,
+          "id_str": "531428881",
+          "indices": [
+            83,
+            92
+          ]
+        }
+      ]
+    },
+    "favorited": false,
+    "retweeted": false,
+    "possibly_sensitive": false,
+    "lang": "nl"
+  },
+  {
+    "created_at": "Sun May 04 11:00:04 +0000 2014",
+    "id": 462909517336817660,
+    "id_str": "462909517336817664",
+    "text": "HTML Special Chars - 1.0.3 (UPDATE) https://t.co/2FKVnTFxET https://t.co/MRIPqZ6vO9 @brackets",
+    "source": "<a href=\"http://brackets-registry.aboutweb.com\" rel=\"nofollow\">BracketsExtensionsUpdateBot</a>",
+    "truncated": false,
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user": {
+      "id": 2333068014,
+      "id_str": "2333068014",
+      "name": "Brackets Extensions",
+      "screen_name": "brktsextensions",
+      "location": "San Francisco",
+      "description": "I'm a bot. I'll keep you updated about new and updated @brackets extensions. I'm officially working on behalf of @ingorichter.",
+      "url": "http://t.co/cxBnd5Ehom",
+      "entities": {
+        "url": {
+          "urls": [
+            {
+              "url": "http://t.co/cxBnd5Ehom",
+              "expanded_url": "http://brackets-registry.aboutweb.com",
+              "display_url": "brackets-registry.aboutweb.com",
+              "indices": [
+                0,
+                22
+              ]
+            }
+          ]
+        },
+        "description": {
+          "urls": []
+        }
+      },
+      "protected": false,
+      "followers_count": 80,
+      "friends_count": 1,
+      "listed_count": 2,
+      "created_at": "Sat Feb 08 07:46:26 +0000 2014",
+      "favourites_count": 1,
+      "utc_offset": null,
+      "time_zone": null,
+      "geo_enabled": false,
+      "verified": false,
+      "statuses_count": 452,
+      "lang": "en",
+      "contributors_enabled": false,
+      "is_translator": false,
+      "is_translation_enabled": false,
+      "profile_background_color": "C0DEED",
+      "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+      "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+      "profile_background_tile": false,
+      "profile_image_url": "http://pbs.twimg.com/profile_images/435843580435787776/Dbi7lvn1_normal.png",
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/435843580435787776/Dbi7lvn1_normal.png",
+      "profile_link_color": "0084B4",
+      "profile_sidebar_border_color": "C0DEED",
+      "profile_sidebar_fill_color": "DDEEF6",
+      "profile_text_color": "333333",
+      "profile_use_background_image": true,
+      "default_profile": true,
+      "default_profile_image": false,
+      "following": false,
+      "follow_request_sent": false,
+      "notifications": false
+    },
+    "geo": null,
+    "coordinates": null,
+    "place": null,
+    "contributors": null,
+    "retweet_count": 0,
+    "favorite_count": 0,
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "urls": [
+        {
+          "url": "https://t.co/2FKVnTFxET",
+          "expanded_url": "https://github.com/Y0nnyy/SpecialChars",
+          "display_url": "github.com/Y0nnyy/Special…",
+          "indices": [
+            36,
+            59
+          ]
+        },
+        {
+          "url": "https://t.co/MRIPqZ6vO9",
+          "expanded_url": "https://s3.amazonaws.com/extend.brackets/y0nnyy.specialchars/y0nnyy.specialchars-1.0.3.zip",
+          "display_url": "s3.amazonaws.com/extend.bracket…",
+          "indices": [
+            60,
+            83
+          ]
+        }
+      ],
+      "user_mentions": [
+        {
+          "screen_name": "brackets",
+          "name": "Brackets",
+          "id": 531428881,
+          "id_str": "531428881",
+          "indices": [
+            84,
+            93
+          ]
+        }
+      ]
+    },
+    "favorited": false,
+    "retweeted": false,
+    "possibly_sensitive": false,
+    "lang": "sk"
+  },
+  {
+    "created_at": "Sat May 03 13:00:03 +0000 2014",
+    "id": 462577327356907500,
+    "id_str": "462577327356907520",
+    "text": "Brackets Color Palette - 0.1.4 (UPDATE) https://t.co/Va1lhnzpJx https://t.co/sYwI0Zplep @brackets",
+    "source": "<a href=\"http://brackets-registry.aboutweb.com\" rel=\"nofollow\">BracketsExtensionsUpdateBot</a>",
+    "truncated": false,
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user": {
+      "id": 2333068014,
+      "id_str": "2333068014",
+      "name": "Brackets Extensions",
+      "screen_name": "brktsextensions",
+      "location": "San Francisco",
+      "description": "I'm a bot. I'll keep you updated about new and updated @brackets extensions. I'm officially working on behalf of @ingorichter.",
+      "url": "http://t.co/cxBnd5Ehom",
+      "entities": {
+        "url": {
+          "urls": [
+            {
+              "url": "http://t.co/cxBnd5Ehom",
+              "expanded_url": "http://brackets-registry.aboutweb.com",
+              "display_url": "brackets-registry.aboutweb.com",
+              "indices": [
+                0,
+                22
+              ]
+            }
+          ]
+        },
+        "description": {
+          "urls": []
+        }
+      },
+      "protected": false,
+      "followers_count": 80,
+      "friends_count": 1,
+      "listed_count": 2,
+      "created_at": "Sat Feb 08 07:46:26 +0000 2014",
+      "favourites_count": 1,
+      "utc_offset": null,
+      "time_zone": null,
+      "geo_enabled": false,
+      "verified": false,
+      "statuses_count": 452,
+      "lang": "en",
+      "contributors_enabled": false,
+      "is_translator": false,
+      "is_translation_enabled": false,
+      "profile_background_color": "C0DEED",
+      "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+      "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+      "profile_background_tile": false,
+      "profile_image_url": "http://pbs.twimg.com/profile_images/435843580435787776/Dbi7lvn1_normal.png",
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/435843580435787776/Dbi7lvn1_normal.png",
+      "profile_link_color": "0084B4",
+      "profile_sidebar_border_color": "C0DEED",
+      "profile_sidebar_fill_color": "DDEEF6",
+      "profile_text_color": "333333",
+      "profile_use_background_image": true,
+      "default_profile": true,
+      "default_profile_image": false,
+      "following": false,
+      "follow_request_sent": false,
+      "notifications": false
+    },
+    "geo": null,
+    "coordinates": null,
+    "place": null,
+    "contributors": null,
+    "retweet_count": 0,
+    "favorite_count": 0,
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "urls": [
+        {
+          "url": "https://t.co/Va1lhnzpJx",
+          "expanded_url": "https://github.com/sprintr/brackets-color-palette",
+          "display_url": "github.com/sprintr/bracke…",
+          "indices": [
+            40,
+            63
+          ]
+        },
+        {
+          "url": "https://t.co/sYwI0Zplep",
+          "expanded_url": "https://s3.amazonaws.com/extend.brackets/io.brackets.color-palette/io.brackets.color-palette-0.1.4.zip",
+          "display_url": "s3.amazonaws.com/extend.bracket…",
+          "indices": [
+            64,
+            87
+          ]
+        }
+      ],
+      "user_mentions": [
+        {
+          "screen_name": "brackets",
+          "name": "Brackets",
+          "id": 531428881,
+          "id_str": "531428881",
+          "indices": [
+            88,
+            97
+          ]
+        }
+      ]
+    },
+    "favorited": false,
+    "retweeted": false,
+    "possibly_sensitive": false,
+    "lang": "en"
+  },
+  {
+    "created_at": "Sat May 03 11:00:04 +0000 2014",
+    "id": 462547131186675700,
+    "id_str": "462547131186675713",
+    "text": "HTML Special Chars - 1.0.1 (UPDATE) http://t.co/sVLRoJAqLa https://t.co/jNzkC64J7L @brackets",
+    "source": "<a href=\"http://brackets-registry.aboutweb.com\" rel=\"nofollow\">BracketsExtensionsUpdateBot</a>",
+    "truncated": false,
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user": {
+      "id": 2333068014,
+      "id_str": "2333068014",
+      "name": "Brackets Extensions",
+      "screen_name": "brktsextensions",
+      "location": "San Francisco",
+      "description": "I'm a bot. I'll keep you updated about new and updated @brackets extensions. I'm officially working on behalf of @ingorichter.",
+      "url": "http://t.co/cxBnd5Ehom",
+      "entities": {
+        "url": {
+          "urls": [
+            {
+              "url": "http://t.co/cxBnd5Ehom",
+              "expanded_url": "http://brackets-registry.aboutweb.com",
+              "display_url": "brackets-registry.aboutweb.com",
+              "indices": [
+                0,
+                22
+              ]
+            }
+          ]
+        },
+        "description": {
+          "urls": []
+        }
+      },
+      "protected": false,
+      "followers_count": 80,
+      "friends_count": 1,
+      "listed_count": 2,
+      "created_at": "Sat Feb 08 07:46:26 +0000 2014",
+      "favourites_count": 1,
+      "utc_offset": null,
+      "time_zone": null,
+      "geo_enabled": false,
+      "verified": false,
+      "statuses_count": 452,
+      "lang": "en",
+      "contributors_enabled": false,
+      "is_translator": false,
+      "is_translation_enabled": false,
+      "profile_background_color": "C0DEED",
+      "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+      "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+      "profile_background_tile": false,
+      "profile_image_url": "http://pbs.twimg.com/profile_images/435843580435787776/Dbi7lvn1_normal.png",
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/435843580435787776/Dbi7lvn1_normal.png",
+      "profile_link_color": "0084B4",
+      "profile_sidebar_border_color": "C0DEED",
+      "profile_sidebar_fill_color": "DDEEF6",
+      "profile_text_color": "333333",
+      "profile_use_background_image": true,
+      "default_profile": true,
+      "default_profile_image": false,
+      "following": false,
+      "follow_request_sent": false,
+      "notifications": false
+    },
+    "geo": null,
+    "coordinates": null,
+    "place": null,
+    "contributors": null,
+    "retweet_count": 0,
+    "favorite_count": 0,
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "urls": [
+        {
+          "url": "http://t.co/sVLRoJAqLa",
+          "expanded_url": "http://jonasgeschke.de",
+          "display_url": "jonasgeschke.de",
+          "indices": [
+            36,
+            58
+          ]
+        },
+        {
+          "url": "https://t.co/jNzkC64J7L",
+          "expanded_url": "https://s3.amazonaws.com/extend.brackets/y0nnyy.specialchars/y0nnyy.specialchars-1.0.1.zip",
+          "display_url": "s3.amazonaws.com/extend.bracket…",
+          "indices": [
+            59,
+            82
+          ]
+        }
+      ],
+      "user_mentions": [
+        {
+          "screen_name": "brackets",
+          "name": "Brackets",
+          "id": 531428881,
+          "id_str": "531428881",
+          "indices": [
+            83,
+            92
+          ]
+        }
+      ]
+    },
+    "favorited": false,
+    "retweeted": false,
+    "possibly_sensitive": false,
+    "lang": "sk"
+  },
+  {
+    "created_at": "Sat May 03 02:00:04 +0000 2014",
+    "id": 462411237112832000,
+    "id_str": "462411237112832000",
+    "text": "WordHint - 1.0.1 (UPDATE) https://t.co/kU20DOgjVe https://t.co/M6X5zb1Scm @brackets",
+    "source": "<a href=\"http://brackets-registry.aboutweb.com\" rel=\"nofollow\">BracketsExtensionsUpdateBot</a>",
+    "truncated": false,
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user": {
+      "id": 2333068014,
+      "id_str": "2333068014",
+      "name": "Brackets Extensions",
+      "screen_name": "brktsextensions",
+      "location": "San Francisco",
+      "description": "I'm a bot. I'll keep you updated about new and updated @brackets extensions. I'm officially working on behalf of @ingorichter.",
+      "url": "http://t.co/cxBnd5Ehom",
+      "entities": {
+        "url": {
+          "urls": [
+            {
+              "url": "http://t.co/cxBnd5Ehom",
+              "expanded_url": "http://brackets-registry.aboutweb.com",
+              "display_url": "brackets-registry.aboutweb.com",
+              "indices": [
+                0,
+                22
+              ]
+            }
+          ]
+        },
+        "description": {
+          "urls": []
+        }
+      },
+      "protected": false,
+      "followers_count": 80,
+      "friends_count": 1,
+      "listed_count": 2,
+      "created_at": "Sat Feb 08 07:46:26 +0000 2014",
+      "favourites_count": 1,
+      "utc_offset": null,
+      "time_zone": null,
+      "geo_enabled": false,
+      "verified": false,
+      "statuses_count": 452,
+      "lang": "en",
+      "contributors_enabled": false,
+      "is_translator": false,
+      "is_translation_enabled": false,
+      "profile_background_color": "C0DEED",
+      "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+      "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+      "profile_background_tile": false,
+      "profile_image_url": "http://pbs.twimg.com/profile_images/435843580435787776/Dbi7lvn1_normal.png",
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/435843580435787776/Dbi7lvn1_normal.png",
+      "profile_link_color": "0084B4",
+      "profile_sidebar_border_color": "C0DEED",
+      "profile_sidebar_fill_color": "DDEEF6",
+      "profile_text_color": "333333",
+      "profile_use_background_image": true,
+      "default_profile": true,
+      "default_profile_image": false,
+      "following": false,
+      "follow_request_sent": false,
+      "notifications": false
+    },
+    "geo": null,
+    "coordinates": null,
+    "place": null,
+    "contributors": null,
+    "retweet_count": 0,
+    "favorite_count": 0,
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "urls": [
+        {
+          "url": "https://t.co/kU20DOgjVe",
+          "expanded_url": "https://github.com/bigeyex/brackets-wordhint",
+          "display_url": "github.com/bigeyex/bracke…",
+          "indices": [
+            26,
+            49
+          ]
+        },
+        {
+          "url": "https://t.co/M6X5zb1Scm",
+          "expanded_url": "https://s3.amazonaws.com/extend.brackets/bigeyex.brackets-wordhint/bigeyex.brackets-wordhint-1.0.1.zip",
+          "display_url": "s3.amazonaws.com/extend.bracket…",
+          "indices": [
+            50,
+            73
+          ]
+        }
+      ],
+      "user_mentions": [
+        {
+          "screen_name": "brackets",
+          "name": "Brackets",
+          "id": 531428881,
+          "id_str": "531428881",
+          "indices": [
+            74,
+            83
+          ]
+        }
+      ]
+    },
+    "favorited": false,
+    "retweeted": false,
+    "possibly_sensitive": false,
+    "lang": "hu"
+  },
+  {
+    "created_at": "Sat May 03 00:00:04 +0000 2014",
+    "id": 462381034856644600,
+    "id_str": "462381034856644609",
+    "text": "Emacs keybindings - 1.0.6 (UPDATE) https://t.co/SyXcMaMlKl https://t.co/kQq19Cgr5Z @brackets",
+    "source": "<a href=\"http://brackets-registry.aboutweb.com\" rel=\"nofollow\">BracketsExtensionsUpdateBot</a>",
+    "truncated": false,
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user": {
+      "id": 2333068014,
+      "id_str": "2333068014",
+      "name": "Brackets Extensions",
+      "screen_name": "brktsextensions",
+      "location": "San Francisco",
+      "description": "I'm a bot. I'll keep you updated about new and updated @brackets extensions. I'm officially working on behalf of @ingorichter.",
+      "url": "http://t.co/cxBnd5Ehom",
+      "entities": {
+        "url": {
+          "urls": [
+            {
+              "url": "http://t.co/cxBnd5Ehom",
+              "expanded_url": "http://brackets-registry.aboutweb.com",
+              "display_url": "brackets-registry.aboutweb.com",
+              "indices": [
+                0,
+                22
+              ]
+            }
+          ]
+        },
+        "description": {
+          "urls": []
+        }
+      },
+      "protected": false,
+      "followers_count": 80,
+      "friends_count": 1,
+      "listed_count": 2,
+      "created_at": "Sat Feb 08 07:46:26 +0000 2014",
+      "favourites_count": 1,
+      "utc_offset": null,
+      "time_zone": null,
+      "geo_enabled": false,
+      "verified": false,
+      "statuses_count": 452,
+      "lang": "en",
+      "contributors_enabled": false,
+      "is_translator": false,
+      "is_translation_enabled": false,
+      "profile_background_color": "C0DEED",
+      "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+      "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+      "profile_background_tile": false,
+      "profile_image_url": "http://pbs.twimg.com/profile_images/435843580435787776/Dbi7lvn1_normal.png",
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/435843580435787776/Dbi7lvn1_normal.png",
+      "profile_link_color": "0084B4",
+      "profile_sidebar_border_color": "C0DEED",
+      "profile_sidebar_fill_color": "DDEEF6",
+      "profile_text_color": "333333",
+      "profile_use_background_image": true,
+      "default_profile": true,
+      "default_profile_image": false,
+      "following": false,
+      "follow_request_sent": false,
+      "notifications": false
+    },
+    "geo": null,
+    "coordinates": null,
+    "place": null,
+    "contributors": null,
+    "retweet_count": 0,
+    "favorite_count": 0,
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "urls": [
+        {
+          "url": "https://t.co/SyXcMaMlKl",
+          "expanded_url": "https://github.com/ahmadnazir/brackets-emacs",
+          "display_url": "github.com/ahmadnazir/bra…",
+          "indices": [
+            35,
+            58
+          ]
+        },
+        {
+          "url": "https://t.co/kQq19Cgr5Z",
+          "expanded_url": "https://s3.amazonaws.com/extend.brackets/ahmadnazir.brackets-emacs/ahmadnazir.brackets-emacs-1.0.6.zip",
+          "display_url": "s3.amazonaws.com/extend.bracket…",
+          "indices": [
+            59,
+            82
+          ]
+        }
+      ],
+      "user_mentions": [
+        {
+          "screen_name": "brackets",
+          "name": "Brackets",
+          "id": 531428881,
+          "id_str": "531428881",
+          "indices": [
+            83,
+            92
+          ]
+        }
+      ]
+    },
+    "favorited": false,
+    "retweeted": false,
+    "possibly_sensitive": false,
+    "lang": "nl"
+  },
+  {
+    "created_at": "Fri May 02 17:48:01 +0000 2014",
+    "id": 462287406696521700,
+    "id_str": "462287406696521728",
+    "text": "RT @jonathanAdunlap: Can you dig it!? Created this for @brackets... because it's awesome. http://t.co/gFEve4xBar",
+    "source": "<a href=\"http://www.hootsuite.com\" rel=\"nofollow\">HootSuite</a>",
+    "truncated": false,
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user": {
+      "id": 531428881,
+      "id_str": "531428881",
+      "name": "Brackets",
+      "screen_name": "brackets",
+      "location": "OSX ♦ Linux ♦ Windows",
+      "description": "An open source code editor for the web. Made with ♥ and JavaScript. code the web.",
+      "url": "http://t.co/HtKNVHKscU",
+      "entities": {
+        "url": {
+          "urls": [
+            {
+              "url": "http://t.co/HtKNVHKscU",
+              "expanded_url": "http://brackets.io",
+              "display_url": "brackets.io",
+              "indices": [
+                0,
+                22
+              ]
+            }
+          ]
+        },
+        "description": {
+          "urls": []
+        }
+      },
+      "protected": false,
+      "followers_count": 19539,
+      "friends_count": 12,
+      "listed_count": 782,
+      "created_at": "Tue Mar 20 16:47:12 +0000 2012",
+      "favourites_count": 9,
+      "utc_offset": -14400,
+      "time_zone": "Eastern Time (US & Canada)",
+      "geo_enabled": false,
+      "verified": false,
+      "statuses_count": 487,
+      "lang": "en",
+      "contributors_enabled": false,
+      "is_translator": false,
+      "is_translation_enabled": false,
+      "profile_background_color": "C0DEED",
+      "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+      "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+      "profile_background_tile": false,
+      "profile_image_url": "http://pbs.twimg.com/profile_images/1915279008/brackets_512_normal.png",
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/1915279008/brackets_512_normal.png",
+      "profile_link_color": "0084B4",
+      "profile_sidebar_border_color": "C0DEED",
+      "profile_sidebar_fill_color": "DDEEF6",
+      "profile_text_color": "333333",
+      "profile_use_background_image": true,
+      "default_profile": true,
+      "default_profile_image": false,
+      "following": true,
+      "follow_request_sent": false,
+      "notifications": false
+    },
+    "geo": null,
+    "coordinates": null,
+    "place": null,
+    "contributors": null,
+    "retweeted_status": {
+      "created_at": "Fri May 02 17:46:59 +0000 2014",
+      "id": 462287148557672450,
+      "id_str": "462287148557672449",
+      "text": "Can you dig it!? Created this for @brackets... because it's awesome. http://t.co/gFEve4xBar",
+      "source": "web",
+      "truncated": false,
+      "in_reply_to_status_id": null,
+      "in_reply_to_status_id_str": null,
+      "in_reply_to_user_id": null,
+      "in_reply_to_user_id_str": null,
+      "in_reply_to_screen_name": null,
+      "user": {
+        "id": 14548411,
+        "id_str": "14548411",
+        "name": "Jonathan A Dunlap",
+        "screen_name": "jonathanAdunlap",
+        "location": "San Francisco, CA",
+        "description": "Sr. Product Manager of @Brackets, @Edge_Code, @Snapsvg, @Topcoat :: Adobe",
+        "url": null,
+        "entities": {
+          "description": {
+            "urls": []
+          }
+        },
+        "protected": false,
+        "followers_count": 300,
+        "friends_count": 227,
+        "listed_count": 17,
+        "created_at": "Sat Apr 26 17:10:07 +0000 2008",
+        "favourites_count": 392,
+        "utc_offset": -18000,
+        "time_zone": "Quito",
+        "geo_enabled": true,
+        "verified": false,
+        "statuses_count": 623,
+        "lang": "en",
+        "contributors_enabled": false,
+        "is_translator": false,
+        "is_translation_enabled": false,
+        "profile_background_color": "1C1C1C",
+        "profile_background_image_url": "http://pbs.twimg.com/profile_background_images/456541256684818432/cUfrJn98.jpeg",
+        "profile_background_image_url_https": "https://pbs.twimg.com/profile_background_images/456541256684818432/cUfrJn98.jpeg",
+        "profile_background_tile": true,
+        "profile_image_url": "http://pbs.twimg.com/profile_images/444239732705198080/x7sc1vVW_normal.png",
+        "profile_image_url_https": "https://pbs.twimg.com/profile_images/444239732705198080/x7sc1vVW_normal.png",
+        "profile_banner_url": "https://pbs.twimg.com/profile_banners/14548411/1399061370",
+        "profile_link_color": "1F98C7",
+        "profile_sidebar_border_color": "FFFFFF",
+        "profile_sidebar_fill_color": "DAECF4",
+        "profile_text_color": "663B12",
+        "profile_use_background_image": true,
+        "default_profile": false,
+        "default_profile_image": false,
+        "following": false,
+        "follow_request_sent": false,
+        "notifications": false
+      },
+      "geo": null,
+      "coordinates": null,
+      "place": null,
+      "contributors": null,
+      "retweet_count": 22,
+      "favorite_count": 22,
+      "entities": {
+        "hashtags": [],
+        "symbols": [],
+        "urls": [],
+        "user_mentions": [
+          {
+            "screen_name": "brackets",
+            "name": "Brackets",
+            "id": 531428881,
+            "id_str": "531428881",
+            "indices": [
+              34,
+              43
+            ]
+          }
+        ],
+        "media": [
+          {
+            "id": 462287148566061060,
+            "id_str": "462287148566061058",
+            "indices": [
+              69,
+              91
+            ],
+            "media_url": "http://pbs.twimg.com/media/BmpftlqCIAIf2p4.png",
+            "media_url_https": "https://pbs.twimg.com/media/BmpftlqCIAIf2p4.png",
+            "url": "http://t.co/gFEve4xBar",
+            "display_url": "pic.twitter.com/gFEve4xBar",
+            "expanded_url": "http://twitter.com/jonathanAdunlap/status/462287148557672449/photo/1",
+            "type": "photo",
+            "sizes": {
+              "thumb": {
+                "w": 150,
+                "h": 150,
+                "resize": "crop"
+              },
+              "medium": {
+                "w": 448,
+                "h": 761,
+                "resize": "fit"
+              },
+              "small": {
+                "w": 340,
+                "h": 578,
+                "resize": "fit"
+              },
+              "large": {
+                "w": 448,
+                "h": 761,
+                "resize": "fit"
+              }
+            }
+          }
+        ]
+      },
+      "favorited": false,
+      "retweeted": false,
+      "possibly_sensitive": false,
+      "lang": "en"
+    },
+    "retweet_count": 22,
+    "favorite_count": 0,
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "urls": [],
+      "user_mentions": [
+        {
+          "screen_name": "jonathanAdunlap",
+          "name": "Jonathan A Dunlap",
+          "id": 14548411,
+          "id_str": "14548411",
+          "indices": [
+            3,
+            19
+          ]
+        },
+        {
+          "screen_name": "brackets",
+          "name": "Brackets",
+          "id": 531428881,
+          "id_str": "531428881",
+          "indices": [
+            55,
+            64
+          ]
+        }
+      ],
+      "media": [
+        {
+          "id": 462287148566061060,
+          "id_str": "462287148566061058",
+          "indices": [
+            90,
+            112
+          ],
+          "media_url": "http://pbs.twimg.com/media/BmpftlqCIAIf2p4.png",
+          "media_url_https": "https://pbs.twimg.com/media/BmpftlqCIAIf2p4.png",
+          "url": "http://t.co/gFEve4xBar",
+          "display_url": "pic.twitter.com/gFEve4xBar",
+          "expanded_url": "http://twitter.com/jonathanAdunlap/status/462287148557672449/photo/1",
+          "type": "photo",
+          "sizes": {
+            "thumb": {
+              "w": 150,
+              "h": 150,
+              "resize": "crop"
+            },
+            "medium": {
+              "w": 448,
+              "h": 761,
+              "resize": "fit"
+            },
+            "small": {
+              "w": 340,
+              "h": 578,
+              "resize": "fit"
+            },
+            "large": {
+              "w": 448,
+              "h": 761,
+              "resize": "fit"
+            }
+          }
+        }
+      ]
+    },
+    "favorited": false,
+    "retweeted": false,
+    "possibly_sensitive": false,
+    "lang": "en"
+  },
+  {
+    "created_at": "Fri May 02 17:00:04 +0000 2014",
+    "id": 462275339356360700,
+    "id_str": "462275339356360704",
+    "text": "JS/CSS Outline - 0.0.6 (UPDATE) https://t.co/VTKKTdFNaC https://t.co/Q0QJ2aQBHQ @brackets",
+    "source": "<a href=\"http://brackets-registry.aboutweb.com\" rel=\"nofollow\">BracketsExtensionsUpdateBot</a>",
+    "truncated": false,
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user": {
+      "id": 2333068014,
+      "id_str": "2333068014",
+      "name": "Brackets Extensions",
+      "screen_name": "brktsextensions",
+      "location": "San Francisco",
+      "description": "I'm a bot. I'll keep you updated about new and updated @brackets extensions. I'm officially working on behalf of @ingorichter.",
+      "url": "http://t.co/cxBnd5Ehom",
+      "entities": {
+        "url": {
+          "urls": [
+            {
+              "url": "http://t.co/cxBnd5Ehom",
+              "expanded_url": "http://brackets-registry.aboutweb.com",
+              "display_url": "brackets-registry.aboutweb.com",
+              "indices": [
+                0,
+                22
+              ]
+            }
+          ]
+        },
+        "description": {
+          "urls": []
+        }
+      },
+      "protected": false,
+      "followers_count": 80,
+      "friends_count": 1,
+      "listed_count": 2,
+      "created_at": "Sat Feb 08 07:46:26 +0000 2014",
+      "favourites_count": 1,
+      "utc_offset": null,
+      "time_zone": null,
+      "geo_enabled": false,
+      "verified": false,
+      "statuses_count": 452,
+      "lang": "en",
+      "contributors_enabled": false,
+      "is_translator": false,
+      "is_translation_enabled": false,
+      "profile_background_color": "C0DEED",
+      "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+      "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+      "profile_background_tile": false,
+      "profile_image_url": "http://pbs.twimg.com/profile_images/435843580435787776/Dbi7lvn1_normal.png",
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/435843580435787776/Dbi7lvn1_normal.png",
+      "profile_link_color": "0084B4",
+      "profile_sidebar_border_color": "C0DEED",
+      "profile_sidebar_fill_color": "DDEEF6",
+      "profile_text_color": "333333",
+      "profile_use_background_image": true,
+      "default_profile": true,
+      "default_profile_image": false,
+      "following": false,
+      "follow_request_sent": false,
+      "notifications": false
+    },
+    "geo": null,
+    "coordinates": null,
+    "place": null,
+    "contributors": null,
+    "retweet_count": 0,
+    "favorite_count": 0,
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "urls": [
+        {
+          "url": "https://t.co/VTKKTdFNaC",
+          "expanded_url": "https://github.com/crabcode/brackets-outline",
+          "display_url": "github.com/crabcode/brack…",
+          "indices": [
+            32,
+            55
+          ]
+        },
+        {
+          "url": "https://t.co/Q0QJ2aQBHQ",
+          "expanded_url": "https://s3.amazonaws.com/extend.brackets/crabcode.outline/crabcode.outline-0.0.6.zip",
+          "display_url": "s3.amazonaws.com/extend.bracket…",
+          "indices": [
+            56,
+            79
+          ]
+        }
+      ],
+      "user_mentions": [
+        {
+          "screen_name": "brackets",
+          "name": "Brackets",
+          "id": 531428881,
+          "id_str": "531428881",
+          "indices": [
+            80,
+            89
+          ]
+        }
+      ]
+    },
+    "favorited": false,
+    "retweeted": false,
+    "possibly_sensitive": false,
+    "lang": "sk"
+  },
+  {
+    "created_at": "Fri May 02 17:00:04 +0000 2014",
+    "id": 462275339322785800,
+    "id_str": "462275339322785792",
+    "text": "Brackets New Project Creator - 0.4.6 (UPDATE) https://t.co/7G3sESAp7k https://t.co/gegV3rhP8S @brackets",
+    "source": "<a href=\"http://brackets-registry.aboutweb.com\" rel=\"nofollow\">BracketsExtensionsUpdateBot</a>",
+    "truncated": false,
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user": {
+      "id": 2333068014,
+      "id_str": "2333068014",
+      "name": "Brackets Extensions",
+      "screen_name": "brktsextensions",
+      "location": "San Francisco",
+      "description": "I'm a bot. I'll keep you updated about new and updated @brackets extensions. I'm officially working on behalf of @ingorichter.",
+      "url": "http://t.co/cxBnd5Ehom",
+      "entities": {
+        "url": {
+          "urls": [
+            {
+              "url": "http://t.co/cxBnd5Ehom",
+              "expanded_url": "http://brackets-registry.aboutweb.com",
+              "display_url": "brackets-registry.aboutweb.com",
+              "indices": [
+                0,
+                22
+              ]
+            }
+          ]
+        },
+        "description": {
+          "urls": []
+        }
+      },
+      "protected": false,
+      "followers_count": 80,
+      "friends_count": 1,
+      "listed_count": 2,
+      "created_at": "Sat Feb 08 07:46:26 +0000 2014",
+      "favourites_count": 1,
+      "utc_offset": null,
+      "time_zone": null,
+      "geo_enabled": false,
+      "verified": false,
+      "statuses_count": 452,
+      "lang": "en",
+      "contributors_enabled": false,
+      "is_translator": false,
+      "is_translation_enabled": false,
+      "profile_background_color": "C0DEED",
+      "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+      "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+      "profile_background_tile": false,
+      "profile_image_url": "http://pbs.twimg.com/profile_images/435843580435787776/Dbi7lvn1_normal.png",
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/435843580435787776/Dbi7lvn1_normal.png",
+      "profile_link_color": "0084B4",
+      "profile_sidebar_border_color": "C0DEED",
+      "profile_sidebar_fill_color": "DDEEF6",
+      "profile_text_color": "333333",
+      "profile_use_background_image": true,
+      "default_profile": true,
+      "default_profile_image": false,
+      "following": false,
+      "follow_request_sent": false,
+      "notifications": false
+    },
+    "geo": null,
+    "coordinates": null,
+    "place": null,
+    "contributors": null,
+    "retweet_count": 0,
+    "favorite_count": 0,
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "urls": [
+        {
+          "url": "https://t.co/7G3sESAp7k",
+          "expanded_url": "https://github.com/JeffryBooher/brackets-newproject-extension",
+          "display_url": "github.com/JeffryBooher/b…",
+          "indices": [
+            46,
+            69
+          ]
+        },
+        {
+          "url": "https://t.co/gegV3rhP8S",
+          "expanded_url": "https://s3.amazonaws.com/extend.brackets/jeffbooher.new-project/jeffbooher.new-project-0.4.6.zip",
+          "display_url": "s3.amazonaws.com/extend.bracket…",
+          "indices": [
+            70,
+            93
+          ]
+        }
+      ],
+      "user_mentions": [
+        {
+          "screen_name": "brackets",
+          "name": "Brackets",
+          "id": 531428881,
+          "id_str": "531428881",
+          "indices": [
+            94,
+            103
+          ]
+        }
+      ]
+    },
+    "favorited": false,
+    "retweeted": false,
+    "possibly_sensitive": false,
+    "lang": "en"
+  },
+  {
+    "created_at": "Fri May 02 15:00:03 +0000 2014",
+    "id": 462245139050541060,
+    "id_str": "462245139050541056",
+    "text": "Custom Placehold.it image for Brackets - 0.0.1 (NEW) https://t.co/0vuHui7KOr https://t.co/ctnroJ6PGM @brackets",
+    "source": "<a href=\"http://brackets-registry.aboutweb.com\" rel=\"nofollow\">BracketsExtensionsUpdateBot</a>",
+    "truncated": false,
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user": {
+      "id": 2333068014,
+      "id_str": "2333068014",
+      "name": "Brackets Extensions",
+      "screen_name": "brktsextensions",
+      "location": "San Francisco",
+      "description": "I'm a bot. I'll keep you updated about new and updated @brackets extensions. I'm officially working on behalf of @ingorichter.",
+      "url": "http://t.co/cxBnd5Ehom",
+      "entities": {
+        "url": {
+          "urls": [
+            {
+              "url": "http://t.co/cxBnd5Ehom",
+              "expanded_url": "http://brackets-registry.aboutweb.com",
+              "display_url": "brackets-registry.aboutweb.com",
+              "indices": [
+                0,
+                22
+              ]
+            }
+          ]
+        },
+        "description": {
+          "urls": []
+        }
+      },
+      "protected": false,
+      "followers_count": 80,
+      "friends_count": 1,
+      "listed_count": 2,
+      "created_at": "Sat Feb 08 07:46:26 +0000 2014",
+      "favourites_count": 1,
+      "utc_offset": null,
+      "time_zone": null,
+      "geo_enabled": false,
+      "verified": false,
+      "statuses_count": 452,
+      "lang": "en",
+      "contributors_enabled": false,
+      "is_translator": false,
+      "is_translation_enabled": false,
+      "profile_background_color": "C0DEED",
+      "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+      "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+      "profile_background_tile": false,
+      "profile_image_url": "http://pbs.twimg.com/profile_images/435843580435787776/Dbi7lvn1_normal.png",
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/435843580435787776/Dbi7lvn1_normal.png",
+      "profile_link_color": "0084B4",
+      "profile_sidebar_border_color": "C0DEED",
+      "profile_sidebar_fill_color": "DDEEF6",
+      "profile_text_color": "333333",
+      "profile_use_background_image": true,
+      "default_profile": true,
+      "default_profile_image": false,
+      "following": false,
+      "follow_request_sent": false,
+      "notifications": false
+    },
+    "geo": null,
+    "coordinates": null,
+    "place": null,
+    "contributors": null,
+    "retweet_count": 0,
+    "favorite_count": 0,
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "urls": [
+        {
+          "url": "https://t.co/0vuHui7KOr",
+          "expanded_url": "https://github.com/jspartak/custom-placeholdit-for-brackets-jara.phit/",
+          "display_url": "github.com/jspartak/custo…",
+          "indices": [
+            53,
+            76
+          ]
+        },
+        {
+          "url": "https://t.co/ctnroJ6PGM",
+          "expanded_url": "https://s3.amazonaws.com/extend.brackets/custom-placeholdit-for-brackets-jara.phit/custom-placeholdit-for-brackets-jara.phit-0.0.1.zip",
+          "display_url": "s3.amazonaws.com/extend.bracket…",
+          "indices": [
+            77,
+            100
+          ]
+        }
+      ],
+      "user_mentions": [
+        {
+          "screen_name": "brackets",
+          "name": "Brackets",
+          "id": 531428881,
+          "id_str": "531428881",
+          "indices": [
+            101,
+            110
+          ]
+        }
+      ]
+    },
+    "favorited": false,
+    "retweeted": false,
+    "possibly_sensitive": false,
+    "lang": "en"
+  },
+  {
+    "created_at": "Fri May 02 15:00:03 +0000 2014",
+    "id": 462245139033767940,
+    "id_str": "462245139033767936",
+    "text": "JS/CSS Outline - 0.0.5 (UPDATE) https://t.co/VTKKTdFNaC https://t.co/3vsSk0fzGi @brackets",
+    "source": "<a href=\"http://brackets-registry.aboutweb.com\" rel=\"nofollow\">BracketsExtensionsUpdateBot</a>",
+    "truncated": false,
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user": {
+      "id": 2333068014,
+      "id_str": "2333068014",
+      "name": "Brackets Extensions",
+      "screen_name": "brktsextensions",
+      "location": "San Francisco",
+      "description": "I'm a bot. I'll keep you updated about new and updated @brackets extensions. I'm officially working on behalf of @ingorichter.",
+      "url": "http://t.co/cxBnd5Ehom",
+      "entities": {
+        "url": {
+          "urls": [
+            {
+              "url": "http://t.co/cxBnd5Ehom",
+              "expanded_url": "http://brackets-registry.aboutweb.com",
+              "display_url": "brackets-registry.aboutweb.com",
+              "indices": [
+                0,
+                22
+              ]
+            }
+          ]
+        },
+        "description": {
+          "urls": []
+        }
+      },
+      "protected": false,
+      "followers_count": 80,
+      "friends_count": 1,
+      "listed_count": 2,
+      "created_at": "Sat Feb 08 07:46:26 +0000 2014",
+      "favourites_count": 1,
+      "utc_offset": null,
+      "time_zone": null,
+      "geo_enabled": false,
+      "verified": false,
+      "statuses_count": 452,
+      "lang": "en",
+      "contributors_enabled": false,
+      "is_translator": false,
+      "is_translation_enabled": false,
+      "profile_background_color": "C0DEED",
+      "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+      "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+      "profile_background_tile": false,
+      "profile_image_url": "http://pbs.twimg.com/profile_images/435843580435787776/Dbi7lvn1_normal.png",
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/435843580435787776/Dbi7lvn1_normal.png",
+      "profile_link_color": "0084B4",
+      "profile_sidebar_border_color": "C0DEED",
+      "profile_sidebar_fill_color": "DDEEF6",
+      "profile_text_color": "333333",
+      "profile_use_background_image": true,
+      "default_profile": true,
+      "default_profile_image": false,
+      "following": false,
+      "follow_request_sent": false,
+      "notifications": false
+    },
+    "geo": null,
+    "coordinates": null,
+    "place": null,
+    "contributors": null,
+    "retweet_count": 0,
+    "favorite_count": 0,
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "urls": [
+        {
+          "url": "https://t.co/VTKKTdFNaC",
+          "expanded_url": "https://github.com/crabcode/brackets-outline",
+          "display_url": "github.com/crabcode/brack…",
+          "indices": [
+            32,
+            55
+          ]
+        },
+        {
+          "url": "https://t.co/3vsSk0fzGi",
+          "expanded_url": "https://s3.amazonaws.com/extend.brackets/crabcode.outline/crabcode.outline-0.0.5.zip",
+          "display_url": "s3.amazonaws.com/extend.bracket…",
+          "indices": [
+            56,
+            79
+          ]
+        }
+      ],
+      "user_mentions": [
+        {
+          "screen_name": "brackets",
+          "name": "Brackets",
+          "id": 531428881,
+          "id_str": "531428881",
+          "indices": [
+            80,
+            89
+          ]
+        }
+      ]
+    },
+    "favorited": false,
+    "retweeted": false,
+    "possibly_sensitive": false,
+    "lang": "sk"
+  },
+  {
+    "created_at": "Fri May 02 14:00:04 +0000 2014",
+    "id": 462230041397440500,
+    "id_str": "462230041397440512",
+    "text": "CKeditor for Brackets - 1.0.2 (UPDATE) https://t.co/3gM7PVsfDs https://t.co/CJpyeCHIDE @brackets",
+    "source": "<a href=\"http://brackets-registry.aboutweb.com\" rel=\"nofollow\">BracketsExtensionsUpdateBot</a>",
+    "truncated": false,
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user": {
+      "id": 2333068014,
+      "id_str": "2333068014",
+      "name": "Brackets Extensions",
+      "screen_name": "brktsextensions",
+      "location": "San Francisco",
+      "description": "I'm a bot. I'll keep you updated about new and updated @brackets extensions. I'm officially working on behalf of @ingorichter.",
+      "url": "http://t.co/cxBnd5Ehom",
+      "entities": {
+        "url": {
+          "urls": [
+            {
+              "url": "http://t.co/cxBnd5Ehom",
+              "expanded_url": "http://brackets-registry.aboutweb.com",
+              "display_url": "brackets-registry.aboutweb.com",
+              "indices": [
+                0,
+                22
+              ]
+            }
+          ]
+        },
+        "description": {
+          "urls": []
+        }
+      },
+      "protected": false,
+      "followers_count": 80,
+      "friends_count": 1,
+      "listed_count": 2,
+      "created_at": "Sat Feb 08 07:46:26 +0000 2014",
+      "favourites_count": 1,
+      "utc_offset": null,
+      "time_zone": null,
+      "geo_enabled": false,
+      "verified": false,
+      "statuses_count": 452,
+      "lang": "en",
+      "contributors_enabled": false,
+      "is_translator": false,
+      "is_translation_enabled": false,
+      "profile_background_color": "C0DEED",
+      "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+      "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+      "profile_background_tile": false,
+      "profile_image_url": "http://pbs.twimg.com/profile_images/435843580435787776/Dbi7lvn1_normal.png",
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/435843580435787776/Dbi7lvn1_normal.png",
+      "profile_link_color": "0084B4",
+      "profile_sidebar_border_color": "C0DEED",
+      "profile_sidebar_fill_color": "DDEEF6",
+      "profile_text_color": "333333",
+      "profile_use_background_image": true,
+      "default_profile": true,
+      "default_profile_image": false,
+      "following": false,
+      "follow_request_sent": false,
+      "notifications": false
+    },
+    "geo": null,
+    "coordinates": null,
+    "place": null,
+    "contributors": null,
+    "retweet_count": 0,
+    "favorite_count": 0,
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "urls": [
+        {
+          "url": "https://t.co/3gM7PVsfDs",
+          "expanded_url": "https://github.com/MomoPZ/brackets-ckeditor/",
+          "display_url": "github.com/MomoPZ/bracket…",
+          "indices": [
+            39,
+            62
+          ]
+        },
+        {
+          "url": "https://t.co/CJpyeCHIDE",
+          "expanded_url": "https://s3.amazonaws.com/extend.brackets/brackets-ckeditor/brackets-ckeditor-1.0.2.zip",
+          "display_url": "s3.amazonaws.com/extend.bracket…",
+          "indices": [
+            63,
+            86
+          ]
+        }
+      ],
+      "user_mentions": [
+        {
+          "screen_name": "brackets",
+          "name": "Brackets",
+          "id": 531428881,
+          "id_str": "531428881",
+          "indices": [
+            87,
+            96
+          ]
+        }
+      ]
+    },
+    "favorited": false,
+    "retweeted": false,
+    "possibly_sensitive": false,
+    "lang": "sk"
+  },
+  {
+    "created_at": "Fri May 02 14:00:04 +0000 2014",
+    "id": 462230041292578800,
+    "id_str": "462230041292578820",
+    "text": "Brackets Color Palette - 0.1.3 (UPDATE) https://t.co/Va1lhnzpJx https://t.co/gMJwjQNC4E @brackets",
+    "source": "<a href=\"http://brackets-registry.aboutweb.com\" rel=\"nofollow\">BracketsExtensionsUpdateBot</a>",
+    "truncated": false,
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user": {
+      "id": 2333068014,
+      "id_str": "2333068014",
+      "name": "Brackets Extensions",
+      "screen_name": "brktsextensions",
+      "location": "San Francisco",
+      "description": "I'm a bot. I'll keep you updated about new and updated @brackets extensions. I'm officially working on behalf of @ingorichter.",
+      "url": "http://t.co/cxBnd5Ehom",
+      "entities": {
+        "url": {
+          "urls": [
+            {
+              "url": "http://t.co/cxBnd5Ehom",
+              "expanded_url": "http://brackets-registry.aboutweb.com",
+              "display_url": "brackets-registry.aboutweb.com",
+              "indices": [
+                0,
+                22
+              ]
+            }
+          ]
+        },
+        "description": {
+          "urls": []
+        }
+      },
+      "protected": false,
+      "followers_count": 80,
+      "friends_count": 1,
+      "listed_count": 2,
+      "created_at": "Sat Feb 08 07:46:26 +0000 2014",
+      "favourites_count": 1,
+      "utc_offset": null,
+      "time_zone": null,
+      "geo_enabled": false,
+      "verified": false,
+      "statuses_count": 452,
+      "lang": "en",
+      "contributors_enabled": false,
+      "is_translator": false,
+      "is_translation_enabled": false,
+      "profile_background_color": "C0DEED",
+      "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+      "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+      "profile_background_tile": false,
+      "profile_image_url": "http://pbs.twimg.com/profile_images/435843580435787776/Dbi7lvn1_normal.png",
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/435843580435787776/Dbi7lvn1_normal.png",
+      "profile_link_color": "0084B4",
+      "profile_sidebar_border_color": "C0DEED",
+      "profile_sidebar_fill_color": "DDEEF6",
+      "profile_text_color": "333333",
+      "profile_use_background_image": true,
+      "default_profile": true,
+      "default_profile_image": false,
+      "following": false,
+      "follow_request_sent": false,
+      "notifications": false
+    },
+    "geo": null,
+    "coordinates": null,
+    "place": null,
+    "contributors": null,
+    "retweet_count": 0,
+    "favorite_count": 0,
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "urls": [
+        {
+          "url": "https://t.co/Va1lhnzpJx",
+          "expanded_url": "https://github.com/sprintr/brackets-color-palette",
+          "display_url": "github.com/sprintr/bracke…",
+          "indices": [
+            40,
+            63
+          ]
+        },
+        {
+          "url": "https://t.co/gMJwjQNC4E",
+          "expanded_url": "https://s3.amazonaws.com/extend.brackets/io.brackets.color-palette/io.brackets.color-palette-0.1.3.zip",
+          "display_url": "s3.amazonaws.com/extend.bracket…",
+          "indices": [
+            64,
+            87
+          ]
+        }
+      ],
+      "user_mentions": [
+        {
+          "screen_name": "brackets",
+          "name": "Brackets",
+          "id": 531428881,
+          "id_str": "531428881",
+          "indices": [
+            88,
+            97
+          ]
+        }
+      ]
+    },
+    "favorited": false,
+    "retweeted": false,
+    "possibly_sensitive": false,
+    "lang": "en"
+  },
+  {
+    "created_at": "Fri May 02 09:00:03 +0000 2014",
+    "id": 462154541920579600,
+    "id_str": "462154541920579585",
+    "text": "JS/CSS Outline - 0.0.2 (NEW) https://t.co/VTKKTdFNaC https://t.co/1vXWjT5Kqp @brackets",
+    "source": "<a href=\"http://brackets-registry.aboutweb.com\" rel=\"nofollow\">BracketsExtensionsUpdateBot</a>",
+    "truncated": false,
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user": {
+      "id": 2333068014,
+      "id_str": "2333068014",
+      "name": "Brackets Extensions",
+      "screen_name": "brktsextensions",
+      "location": "San Francisco",
+      "description": "I'm a bot. I'll keep you updated about new and updated @brackets extensions. I'm officially working on behalf of @ingorichter.",
+      "url": "http://t.co/cxBnd5Ehom",
+      "entities": {
+        "url": {
+          "urls": [
+            {
+              "url": "http://t.co/cxBnd5Ehom",
+              "expanded_url": "http://brackets-registry.aboutweb.com",
+              "display_url": "brackets-registry.aboutweb.com",
+              "indices": [
+                0,
+                22
+              ]
+            }
+          ]
+        },
+        "description": {
+          "urls": []
+        }
+      },
+      "protected": false,
+      "followers_count": 80,
+      "friends_count": 1,
+      "listed_count": 2,
+      "created_at": "Sat Feb 08 07:46:26 +0000 2014",
+      "favourites_count": 1,
+      "utc_offset": null,
+      "time_zone": null,
+      "geo_enabled": false,
+      "verified": false,
+      "statuses_count": 452,
+      "lang": "en",
+      "contributors_enabled": false,
+      "is_translator": false,
+      "is_translation_enabled": false,
+      "profile_background_color": "C0DEED",
+      "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+      "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+      "profile_background_tile": false,
+      "profile_image_url": "http://pbs.twimg.com/profile_images/435843580435787776/Dbi7lvn1_normal.png",
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/435843580435787776/Dbi7lvn1_normal.png",
+      "profile_link_color": "0084B4",
+      "profile_sidebar_border_color": "C0DEED",
+      "profile_sidebar_fill_color": "DDEEF6",
+      "profile_text_color": "333333",
+      "profile_use_background_image": true,
+      "default_profile": true,
+      "default_profile_image": false,
+      "following": false,
+      "follow_request_sent": false,
+      "notifications": false
+    },
+    "geo": null,
+    "coordinates": null,
+    "place": null,
+    "contributors": null,
+    "retweet_count": 0,
+    "favorite_count": 0,
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "urls": [
+        {
+          "url": "https://t.co/VTKKTdFNaC",
+          "expanded_url": "https://github.com/crabcode/brackets-outline",
+          "display_url": "github.com/crabcode/brack…",
+          "indices": [
+            29,
+            52
+          ]
+        },
+        {
+          "url": "https://t.co/1vXWjT5Kqp",
+          "expanded_url": "https://s3.amazonaws.com/extend.brackets/crabcode.outline/crabcode.outline-0.0.2.zip",
+          "display_url": "s3.amazonaws.com/extend.bracket…",
+          "indices": [
+            53,
+            76
+          ]
+        }
+      ],
+      "user_mentions": [
+        {
+          "screen_name": "brackets",
+          "name": "Brackets",
+          "id": 531428881,
+          "id_str": "531428881",
+          "indices": [
+            77,
+            86
+          ]
+        }
+      ]
+    },
+    "favorited": false,
+    "retweeted": false,
+    "possibly_sensitive": false,
+    "lang": "de"
+  },
+  {
+    "created_at": "Fri May 02 09:00:03 +0000 2014",
+    "id": 462154541899579400,
+    "id_str": "462154541899579392",
+    "text": "Brackets OnCopy - 1.0.1 (UPDATE) https://t.co/Y1vu19rPuQ https://t.co/lz5VAzpgTW @brackets",
+    "source": "<a href=\"http://brackets-registry.aboutweb.com\" rel=\"nofollow\">BracketsExtensionsUpdateBot</a>",
+    "truncated": false,
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user": {
+      "id": 2333068014,
+      "id_str": "2333068014",
+      "name": "Brackets Extensions",
+      "screen_name": "brktsextensions",
+      "location": "San Francisco",
+      "description": "I'm a bot. I'll keep you updated about new and updated @brackets extensions. I'm officially working on behalf of @ingorichter.",
+      "url": "http://t.co/cxBnd5Ehom",
+      "entities": {
+        "url": {
+          "urls": [
+            {
+              "url": "http://t.co/cxBnd5Ehom",
+              "expanded_url": "http://brackets-registry.aboutweb.com",
+              "display_url": "brackets-registry.aboutweb.com",
+              "indices": [
+                0,
+                22
+              ]
+            }
+          ]
+        },
+        "description": {
+          "urls": []
+        }
+      },
+      "protected": false,
+      "followers_count": 80,
+      "friends_count": 1,
+      "listed_count": 2,
+      "created_at": "Sat Feb 08 07:46:26 +0000 2014",
+      "favourites_count": 1,
+      "utc_offset": null,
+      "time_zone": null,
+      "geo_enabled": false,
+      "verified": false,
+      "statuses_count": 452,
+      "lang": "en",
+      "contributors_enabled": false,
+      "is_translator": false,
+      "is_translation_enabled": false,
+      "profile_background_color": "C0DEED",
+      "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+      "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+      "profile_background_tile": false,
+      "profile_image_url": "http://pbs.twimg.com/profile_images/435843580435787776/Dbi7lvn1_normal.png",
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/435843580435787776/Dbi7lvn1_normal.png",
+      "profile_link_color": "0084B4",
+      "profile_sidebar_border_color": "C0DEED",
+      "profile_sidebar_fill_color": "DDEEF6",
+      "profile_text_color": "333333",
+      "profile_use_background_image": true,
+      "default_profile": true,
+      "default_profile_image": false,
+      "following": false,
+      "follow_request_sent": false,
+      "notifications": false
+    },
+    "geo": null,
+    "coordinates": null,
+    "place": null,
+    "contributors": null,
+    "retweet_count": 0,
+    "favorite_count": 0,
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "urls": [
+        {
+          "url": "https://t.co/Y1vu19rPuQ",
+          "expanded_url": "https://github.com/timoweiss/brackets-oncopy",
+          "display_url": "github.com/timoweiss/brac…",
+          "indices": [
+            33,
+            56
+          ]
+        },
+        {
+          "url": "https://t.co/lz5VAzpgTW",
+          "expanded_url": "https://s3.amazonaws.com/extend.brackets/brackets-oncopy/brackets-oncopy-1.0.1.zip",
+          "display_url": "s3.amazonaws.com/extend.bracket…",
+          "indices": [
+            57,
+            80
+          ]
+        }
+      ],
+      "user_mentions": [
+        {
+          "screen_name": "brackets",
+          "name": "Brackets",
+          "id": 531428881,
+          "id_str": "531428881",
+          "indices": [
+            81,
+            90
+          ]
+        }
+      ]
+    },
+    "favorited": false,
+    "retweeted": false,
+    "possibly_sensitive": false,
+    "lang": "en"
+  },
+  {
+    "created_at": "Fri May 02 05:00:03 +0000 2014",
+    "id": 462094144010059800,
+    "id_str": "462094144010059777",
+    "text": "Brackets New Project Creator - 0.4.5 (UPDATE) https://t.co/7G3sESAp7k https://t.co/01zPlz1YM4 @brackets",
+    "source": "<a href=\"http://brackets-registry.aboutweb.com\" rel=\"nofollow\">BracketsExtensionsUpdateBot</a>",
+    "truncated": false,
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user": {
+      "id": 2333068014,
+      "id_str": "2333068014",
+      "name": "Brackets Extensions",
+      "screen_name": "brktsextensions",
+      "location": "San Francisco",
+      "description": "I'm a bot. I'll keep you updated about new and updated @brackets extensions. I'm officially working on behalf of @ingorichter.",
+      "url": "http://t.co/cxBnd5Ehom",
+      "entities": {
+        "url": {
+          "urls": [
+            {
+              "url": "http://t.co/cxBnd5Ehom",
+              "expanded_url": "http://brackets-registry.aboutweb.com",
+              "display_url": "brackets-registry.aboutweb.com",
+              "indices": [
+                0,
+                22
+              ]
+            }
+          ]
+        },
+        "description": {
+          "urls": []
+        }
+      },
+      "protected": false,
+      "followers_count": 80,
+      "friends_count": 1,
+      "listed_count": 2,
+      "created_at": "Sat Feb 08 07:46:26 +0000 2014",
+      "favourites_count": 1,
+      "utc_offset": null,
+      "time_zone": null,
+      "geo_enabled": false,
+      "verified": false,
+      "statuses_count": 452,
+      "lang": "en",
+      "contributors_enabled": false,
+      "is_translator": false,
+      "is_translation_enabled": false,
+      "profile_background_color": "C0DEED",
+      "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+      "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+      "profile_background_tile": false,
+      "profile_image_url": "http://pbs.twimg.com/profile_images/435843580435787776/Dbi7lvn1_normal.png",
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/435843580435787776/Dbi7lvn1_normal.png",
+      "profile_link_color": "0084B4",
+      "profile_sidebar_border_color": "C0DEED",
+      "profile_sidebar_fill_color": "DDEEF6",
+      "profile_text_color": "333333",
+      "profile_use_background_image": true,
+      "default_profile": true,
+      "default_profile_image": false,
+      "following": false,
+      "follow_request_sent": false,
+      "notifications": false
+    },
+    "geo": null,
+    "coordinates": null,
+    "place": null,
+    "contributors": null,
+    "retweet_count": 1,
+    "favorite_count": 0,
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "urls": [
+        {
+          "url": "https://t.co/7G3sESAp7k",
+          "expanded_url": "https://github.com/JeffryBooher/brackets-newproject-extension",
+          "display_url": "github.com/JeffryBooher/b…",
+          "indices": [
+            46,
+            69
+          ]
+        },
+        {
+          "url": "https://t.co/01zPlz1YM4",
+          "expanded_url": "https://s3.amazonaws.com/extend.brackets/jeffbooher.new-project/jeffbooher.new-project-0.4.5.zip",
+          "display_url": "s3.amazonaws.com/extend.bracket…",
+          "indices": [
+            70,
+            93
+          ]
+        }
+      ],
+      "user_mentions": [
+        {
+          "screen_name": "brackets",
+          "name": "Brackets",
+          "id": 531428881,
+          "id_str": "531428881",
+          "indices": [
+            94,
+            103
+          ]
+        }
+      ]
+    },
+    "favorited": false,
+    "retweeted": false,
+    "possibly_sensitive": false,
+    "lang": "en"
+  },
+  {
+    "created_at": "Fri May 02 00:00:04 +0000 2014",
+    "id": 462018648412913660,
+    "id_str": "462018648412913664",
+    "text": "Brackets Git - 0.13.14 (UPDATE) https://t.co/CiyeAQLQOD https://t.co/OtzDjfFFpi @brackets",
+    "source": "<a href=\"http://brackets-registry.aboutweb.com\" rel=\"nofollow\">BracketsExtensionsUpdateBot</a>",
+    "truncated": false,
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user": {
+      "id": 2333068014,
+      "id_str": "2333068014",
+      "name": "Brackets Extensions",
+      "screen_name": "brktsextensions",
+      "location": "San Francisco",
+      "description": "I'm a bot. I'll keep you updated about new and updated @brackets extensions. I'm officially working on behalf of @ingorichter.",
+      "url": "http://t.co/cxBnd5Ehom",
+      "entities": {
+        "url": {
+          "urls": [
+            {
+              "url": "http://t.co/cxBnd5Ehom",
+              "expanded_url": "http://brackets-registry.aboutweb.com",
+              "display_url": "brackets-registry.aboutweb.com",
+              "indices": [
+                0,
+                22
+              ]
+            }
+          ]
+        },
+        "description": {
+          "urls": []
+        }
+      },
+      "protected": false,
+      "followers_count": 80,
+      "friends_count": 1,
+      "listed_count": 2,
+      "created_at": "Sat Feb 08 07:46:26 +0000 2014",
+      "favourites_count": 1,
+      "utc_offset": null,
+      "time_zone": null,
+      "geo_enabled": false,
+      "verified": false,
+      "statuses_count": 452,
+      "lang": "en",
+      "contributors_enabled": false,
+      "is_translator": false,
+      "is_translation_enabled": false,
+      "profile_background_color": "C0DEED",
+      "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+      "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+      "profile_background_tile": false,
+      "profile_image_url": "http://pbs.twimg.com/profile_images/435843580435787776/Dbi7lvn1_normal.png",
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/435843580435787776/Dbi7lvn1_normal.png",
+      "profile_link_color": "0084B4",
+      "profile_sidebar_border_color": "C0DEED",
+      "profile_sidebar_fill_color": "DDEEF6",
+      "profile_text_color": "333333",
+      "profile_use_background_image": true,
+      "default_profile": true,
+      "default_profile_image": false,
+      "following": false,
+      "follow_request_sent": false,
+      "notifications": false
+    },
+    "geo": null,
+    "coordinates": null,
+    "place": null,
+    "contributors": null,
+    "retweet_count": 0,
+    "favorite_count": 0,
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "urls": [
+        {
+          "url": "https://t.co/CiyeAQLQOD",
+          "expanded_url": "https://github.com/zaggino/brackets-git",
+          "display_url": "github.com/zaggino/bracke…",
+          "indices": [
+            32,
+            55
+          ]
+        },
+        {
+          "url": "https://t.co/OtzDjfFFpi",
+          "expanded_url": "https://s3.amazonaws.com/extend.brackets/zaggino.brackets-git/zaggino.brackets-git-0.13.14.zip",
+          "display_url": "s3.amazonaws.com/extend.bracket…",
+          "indices": [
+            56,
+            79
+          ]
+        }
+      ],
+      "user_mentions": [
+        {
+          "screen_name": "brackets",
+          "name": "Brackets",
+          "id": 531428881,
+          "id_str": "531428881",
+          "indices": [
+            80,
+            89
+          ]
+        }
+      ]
+    },
+    "favorited": false,
+    "retweeted": false,
+    "possibly_sensitive": false,
+    "lang": "hu"
+  },
+  {
+    "created_at": "Fri May 02 00:00:04 +0000 2014",
+    "id": 462018648324857860,
+    "id_str": "462018648324857857",
+    "text": "recognizer - 0.0.5 (UPDATE) https://t.co/drI72cnCrg https://t.co/ZWlxRFc4o9 @brackets",
+    "source": "<a href=\"http://brackets-registry.aboutweb.com\" rel=\"nofollow\">BracketsExtensionsUpdateBot</a>",
+    "truncated": false,
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user": {
+      "id": 2333068014,
+      "id_str": "2333068014",
+      "name": "Brackets Extensions",
+      "screen_name": "brktsextensions",
+      "location": "San Francisco",
+      "description": "I'm a bot. I'll keep you updated about new and updated @brackets extensions. I'm officially working on behalf of @ingorichter.",
+      "url": "http://t.co/cxBnd5Ehom",
+      "entities": {
+        "url": {
+          "urls": [
+            {
+              "url": "http://t.co/cxBnd5Ehom",
+              "expanded_url": "http://brackets-registry.aboutweb.com",
+              "display_url": "brackets-registry.aboutweb.com",
+              "indices": [
+                0,
+                22
+              ]
+            }
+          ]
+        },
+        "description": {
+          "urls": []
+        }
+      },
+      "protected": false,
+      "followers_count": 80,
+      "friends_count": 1,
+      "listed_count": 2,
+      "created_at": "Sat Feb 08 07:46:26 +0000 2014",
+      "favourites_count": 1,
+      "utc_offset": null,
+      "time_zone": null,
+      "geo_enabled": false,
+      "verified": false,
+      "statuses_count": 452,
+      "lang": "en",
+      "contributors_enabled": false,
+      "is_translator": false,
+      "is_translation_enabled": false,
+      "profile_background_color": "C0DEED",
+      "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+      "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+      "profile_background_tile": false,
+      "profile_image_url": "http://pbs.twimg.com/profile_images/435843580435787776/Dbi7lvn1_normal.png",
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/435843580435787776/Dbi7lvn1_normal.png",
+      "profile_link_color": "0084B4",
+      "profile_sidebar_border_color": "C0DEED",
+      "profile_sidebar_fill_color": "DDEEF6",
+      "profile_text_color": "333333",
+      "profile_use_background_image": true,
+      "default_profile": true,
+      "default_profile_image": false,
+      "following": false,
+      "follow_request_sent": false,
+      "notifications": false
+    },
+    "geo": null,
+    "coordinates": null,
+    "place": null,
+    "contributors": null,
+    "retweet_count": 0,
+    "favorite_count": 0,
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "urls": [
+        {
+          "url": "https://t.co/drI72cnCrg",
+          "expanded_url": "https://github.com/equiet/recognizer",
+          "display_url": "github.com/equiet/recogni…",
+          "indices": [
+            28,
+            51
+          ]
+        },
+        {
+          "url": "https://t.co/ZWlxRFc4o9",
+          "expanded_url": "https://s3.amazonaws.com/extend.brackets/recognizer/recognizer-0.0.5.zip",
+          "display_url": "s3.amazonaws.com/extend.bracket…",
+          "indices": [
+            52,
+            75
+          ]
+        }
+      ],
+      "user_mentions": [
+        {
+          "screen_name": "brackets",
+          "name": "Brackets",
+          "id": 531428881,
+          "id_str": "531428881",
+          "indices": [
+            76,
+            85
+          ]
+        }
+      ]
+    },
+    "favorited": false,
+    "retweeted": false,
+    "possibly_sensitive": false,
+    "lang": "en"
+  },
+  {
+    "created_at": "Thu May 01 14:00:03 +0000 2014",
+    "id": 461867651220791300,
+    "id_str": "461867651220791298",
+    "text": "Brackets Color Palette - 0.1.1 (UPDATE) https://t.co/Va1lhnzpJx https://t.co/cYtlT3La59 @brackets",
+    "source": "<a href=\"http://brackets-registry.aboutweb.com\" rel=\"nofollow\">BracketsExtensionsUpdateBot</a>",
+    "truncated": false,
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user": {
+      "id": 2333068014,
+      "id_str": "2333068014",
+      "name": "Brackets Extensions",
+      "screen_name": "brktsextensions",
+      "location": "San Francisco",
+      "description": "I'm a bot. I'll keep you updated about new and updated @brackets extensions. I'm officially working on behalf of @ingorichter.",
+      "url": "http://t.co/cxBnd5Ehom",
+      "entities": {
+        "url": {
+          "urls": [
+            {
+              "url": "http://t.co/cxBnd5Ehom",
+              "expanded_url": "http://brackets-registry.aboutweb.com",
+              "display_url": "brackets-registry.aboutweb.com",
+              "indices": [
+                0,
+                22
+              ]
+            }
+          ]
+        },
+        "description": {
+          "urls": []
+        }
+      },
+      "protected": false,
+      "followers_count": 80,
+      "friends_count": 1,
+      "listed_count": 2,
+      "created_at": "Sat Feb 08 07:46:26 +0000 2014",
+      "favourites_count": 1,
+      "utc_offset": null,
+      "time_zone": null,
+      "geo_enabled": false,
+      "verified": false,
+      "statuses_count": 452,
+      "lang": "en",
+      "contributors_enabled": false,
+      "is_translator": false,
+      "is_translation_enabled": false,
+      "profile_background_color": "C0DEED",
+      "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+      "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+      "profile_background_tile": false,
+      "profile_image_url": "http://pbs.twimg.com/profile_images/435843580435787776/Dbi7lvn1_normal.png",
+      "profile_image_url_https": "https://pbs.twimg.com/profile_images/435843580435787776/Dbi7lvn1_normal.png",
+      "profile_link_color": "0084B4",
+      "profile_sidebar_border_color": "C0DEED",
+      "profile_sidebar_fill_color": "DDEEF6",
+      "profile_text_color": "333333",
+      "profile_use_background_image": true,
+      "default_profile": true,
+      "default_profile_image": false,
+      "following": false,
+      "follow_request_sent": false,
+      "notifications": false
+    },
+    "geo": null,
+    "coordinates": null,
+    "place": null,
+    "contributors": null,
+    "retweet_count": 0,
+    "favorite_count": 0,
+    "entities": {
+      "hashtags": [],
+      "symbols": [],
+      "urls": [
+        {
+          "url": "https://t.co/Va1lhnzpJx",
+          "expanded_url": "https://github.com/sprintr/brackets-color-palette",
+          "display_url": "github.com/sprintr/bracke…",
+          "indices": [
+            40,
+            63
+          ]
+        },
+        {
+          "url": "https://t.co/cYtlT3La59",
+          "expanded_url": "https://s3.amazonaws.com/extend.brackets/io.brackets.color-palette/io.brackets.color-palette-0.1.1.zip",
+          "display_url": "s3.amazonaws.com/extend.bracket…",
+          "indices": [
+            64,
+            87
+          ]
+        }
+      ],
+      "user_mentions": [
+        {
+          "screen_name": "brackets",
+          "name": "Brackets",
+          "id": 531428881,
+          "id_str": "531428881",
+          "indices": [
+            88,
+            97
+          ]
+        }
+      ]
+    },
+    "favorited": false,
+    "retweeted": false,
+    "possibly_sensitive": false,
+    "lang": "en"
+  }
+]

@@ -17,6 +17,9 @@ module.exports =
     constructor: (config) ->
       @twitterClient = new Twit(config)
 
+    setClient: (client) ->
+      @twitterClient = client
+
     post: (tweet) ->
       deferred = promise.defer()
       @twitterClient.post 'statuses/update', { status: tweet }, (err, reply, response) ->
@@ -27,9 +30,17 @@ module.exports =
 
       deferred.promise
 
-    userTimeLine: ->
+    # https://dev.twitter.com/docs/api/1.1/get/statuses/user_timeline
+    # count - default is 20 defined by the twitter API
+    # @param {?String} max_id - results lower or equal to max_id (to get older posts)
+    userTimeLine: (max_id, count) ->
       deferred = promise.defer()
-      @twitterClient.get 'statuses/home_timeline', (err, reply, response) ->
+      
+      options = {}
+      options.max_id = max_id if max_id?
+      options.count = count if count?
+
+      @twitterClient.get 'statuses/home_timeline', options, (err, reply, response) ->
         if err
           deferred.reject err
         else

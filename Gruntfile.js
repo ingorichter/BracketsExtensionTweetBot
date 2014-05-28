@@ -37,6 +37,9 @@ module.exports = function (grunt) {
     },
     coffee: {
       dist: {
+        options: {
+          bare: true
+        },
         files: [{
           expand: true,
           cwd: '<%= config.src %>',
@@ -88,7 +91,7 @@ module.exports = function (grunt) {
           'AssertionError'
         ],
         timeout: 3000,
-        ignoreLeaks: false,
+        ignoreLeaks: true,
         // grep: '*.spec',
         ui: 'bdd',
         reporter: 'spec'

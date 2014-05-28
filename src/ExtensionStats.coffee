@@ -10,29 +10,31 @@
 'use strict'
 
 path = require 'path'
-#fs = promise.promisifyAll(require 'fs')
+semver = require 'semver'
 fs = require 'fs'
 Promise = require 'bluebird'
+_ = require 'lodash'
 TwitterPublisher = require './TwitterPublisher'
 
 TWITTER_CONFIG = path.resolve(__dirname, '../twitterconfig.json')
+twitterPublisher = undefined
 
-extractTweets = (tweets) ->
-  console.log "retrieved #{tweets.length} tweets"
-  console.log "last tweets from #{tweets[tweets.length - 1].created_at}"
+# Constant
+DEFAULT_NUMBER_OF_DAYS = 7
+UPDATE_KEY = "UPDATE"
+NEW_KEY = "NEW"
+tweetRE = /^(.*)\s+-\s+(.+)\s+\(.+\)/
 
-timeline = (max_id) ->
+createChangeSet = (tweets) ->
+  newExtensions = (tweet for tweet in tweets when tweet.text.indexOf("(NEW)") > -1)
+  updatedExtensions = (tweet for tweet in tweets when tweet.text.indexOf("(UPDATE)") > -1)
+  {"NEW": newExtensions, "UPDATE": updatedExtensions }
+
+timeline = (max_id, count) ->
   deferred = Promise.defer()
 
-  # read twitter config file
-  twitterConf = JSON.parse(fs.readFileSync(TWITTER_CONFIG))
-
-  twitterPublisher = new TwitterPublisher(twitterConf)
-
-  promise = twitterPublisher.userTimeLine(max_id)
+  promise = twitterPublisher.userTimeLine(max_id, count)
   promise.then (data) ->
-#    fs.writeFileSync(path.resolve(__dirname, '../tweets.json'), JSON.stringify(data))
-    extractTweets data
     deferred.resolve data
   promise.catch (err) ->
     deferred.reject err
@@ -44,35 +46,55 @@ getTweetsFromRange = (endDate, numberOfDays) ->
   # Range is [endDate - numberOfDays, endDate]
   # while if date of last tweet > (startDate - numberOfDays)
   # get a list of tweets
-  
-  endDate = new Date() if not startDate
+  # Build a date range [startDate...endDate]
+  endDate = new Date(Date.now()) if not endDate
   endDate = endDate.getTime()
 
-  numberOfDays ?= 7
+  numberOfDays = numberOfDays || DEFAULT_NUMBER_OF_DAYS
 
   startDate = endDate - (numberOfDays * 24 * 60 * 60 * 1000)
   lastTweetDate = endDate
-  # new Date(d.getTime() - (7 * 24 * 60 * 60 * 1000))
 
   allTweets = []
   
-  _tweets = (max_id) ->
-    promise = timeline(max_id)
+  _tweets = (max_id, count) ->
+    promise = timeline(max_id, count)
     promise.then (tweets) ->
+      # console.log("Tweet creation date #{tweets[tweets.length - 1].created_at}")
       lastTweetDate = new Date(tweets[tweets.length - 1].created_at).getTime()
-      allTweets.push tweet for tweet in tweets
+
       if lastTweetDate > startDate
-        _tweets tweets[tweets.length - 1].id
+        allTweets.push tweet for tweet in tweets
+        _tweets(tweets[tweets.length - 1].id, count)
       else
+        allTweets.push tweet for tweet in tweets when new Date(tweet.created_at).getTime() > startDate
         deferred.resolve allTweets
 
   _tweets()
 
   deferred.promise
 
-getTweets = ->
-  getTweetsFromRange(new Date(), 7).then (tweets) ->
-    console.log "Got #{tweets.length} for the last 7 days"
+# return raw tweets for a specific range
+#
+getTweets = (from, to) ->
+  # read twitter config file
+  twitterConf = JSON.parse(fs.readFileSync(TWITTER_CONFIG))
+
+  twitterPublisher = new TwitterPublisher(twitterConf)
+
+  deferred = Promise.defer()
+  getTweetsFromRange(from, to).then (tweets) ->
+    deferred.resolve tweets
+
+  deferred.promise
+
+extractChangesFromTweets = (from, to) ->
+  deferred = Promise.defer()
+  getTweets(from, to).then (tweets) ->
+    cs = createChangeSet tweets
+    deferred.resolve cs
+    
+  deferred.promise
 
 search = (query, untilDate) ->
   # read twitter config file
@@ -85,8 +107,60 @@ search = (query, untilDate) ->
     fs.writeFileSync(path.resolve(__dirname, '../tweets.json'), JSON.stringify(data))
   promise.catch (err) ->
     console.log err
-  # API
 
-exports.search = search
-exports.getTweets = getTweets
-exports.timeline = timeline
+# Remove duplicate in the changeset
+removeDuplicatesFromChangeset = (changeSet) ->
+  makeObject = (tweet) ->
+    match = tweet.text.match tweetRE
+    {name: match[1], version: match[2], tweet: tweet}
+
+  _removeDuplicates = (changeSet) ->
+    resultSet = []
+    for tweet in changeSet
+      obj = makeObject tweet
+      index = _.findIndex(resultSet, {name: obj.name})
+
+      resultSet.push obj if index == -1
+      resultSet[index] = obj if index > -1 && semver.gt(obj.version, resultSet[index].version)
+
+    resultSet
+    
+  updatedSet = _removeDuplicates changeSet["UPDATE"]
+  newSet = _removeDuplicates changeSet["NEW"]
+  
+  for tweet in updatedSet
+    index = _.findIndex(newSet, {name: tweet.name})
+    newSet[index] = false if index > -1
+  
+  {"NEW": _.map(_.compact(newSet), (obj) -> obj.tweet), "UPDATE": _.map(updatedSet, (obj) -> obj.tweet)}
+
+transformChangeset = (changeSet) ->
+  header = """
+| Name | Version | Description | Homepage | Download |
+|------|---------|-------------|----------|----------|
+"""
+
+  formatTweet = (tweet) ->
+    match = tweet.text.match tweetRE
+    homePageURL = tweet.entities.urls?[0].expanded_url
+    downloadURL = tweet.entities.urls?[1].expanded_url
+
+    "|#{match[1]}|#{match[2]}|N/A|#{homePageURL}|#{downloadURL}|"
+
+  cleanedChangeSet = removeDuplicatesFromChangeset changeSet
+  # process all new extensions
+  newTweets = (formatTweet tweet for tweet in cleanedChangeSet["NEW"])
+  updatedTweets = (formatTweet tweet for tweet in cleanedChangeSet["UPDATE"])
+
+  result = "# New Extensions" + "\n" + header + "\n" + newTweets.join("\n") if newTweets.length
+  result += "\n" + "# Updated Extensions" + "\n" + header + "\n" + updatedTweets.join("\n") if updatedTweets.length
+
+  result
+
+# API
+exports.createChangeSet          = createChangeSet
+exports.extractChangesFromTweets = extractChangesFromTweets
+exports.getTweets                = getTweets
+exports.search                   = search
+exports.timeline                 = timeline
+exports.transformChangeset       = transformChangeset
