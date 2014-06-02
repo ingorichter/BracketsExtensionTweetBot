@@ -200,14 +200,22 @@ removeDuplicatesFromChangeset = function(changeSet) {
 };
 
 transformChangeset = function(changeSet) {
-  var cleanedChangeSet, formatTweet, header, newTweets, result, tweet, updatedTweets;
-  header = "| Name | Version | Description | Homepage | Download |\n|------|---------|-------------|----------|----------|";
+  var cleanedChangeSet, formatTweet, formatUrl, header, newTweets, result, tweet, updatedTweets;
+  header = "| Name | Version | Description | Download |\n|------|---------|-------------|----------|";
+  formatUrl = function(url) {
+    return "<a href=\"" + url + "\"><div class=\"imageHolder\"><img src=\"images/cloud_download.svg\" class=\"image\"/></div></a>";
+  };
   formatTweet = function(tweet) {
-    var downloadURL, homePageURL, match, _ref, _ref1;
+    var downloadURL, homePageURL, match, urls;
     match = tweet.text.match(tweetRE);
-    homePageURL = (_ref = tweet.entities.urls) != null ? _ref[0].expanded_url : void 0;
-    downloadURL = (_ref1 = tweet.entities.urls) != null ? _ref1[1].expanded_url : void 0;
-    return "|" + match[1] + "|" + match[2] + "|N/A|" + homePageURL + "|" + downloadURL + "|";
+    urls = tweet.entities.urls;
+    if (urls.length === 2) {
+      homePageURL = urls != null ? urls[0].expanded_url : void 0;
+      downloadURL = urls != null ? urls[1].expanded_url : void 0;
+    } else {
+      homePageURL = downloadURL = urls != null ? urls[0].expanded_url : void 0;
+    }
+    return "|[" + match[1] + "](" + homePageURL + ")|" + match[2] + "|N/A|" + (formatUrl(downloadURL)) + "|";
   };
   cleanedChangeSet = removeDuplicatesFromChangeset(changeSet);
   newTweets = (function() {
@@ -230,13 +238,16 @@ transformChangeset = function(changeSet) {
     }
     return _results;
   })();
+  result = "";
   if (newTweets.length) {
-    result = "# New Extensions" + "\n" + header + "\n" + newTweets.join("\n");
+    result = "## New Extensions" + "\n" + header + "\n" + newTweets.join("\n");
+  }
+  if (newTweets.length && updatedTweets.length) {
+    result += "\n";
   }
   if (updatedTweets.length) {
-    result += "\n" + "# Updated Extensions" + "\n" + header + "\n" + updatedTweets.join("\n");
+    return result += "## Updated Extensions" + "\n" + header + "\n" + updatedTweets.join("\n");
   }
-  return result;
 };
 
 exports.createChangeSet = createChangeSet;

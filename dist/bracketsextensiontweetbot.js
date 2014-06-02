@@ -131,7 +131,7 @@ swapRegistryFiles = function(newContent) {
   }
   d = new Date();
   fs.createReadStream(REGISTRY_JSON).pipe(fs.createWriteStream(path.join(extRegBackupDir, "" + (d.getTime()) + "-extensionRegistry.json")));
-  fs.writeFileSync(REGISTRY_JSON, JSON.stringify(newContent));
+  return fs.writeFileSync(REGISTRY_JSON, JSON.stringify(newContent));
 };
 
 rockAndRoll = function() {

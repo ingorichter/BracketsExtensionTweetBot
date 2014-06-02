@@ -115,7 +115,6 @@ swapRegistryFiles = (newContent) ->
     fs.createWriteStream(path.join(extRegBackupDir, "#{d.getTime()}-extensionRegistry.json")))
 
   fs.writeFileSync(REGISTRY_JSON, JSON.stringify(newContent))
-  return
 
 # This is the main function
 rockAndRoll = ->

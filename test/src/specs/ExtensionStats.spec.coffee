@@ -18,6 +18,8 @@ class TW
 
 describe "ExtensionStats", ->
   beforeEach ->
+    es.__set__('TWITTER_CONFIG', path.resolve(__dirname, '../../testdata/twitterconfig.json'))
+
     @testData = (JSON.parse(fs.readFileSync(path.join(path.dirname(module.filename), "../../testdata/twitter/feeds-#{num}.json"))) for num in [1..5])
 
   describe "Fetch Tweets for various timeframes", ->
@@ -58,7 +60,7 @@ describe "ExtensionStats", ->
       cs = es.createChangeSet dataSet
       expect(cs['NEW'].length).to.equal(5)
       expect(cs['UPDATE'].length).to.equal(32)
-      
+
   describe "Create markdown from Changeset", ->
     it "should create a formatted representation of the changeset", ->
       # create minimal test data
@@ -144,15 +146,41 @@ describe "ExtensionStats", ->
       markdown = es.transformChangeset(changeSet)
 
       expected = """
-# New Extensions
-| Name | Version | Description | Homepage | Download |
-|------|---------|-------------|----------|----------|
-|Fi Compiler|1.3.1|N/A|https://github.com/FinalDevStudio/ficompiler|https://s3.amazonaws.com/extend.brackets/ficompiler/ficompiler-1.3.1.zip|
-# Updated Extensions
-| Name | Version | Description | Homepage | Download |
-|------|---------|-------------|----------|----------|
-|Brackets Color Palette|0.1.2|N/A|https://github.com/sprintr/brackets-color-palette|https://s3.amazonaws.com/extend.brackets/io.brackets.color-palette/io.brackets.color-palette-0.1.2.zip|
-|recognizer|0.0.5|N/A|https://github.com/equiet/recognizer|https://s3.amazonaws.com/extend.brackets/recognizer/recognizer-0.0.5.zip|
+## New Extensions
+| Name | Version | Description | Download |
+|------|---------|-------------|----------|
+|[Fi Compiler](https://github.com/FinalDevStudio/ficompiler)|1.3.1|N/A|<a href=\"https://s3.amazonaws.com/extend.brackets/ficompiler/ficompiler-1.3.1.zip\"><div class=\"imageHolder\"><img src=\"images/cloud_download.svg\" class=\"image\"/></div></a>|
+## Updated Extensions
+| Name | Version | Description | Download |
+|------|---------|-------------|----------|
+|[Brackets Color Palette](https://github.com/sprintr/brackets-color-palette)|0.1.2|N/A|<a href=\"https://s3.amazonaws.com/extend.brackets/io.brackets.color-palette/io.brackets.color-palette-0.1.2.zip\"><div class=\"imageHolder\"><img src=\"images/cloud_download.svg\" class=\"image\"/></div></a>|
+|[recognizer](https://github.com/equiet/recognizer)|0.0.5|N/A|<a href=\"https://s3.amazonaws.com/extend.brackets/recognizer/recognizer-0.0.5.zip\"><div class=\"imageHolder\"><img src=\"images/cloud_download.svg\" class=\"image\"/></div></a>|
 """
       expect(expected).to.equal(markdown)
-        
+
+    it "should create a formatted representation of the changeset if homepage link is missing", ->
+      # create minimal test data
+      testTweets = [
+        {
+          "text": "Brackets Color Palette - 0.1.2 (UPDATE)  https://t.co/cYtlT3La59 @brackets",
+          "entities": {
+            "urls": [
+              {
+                "url": "https://t.co/cYtlT3La59",
+                "expanded_url": "https://s3.amazonaws.com/extend.brackets/io.brackets.color-palette/io.brackets.color-palette-0.1.2.zip"
+              }
+            ]
+          }
+        }
+      ]
+
+      changeSet = es.createChangeSet(testTweets)
+      markdown = es.transformChangeset(changeSet)
+
+      expected = """
+## Updated Extensions
+| Name | Version | Description | Download |
+|------|---------|-------------|----------|
+|[Brackets Color Palette](https://s3.amazonaws.com/extend.brackets/io.brackets.color-palette/io.brackets.color-palette-0.1.2.zip)|0.1.2|N/A|<a href=\"https://s3.amazonaws.com/extend.brackets/io.brackets.color-palette/io.brackets.color-palette-0.1.2.zip\"><div class=\"imageHolder\"><img src=\"images/cloud_download.svg\" class=\"image\"/></div></a>|
+"""
+      expect(expected).to.equal(markdown)

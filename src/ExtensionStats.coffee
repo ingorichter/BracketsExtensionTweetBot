@@ -56,7 +56,7 @@ getTweetsFromRange = (endDate, numberOfDays) ->
   lastTweetDate = endDate
 
   allTweets = []
-  
+
   _tweets = (max_id, count) ->
     promise = timeline(max_id, count)
     promise.then (tweets) ->
@@ -136,26 +136,33 @@ removeDuplicatesFromChangeset = (changeSet) ->
 
 transformChangeset = (changeSet) ->
   header = """
-| Name | Version | Description | Homepage | Download |
-|------|---------|-------------|----------|----------|
+| Name | Version | Description | Download |
+|------|---------|-------------|----------|
 """
+  formatUrl = (url) ->
+    "<a href=\"#{url}\"><div class=\"imageHolder\"><img src=\"images/cloud_download.svg\" class=\"image\"/></div></a>"
 
   formatTweet = (tweet) ->
     match = tweet.text.match tweetRE
-    homePageURL = tweet.entities.urls?[0].expanded_url
-    downloadURL = tweet.entities.urls?[1].expanded_url
+    urls = tweet.entities.urls
+    if urls.length == 2
+      homePageURL = urls?[0].expanded_url
+      downloadURL = urls?[1].expanded_url
+    else
+      homePageURL = downloadURL = urls?[0].expanded_url
 
-    "|#{match[1]}|#{match[2]}|N/A|#{homePageURL}|#{downloadURL}|"
+    "|[#{match[1]}](#{homePageURL})|#{match[2]}|N/A|#{formatUrl(downloadURL)}|"
 
   cleanedChangeSet = removeDuplicatesFromChangeset changeSet
   # process all new extensions
   newTweets = (formatTweet tweet for tweet in cleanedChangeSet["NEW"])
   updatedTweets = (formatTweet tweet for tweet in cleanedChangeSet["UPDATE"])
 
-  result = "# New Extensions" + "\n" + header + "\n" + newTweets.join("\n") if newTweets.length
-  result += "\n" + "# Updated Extensions" + "\n" + header + "\n" + updatedTweets.join("\n") if updatedTweets.length
-
-  result
+  # format result
+  result = ""
+  result = "## New Extensions" + "\n" + header + "\n" + newTweets.join("\n") if newTweets.length
+  result += "\n" if newTweets.length and updatedTweets.length
+  result += "## Updated Extensions" + "\n" + header + "\n" + updatedTweets.join("\n") if updatedTweets.length
 
 # API
 exports.createChangeSet          = createChangeSet
