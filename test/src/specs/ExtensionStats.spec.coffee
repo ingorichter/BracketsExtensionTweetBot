@@ -29,13 +29,13 @@ describe "ExtensionStats", ->
       es.__set__("TwitterPublisher", TW)
 
     it "should return a timeline with 50 tweets for the last 7 days (default)", (done) ->
-      p = es.getTweets(new Date(2014, 4, 4, 18, 0))
+      p = es.getTweets(new Date(Date.UTC(2014, 4, 4, 21, 0)))
       p.done (tweets) ->
         expect(tweets.length).to.equal(50)
         done()
 
     it "should not return any tweets", (done) ->
-      p = es.getTweets(new Date(2014, 7, 4, 18, 0))
+      p = es.getTweets(new Date(Date.UTC(2014, 7, 4, 18, 0)))
       p.done (tweets) ->
         expect(tweets.length).to.equal(0)
         done()
@@ -44,7 +44,7 @@ describe "ExtensionStats", ->
       # the last tweet in the test data is of 2014/5/4
       # month is 0 based => 5-1 = 4
       # 5/4/2014 6:00 pm
-      p = es.getTweets(new Date(2014, 4, 4, 18, 0), 5)
+      p = es.getTweets(new Date(Date.UTC(2014, 4, 4, 23, 0)), 5)
       p.done (tweets) ->
         expect(tweets.length).to.equal(34)
         done()
