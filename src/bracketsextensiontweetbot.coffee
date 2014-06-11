@@ -27,20 +27,18 @@ BRACKETS_REGISTRY_JSON = "#{REGISTRY_BASEURL}/registry.json"
 TWITTER_CONFIG = path.resolve(__dirname, '../twitterconfig.json')
 REGISTRY_JSON = path.resolve(__dirname, '../extensionRegistry.json')
 
-loadLocalRegistry = ->
+loadLocalRegistry = (registry) ->
   deferred = promise.defer()
 
-  p = readFile(REGISTRY_JSON)
+  registry = registry || REGISTRY_JSON
+  p = fs.readFileAsync(registry).then (data) -> deferred.resolve JSON.parse(data)
 
-  p.then (data) -> deferred.resolve JSON.parse(data)
-
-  p.catch((err) ->
+  p.catch (err) ->
     ## file doesn't exist
     if (err.cause.errno is 34)
       deferred.resolve {}
     else
       deferred.reject err
-  )
 
   return deferred.promise
 
@@ -50,17 +48,13 @@ downloadExtensionRegistry = ->
   request {uri: BRACKETS_REGISTRY_JSON, json: true, encoding: null}, (err, resp, body) ->
     if err
       deferred.reject err
-      return
     else
       zlib.gunzip body, (err, buffer) ->
         if err
           console.error err
           deferred.reject err
-          return
         else
           deferred.resolve(JSON.parse(buffer.toString()))
-          return
-      return
 
   deferred.promise
 
@@ -135,3 +129,4 @@ rockAndRoll = ->
 exports.createChangeset = createChangeset
 exports.createNotification = createNotification
 exports.rockAndRoll = rockAndRoll
+exports.loadLocalRegistry = loadLocalRegistry

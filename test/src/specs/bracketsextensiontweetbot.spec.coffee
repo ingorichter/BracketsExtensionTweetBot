@@ -141,3 +141,20 @@ describe "Extension Registry Update Notifications", ->
       notification.should.equal "test-extension - 0.1.1 (NEW) https://github.com/ingorichter/de.richter.brackets.jsonlint https://s3.amazonaws.com/extend.brackets/de.richter.brackets.jsonlint/de.richter.brackets.jsonlint-0.1.1.zip @brackets"
 
       done()
+
+  describe "Local Registry", ->
+    it "should return an empty object if no local registry is available", (done) ->
+      promise = bracketsextensiontweetbot.loadLocalRegistry "notavailable.json"
+
+      promise.then (json) ->
+        expect(json).to.be.empty
+
+      done()
+
+    it "should return the extension registry json object", (done) ->
+      promise = bracketsextensiontweetbot.loadLocalRegistry path.join(path.dirname(module.filename), "../../testdata/extensionRegistry.json")
+
+      promise.then (json) ->
+        Object.keys(json).length.should.equal 214
+
+      done()

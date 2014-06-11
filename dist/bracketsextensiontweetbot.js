@@ -37,11 +37,11 @@ TWITTER_CONFIG = path.resolve(__dirname, '../twitterconfig.json');
 
 REGISTRY_JSON = path.resolve(__dirname, '../extensionRegistry.json');
 
-loadLocalRegistry = function() {
+loadLocalRegistry = function(registry) {
   var deferred, p;
   deferred = promise.defer();
-  p = readFile(REGISTRY_JSON);
-  p.then(function(data) {
+  registry = registry || REGISTRY_JSON;
+  p = fs.readFileAsync(registry).then(function(data) {
     return deferred.resolve(JSON.parse(data));
   });
   p["catch"](function(err) {
@@ -63,14 +63,14 @@ downloadExtensionRegistry = function() {
     encoding: null
   }, function(err, resp, body) {
     if (err) {
-      deferred.reject(err);
+      return deferred.reject(err);
     } else {
-      zlib.gunzip(body, function(err, buffer) {
+      return zlib.gunzip(body, function(err, buffer) {
         if (err) {
           console.error(err);
-          deferred.reject(err);
+          return deferred.reject(err);
         } else {
-          deferred.resolve(JSON.parse(buffer.toString()));
+          return deferred.resolve(JSON.parse(buffer.toString()));
         }
       });
     }
@@ -157,3 +157,5 @@ exports.createChangeset = createChangeset;
 exports.createNotification = createNotification;
 
 exports.rockAndRoll = rockAndRoll;
+
+exports.loadLocalRegistry = loadLocalRegistry;
