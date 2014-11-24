@@ -17,10 +17,12 @@ class TW
     Promise.resolve(@tweets[@callCount])
 
 describe "ExtensionStats", ->
+  @registry
   beforeEach ->
     es.__set__('TWITTER_CONFIG', path.resolve(__dirname, '../../testdata/twitterconfig.json'))
 
     @testData = (JSON.parse(fs.readFileSync(path.join(path.dirname(module.filename), "../../testdata/twitter/feeds-#{num}.json"))) for num in [1..5])
+    @registry = JSON.parse(fs.readFileSync(path.join(path.dirname(module.filename), "../../testdata/registry.json")))
 
   describe "Fetch Tweets for various timeframes", ->
     beforeEach ->
@@ -48,6 +50,105 @@ describe "ExtensionStats", ->
       p.done (tweets) ->
         expect(tweets.length).to.equal(34)
         done()
+
+  describe "Registry JSON", ->
+    beforeEach ->
+      es.__set__('downloadExtensionRegistry', =>
+        Promise.resolve(@registry))
+
+    it "should download the registry", (done) ->
+      p = es.getJSON()
+      p.then (json) ->
+        expect(json).to.not.be.null
+        expect(Object.keys(json).length).to.equal(349)
+        done()
+
+    describe "Create Changeset", ->
+      it "should download the registry and create an empty changeset", (done) ->
+        json = es.createChangeSetFromRegistry({})
+        expect(json).to.not.be.null
+        Object.keys(json.NEW).should.have.length 0
+        Object.keys(json.UPDATE).should.have.length 0
+        done()
+
+      it "should create a changeset with new and updated extensions", (done) ->
+        registry = {
+          extension1: {
+            versions: [{published: "2014-06-23T03:04:59Z"}, {published: "2014-06-23T03:04:59Z"}]
+          },
+          extension2: {
+            versions: [{published: "2014-06-23T03:04:59Z"},
+                       {published: "2014-06-23T03:04:59Z"},
+                       {published: "2014-06-23T03:04:59Z"}]
+          },
+          extension3: {
+            versions: [{published: "2014-06-23T03:04:59Z"}]
+          }
+        }
+
+        json = es.createChangeSetFromRegistry(registry)
+        Object.keys(json.NEW).should.have.length 1
+        Object.keys(json.UPDATE).should.have.length 2
+        done()
+
+    describe "Create Markdown for Changeset", ->
+      it "should download the registry and create a changeset with new and updated extensions", (done) ->
+        registry = {
+            "io.brackets.color-palette": {
+              metadata: {
+                name:"io.brackets.color-palette",
+                title:"Brackets Color Palette",
+                description:"Pick colors directly from images (*.png, *.jpg, *.jpeg, *.gif, *.ico)",
+                homepage:"https://github.com/sprintr/brackets-color-palette",
+                version:"1.2.0"
+              },
+              versions: [{published: "2014-06-23T03:04:59Z"}, {published: "2014-06-23T03:04:59Z"}]
+            },
+            "recognizer": {
+              metadata: {
+                name:"recognizer",
+                version:"0.0.5",
+                description:"Inspect JavaScript variables real-time. This is still experimental, please follow instructions at https://github.com/equiet/recognizer.",
+                homepage:"https://github.com/equiet/recognizer",
+                main:"main.js"
+              },
+              versions: [{published: "2014-06-23T03:04:59Z"},
+                         {published: "2014-06-23T03:04:59Z"},
+                         {published: "2014-06-23T03:04:59Z"}]
+            },
+            "ficompiler": {
+              metadata: {
+                name:"ficompiler",
+                version:"1.3.1",
+                title:"Fi Compiler",
+                homepage:"https://github.com/FinalDevStudio/ficompiler",
+                description:"Compile LESS and JavaScript (Browserify & Uglify) on save."
+              },
+              versions: [{published: "2014-06-23T03:04:59Z"}]
+            }
+        }
+
+        changeSet = es.createChangeSetFromRegistry(registry)
+        expect(changeSet).to.not.be.null
+        Object.keys(changeSet.UPDATE).should.have.length 2
+        Object.keys(changeSet.NEW).should.have.length 1
+
+        markdown = es.transfromRegistryChangeset(changeSet)
+
+        expected = """
+    ## New Extensions
+    | Name | Version | Description | Download |
+    |------|---------|-------------|----------|
+    |[Fi Compiler](https://github.com/FinalDevStudio/ficompiler)|1.3.1|Compile LESS and JavaScript (Browserify & Uglify) on save.|<a href=\"https://s3.amazonaws.com/extend.brackets/ficompiler/ficompiler-1.3.1.zip\"><div class=\"imageHolder\"><img src=\"images/cloud_download.svg\" class=\"image\"/></div></a>|
+    ## Updated Extensions
+    | Name | Version | Description | Download |
+    |------|---------|-------------|----------|
+    |[Brackets Color Palette](https://github.com/sprintr/brackets-color-palette)|1.2.0|Pick colors directly from images (*.png, *.jpg, *.jpeg, *.gif, *.ico)|<a href=\"https://s3.amazonaws.com/extend.brackets/io.brackets.color-palette/io.brackets.color-palette-1.2.0.zip\"><div class=\"imageHolder\"><img src=\"images/cloud_download.svg\" class=\"image\"/></div></a>|
+    |[recognizer](https://github.com/equiet/recognizer)|0.0.5|Inspect JavaScript variables real-time. This is still experimental, please follow instructions at https://github.com/equiet/recognizer.|<a href=\"https://s3.amazonaws.com/extend.brackets/recognizer/recognizer-0.0.5.zip\"><div class=\"imageHolder\"><img src=\"images/cloud_download.svg\" class=\"image\"/></div></a>|
+    """
+        expect(expected).to.equal(markdown)
+        done()
+
 
   describe "Changeset", (done) ->
     it "should create an empty changeset", ->

@@ -9,7 +9,7 @@
 
 'use strict'
 
-promise = require 'bluebird'
+Promise = require 'bluebird'
 Twit = require 'twit'
 
 module.exports =
@@ -21,45 +21,37 @@ module.exports =
       @twitterClient = client
 
     post: (tweet) ->
-      deferred = promise.defer()
-      @twitterClient.post 'statuses/update', { status: tweet }, (err, reply, response) ->
-        if err
-          deferred.reject err
-        else
-          deferred.resolve reply
-
-      deferred.promise
+      new Promise (resolve, reject) ->
+        @twitterClient.post 'statuses/update', { status: tweet }, (err, reply, response) ->
+          if err
+            reject err
+          else
+            resolve reply
 
     # https://dev.twitter.com/docs/api/1.1/get/statuses/user_timeline
     # count - default is 20 defined by the twitter API
     # @param {?String} max_id - results lower or equal to max_id (to get older posts)
     userTimeLine: (max_id, count) ->
-      deferred = promise.defer()
-      
-      options = {}
-      options.max_id = max_id if max_id?
-      options.count = count if count?
+      new Promise (resolve, reject) =>
+        options = {}
+        options.max_id = max_id if max_id?
+        options.count = count if count?
 
-      @twitterClient.get 'statuses/home_timeline', options, (err, reply, response) ->
-        if err
-          deferred.reject err
-        else
-          deferred.resolve reply
-
-      deferred.promise
+        @twitterClient.get 'statuses/home_timeline', options, (err, reply, response) ->
+          if err
+            reject err
+          else
+            resolve reply
 
     search: (query, untilDate) ->
-      deferred = promise.defer()
-      
-      options = {}
-      options.q = query
-      
-      options.until = untilDate if untilDate
+      new Promise (resolve, reject) =>
+        options = {}
+        options.q = query
 
-      @twitterClient.get 'search/tweets', options, (err, reply, response) ->
-        if err
-          deferred.reject err
-        else
-          deferred.resolve reply
+        options.until = untilDate if untilDate
 
-      deferred.promise
+        @twitterClient.get 'search/tweets', options, (err, reply, response) ->
+          if err
+            reject err
+          else
+            resolve reply

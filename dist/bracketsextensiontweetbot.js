@@ -7,7 +7,7 @@
  * Licensed under the MIT license.
  */
 'use strict';
-var BRACKETS_REGISTRY_JSON, NOTIFICATION_TYPE, REGISTRY_BASEURL, REGISTRY_JSON, TWITTER_CONFIG, TwitterPublisher, createChangeset, createNotification, downloadExtensionRegistry, downloadUrl, fs, https, loadLocalRegistry, path, promise, request, rockAndRoll, swapRegistryFiles, zlib,
+var BRACKETS_REGISTRY_JSON, NOTIFICATION_TYPE, Promise, REGISTRY_BASEURL, REGISTRY_JSON, TWITTER_CONFIG, TwitterPublisher, createChangeset, createNotification, downloadExtensionRegistry, downloadUrl, fs, https, loadLocalRegistry, path, request, rockAndRoll, swapRegistryFiles, zlib,
   __hasProp = {}.hasOwnProperty;
 
 path = require('path');
@@ -16,9 +16,9 @@ zlib = require('zlib');
 
 https = require('https');
 
-promise = require('bluebird');
+Promise = require('bluebird');
 
-fs = promise.promisifyAll(require('fs'));
+fs = Promise.promisifyAll(require('fs'));
 
 request = require('request');
 
@@ -38,44 +38,43 @@ TWITTER_CONFIG = path.resolve(__dirname, '../twitterconfig.json');
 REGISTRY_JSON = path.resolve(__dirname, '../extensionRegistry.json');
 
 loadLocalRegistry = function(registry) {
-  var deferred, p;
-  deferred = promise.defer();
-  registry = registry || REGISTRY_JSON;
-  p = fs.readFileAsync(registry).then(function(data) {
-    return deferred.resolve(JSON.parse(data));
+  return new Promise(function(resolve, reject) {
+    var p;
+    registry = registry || REGISTRY_JSON;
+    p = fs.readFileAsync(registry).then(function(data) {
+      return resolve(JSON.parse(data));
+    });
+    return p["catch"](function(err) {
+      if (err.cause.errno === 34) {
+        return resolve({});
+      } else {
+        return reject(err);
+      }
+    });
   });
-  p["catch"](function(err) {
-    if (err.cause.errno === 34) {
-      return deferred.resolve({});
-    } else {
-      return deferred.reject(err);
-    }
-  });
-  return deferred.promise;
 };
 
 downloadExtensionRegistry = function() {
-  var deferred;
-  deferred = promise.defer();
-  request({
-    uri: BRACKETS_REGISTRY_JSON,
-    json: true,
-    encoding: null
-  }, function(err, resp, body) {
-    if (err) {
-      return deferred.reject(err);
-    } else {
-      return zlib.gunzip(body, function(err, buffer) {
-        if (err) {
-          console.error(err);
-          return deferred.reject(err);
-        } else {
-          return deferred.resolve(JSON.parse(buffer.toString()));
-        }
-      });
-    }
+  return new Promise(function(resolve, reject) {
+    return request({
+      uri: BRACKETS_REGISTRY_JSON,
+      json: true,
+      encoding: null
+    }, function(err, resp, body) {
+      if (err) {
+        return reject(err);
+      } else {
+        return zlib.gunzip(body, function(err, buffer) {
+          if (err) {
+            console.error(err);
+            return reject(err);
+          } else {
+            return resolve(JSON.parse(buffer.toString()));
+          }
+        });
+      }
+    });
   });
-  return deferred.promise;
 };
 
 downloadUrl = function(extension) {

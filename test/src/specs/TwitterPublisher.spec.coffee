@@ -27,7 +27,7 @@ describe "TwitterPublisher", ->
       @tc.setClient(provider)
 
       promise = @tc.userTimeLine()
-      promise.done (tweets) ->
+      promise.then (tweets) ->
         assert.lengthOf tweets, 20
         done()
 
@@ -39,6 +39,6 @@ describe "TwitterPublisher", ->
       @tc.setClient(provider)
 
       promise = @tc.userTimeLine()
-      promise.done (tweets) ->
+      promise.then (tweets) ->
         assert.lengthOf tweets, 20
         done()
