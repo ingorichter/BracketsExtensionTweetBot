@@ -10,11 +10,14 @@
 'use strict'
 
 path = require 'path'
-semver = require 'semver'
 fs = require 'fs'
 Promise = require 'bluebird'
-_ = require 'lodash'
+request = require 'request'
+zlib = require 'zlib'
 TwitterPublisher = require './TwitterPublisher'
+TweetFormatter = require './TweetFormatter'
+RegistryFormatter = require './RegistryFormatter'
+_ = require 'lodash'
 
 TWITTER_CONFIG = path.resolve(__dirname, '../twitterconfig.json')
 twitterPublisher = undefined
@@ -23,7 +26,31 @@ twitterPublisher = undefined
 DEFAULT_NUMBER_OF_DAYS = 7
 UPDATE_KEY = "UPDATE"
 NEW_KEY = "NEW"
-tweetRE = /^(.*)\s+-\s+(.+)\s+\(.+\)/
+
+REGISTRY_BASEURL = 'https://s3.amazonaws.com/extend.brackets'
+BRACKETS_REGISTRY_JSON = "#{REGISTRY_BASEURL}/registry.json"
+
+class DateRange
+  constructor: (@from, @to) ->
+
+  contains: (date) ->
+    @from.getTime() <= date.getTime() <= @to.getTime()
+
+downloadExtensionRegistry = ->
+  deferred = Promise.defer()
+
+  request {uri: BRACKETS_REGISTRY_JSON, json: true, encoding: null}, (err, resp, body) ->
+    if err
+      deferred.reject err
+    else
+      zlib.gunzip body, (err, buffer) ->
+        if err
+          console.error err
+          deferred.reject err
+        else
+          deferred.resolve(JSON.parse(buffer.toString()))
+
+  deferred.promise
 
 createChangeSet = (tweets) ->
   newExtensions = (tweet for tweet in tweets when tweet.text.indexOf("(NEW)") > -1)
@@ -56,7 +83,6 @@ getTweetsFromRange = (endDate, numberOfDays) ->
   lastTweetDate = endDate
 
   allTweets = []
-
   _tweets = (max_id, count) ->
     promise = timeline(max_id, count)
     promise.then (tweets) ->
@@ -82,19 +108,56 @@ getTweets = (from, to) ->
 
   twitterPublisher = new TwitterPublisher(twitterConf)
 
-  deferred = Promise.defer()
-  getTweetsFromRange(from, to).then (tweets) ->
-    deferred.resolve tweets
+  getTweetsFromRange(from, to)
 
-  deferred.promise
+getJSON = ->
+  new Promise (resolve, reject) ->
+    p = downloadExtensionRegistry()
+    p.then (json) ->
+      resolve json
+    p.catch (err) ->
+      reject err
+
+filter = (from, to, json) ->
+  to ?= new Date()
+  filteredRegistry = _.filter json, (item) ->
+    versions = item.versions.length
+    pubDate = new Date(item.versions[versions - 1].published).getTime()
+    pubDate >= from.getTime() && pubDate <= to.getTime()
+#    console.log "#{item.metadata.title}-#{versions}-#{pubDate}"
+
+  filteredRegistry
+
+createChangeSetFromRegistry = (registry) ->
+  newExtensions = _.filter registry, (extension) ->
+    extension.versions.length == 1
+
+  updatedExtensions = _.filter registry, (extension) ->
+    extension.versions.length != 1
+
+  console.warn "Mismatch" if (newExtensions.length + updatedExtensions.length) != registry.length
+  {"NEW": newExtensions, "UPDATE": updatedExtensions}
+
+filterRegistry = (from, to) ->
+  new Promise (resolve, reject) ->
+    getJSON().then (json) ->
+      resolve filter(from, to, json)
 
 extractChangesFromTweets = (from, to) ->
-  deferred = Promise.defer()
-  getTweets(from, to).then (tweets) ->
-    cs = createChangeSet tweets
-    deferred.resolve cs
-    
-  deferred.promise
+  new Promise (resolve, reject) ->
+    getTweets(from, to).then (tweets) ->
+      cs = createChangeSet tweets
+      resolve cs
+#  deferred = Promise.defer()
+#  getTweets(from, to).then (tweets) ->
+#    cs = createChangeSet tweets
+#    deferred.resolve cs
+#
+#  deferred.promise
+
+extractChangesFromRegistry = (from, to) ->
+  filterRegistry(from, to).then (filteredRegistry) ->
+    createChangeSetFromRegistry filteredRegistry
 
 search = (query, untilDate) ->
   # read twitter config file
@@ -108,66 +171,23 @@ search = (query, untilDate) ->
   promise.catch (err) ->
     console.log err
 
-# Remove duplicate in the changeset
-removeDuplicatesFromChangeset = (changeSet) ->
-  makeObject = (tweet) ->
-    match = tweet.text.match tweetRE
-    {name: match[1], version: match[2], tweet: tweet}
-
-  _removeDuplicates = (changeSet) ->
-    resultSet = []
-    for tweet in changeSet
-      obj = makeObject tweet
-      index = _.findIndex(resultSet, {name: obj.name})
-
-      resultSet.push obj if index == -1
-      resultSet[index] = obj if index > -1 && semver.gt(obj.version, resultSet[index].version)
-
-    resultSet
-    
-  updatedSet = _removeDuplicates changeSet["UPDATE"]
-  newSet = _removeDuplicates changeSet["NEW"]
-  
-  for tweet in updatedSet
-    index = _.findIndex(newSet, {name: tweet.name})
-    newSet[index] = false if index > -1
-  
-  {"NEW": _.map(_.compact(newSet), (obj) -> obj.tweet), "UPDATE": _.map(updatedSet, (obj) -> obj.tweet)}
-
 transformChangeset = (changeSet) ->
-  header = """
-| Name | Version | Description | Download |
-|------|---------|-------------|----------|
-"""
-  formatUrl = (url) ->
-    "<a href=\"#{url}\"><div class=\"imageHolder\"><img src=\"images/cloud_download.svg\" class=\"image\"/></div></a>"
+  formatter = new TweetFormatter()
+  formatter.transform changeSet
 
-  formatTweet = (tweet) ->
-    match = tweet.text.match tweetRE
-    urls = tweet.entities.urls
-    if urls.length == 2
-      homePageURL = urls?[0].expanded_url
-      downloadURL = urls?[1].expanded_url
-    else
-      homePageURL = downloadURL = urls?[0].expanded_url
-
-    "|[#{match[1]}](#{homePageURL})|#{match[2]}|N/A|#{formatUrl(downloadURL)}|"
-
-  cleanedChangeSet = removeDuplicatesFromChangeset changeSet
-  # process all new extensions
-  newTweets = (formatTweet tweet for tweet in cleanedChangeSet["NEW"])
-  updatedTweets = (formatTweet tweet for tweet in cleanedChangeSet["UPDATE"])
-
-  # format result
-  result = ""
-  result = "## New Extensions" + "\n" + header + "\n" + newTweets.join("\n") if newTweets.length
-  result += "\n" if newTweets.length and updatedTweets.length
-  result += "## Updated Extensions" + "\n" + header + "\n" + updatedTweets.join("\n") if updatedTweets.length
+transfromRegistryChangeset = (changeSet) ->
+  formatter = new RegistryFormatter()
+  formatter.transform changeSet
 
 # API
-exports.createChangeSet          = createChangeSet
-exports.extractChangesFromTweets = extractChangesFromTweets
-exports.getTweets                = getTweets
-exports.search                   = search
-exports.timeline                 = timeline
-exports.transformChangeset       = transformChangeset
+exports.createChangeSet            = createChangeSet
+exports.createChangeSetFromRegistry= createChangeSetFromRegistry
+exports.extractChangesFromTweets   = extractChangesFromTweets
+exports.extractChangesFromRegistry = extractChangesFromRegistry
+exports.filterRegistry             = filterRegistry
+exports.getTweets                  = getTweets
+exports.getJSON                    = getJSON
+exports.search                     = search
+exports.timeline                   = timeline
+exports.transformChangeset         = transformChangeset
+exports.transfromRegistryChangeset = transfromRegistryChangeset

@@ -7,19 +7,25 @@
  * Licensed under the MIT license.
  */
 'use strict';
-var DEFAULT_NUMBER_OF_DAYS, NEW_KEY, Promise, TWITTER_CONFIG, TwitterPublisher, UPDATE_KEY, createChangeSet, extractChangesFromTweets, fs, getTweets, getTweetsFromRange, path, removeDuplicatesFromChangeset, search, semver, timeline, transformChangeset, tweetRE, twitterPublisher, _;
+var BRACKETS_REGISTRY_JSON, DEFAULT_NUMBER_OF_DAYS, DateRange, NEW_KEY, Promise, REGISTRY_BASEURL, RegistryFormatter, TWITTER_CONFIG, TweetFormatter, TwitterPublisher, UPDATE_KEY, createChangeSet, createChangeSetFromRegistry, downloadExtensionRegistry, extractChangesFromRegistry, extractChangesFromTweets, filter, filterRegistry, fs, getJSON, getTweets, getTweetsFromRange, path, request, search, timeline, transformChangeset, transfromRegistryChangeset, twitterPublisher, zlib, _;
 
 path = require('path');
-
-semver = require('semver');
 
 fs = require('fs');
 
 Promise = require('bluebird');
 
-_ = require('lodash');
+request = require('request');
+
+zlib = require('zlib');
 
 TwitterPublisher = require('./TwitterPublisher');
+
+TweetFormatter = require('./TweetFormatter');
+
+RegistryFormatter = require('./RegistryFormatter');
+
+_ = require('lodash');
 
 TWITTER_CONFIG = path.resolve(__dirname, '../twitterconfig.json');
 
@@ -31,7 +37,48 @@ UPDATE_KEY = "UPDATE";
 
 NEW_KEY = "NEW";
 
-tweetRE = /^(.*)\s+-\s+(.+)\s+\(.+\)/;
+REGISTRY_BASEURL = 'https://s3.amazonaws.com/extend.brackets';
+
+BRACKETS_REGISTRY_JSON = "" + REGISTRY_BASEURL + "/registry.json";
+
+DateRange = (function() {
+  function DateRange(from, to) {
+    this.from = from;
+    this.to = to;
+  }
+
+  DateRange.prototype.contains = function(date) {
+    var _ref;
+    return (this.from.getTime() <= (_ref = date.getTime()) && _ref <= this.to.getTime());
+  };
+
+  return DateRange;
+
+})();
+
+downloadExtensionRegistry = function() {
+  var deferred;
+  deferred = Promise.defer();
+  request({
+    uri: BRACKETS_REGISTRY_JSON,
+    json: true,
+    encoding: null
+  }, function(err, resp, body) {
+    if (err) {
+      return deferred.reject(err);
+    } else {
+      return zlib.gunzip(body, function(err, buffer) {
+        if (err) {
+          console.error(err);
+          return deferred.reject(err);
+        } else {
+          return deferred.resolve(JSON.parse(buffer.toString()));
+        }
+      });
+    }
+  });
+  return deferred.promise;
+};
 
 createChangeSet = function(tweets) {
   var newExtensions, tweet, updatedExtensions;
@@ -115,25 +162,78 @@ getTweetsFromRange = function(endDate, numberOfDays) {
 };
 
 getTweets = function(from, to) {
-  var deferred, twitterConf;
+  var twitterConf;
   twitterConf = JSON.parse(fs.readFileSync(TWITTER_CONFIG));
   twitterPublisher = new TwitterPublisher(twitterConf);
-  deferred = Promise.defer();
-  getTweetsFromRange(from, to).then(function(tweets) {
-    return deferred.resolve(tweets);
+  return getTweetsFromRange(from, to);
+};
+
+getJSON = function() {
+  return new Promise(function(resolve, reject) {
+    var p;
+    p = downloadExtensionRegistry();
+    p.then(function(json) {
+      return resolve(json);
+    });
+    return p["catch"](function(err) {
+      return reject(err);
+    });
   });
-  return deferred.promise;
+};
+
+filter = function(from, to, json) {
+  var filteredRegistry;
+  if (to == null) {
+    to = new Date();
+  }
+  filteredRegistry = _.filter(json, function(item) {
+    var pubDate, versions;
+    versions = item.versions.length;
+    pubDate = new Date(item.versions[versions - 1].published).getTime();
+    return pubDate >= from.getTime() && pubDate <= to.getTime();
+  });
+  return filteredRegistry;
+};
+
+createChangeSetFromRegistry = function(registry) {
+  var newExtensions, updatedExtensions;
+  newExtensions = _.filter(registry, function(extension) {
+    return extension.versions.length === 1;
+  });
+  updatedExtensions = _.filter(registry, function(extension) {
+    return extension.versions.length !== 1;
+  });
+  if ((newExtensions.length + updatedExtensions.length) !== registry.length) {
+    console.warn("Mismatch");
+  }
+  return {
+    "NEW": newExtensions,
+    "UPDATE": updatedExtensions
+  };
+};
+
+filterRegistry = function(from, to) {
+  return new Promise(function(resolve, reject) {
+    return getJSON().then(function(json) {
+      return resolve(filter(from, to, json));
+    });
+  });
 };
 
 extractChangesFromTweets = function(from, to) {
-  var deferred;
-  deferred = Promise.defer();
-  getTweets(from, to).then(function(tweets) {
-    var cs;
-    cs = createChangeSet(tweets);
-    return deferred.resolve(cs);
+  return new Promise(function(resolve, reject) {
+    return getTweets(from, to).then(function(tweets) {
+      var cs;
+      cs = createChangeSet(tweets);
+      return resolve(cs);
+    });
   });
-  return deferred.promise;
+};
+
+extractChangesFromRegistry = function(from, to) {
+  return filterRegistry(from, to).then(function(filteredRegistry) {
+    return createChangeSetFromRegistry(filteredRegistry);
+  });
 };
 
 search = function(query, untilDate) {
@@ -149,115 +249,36 @@ search = function(query, untilDate) {
   });
 };
 
-removeDuplicatesFromChangeset = function(changeSet) {
-  var index, makeObject, newSet, tweet, updatedSet, _i, _len, _removeDuplicates;
-  makeObject = function(tweet) {
-    var match;
-    match = tweet.text.match(tweetRE);
-    return {
-      name: match[1],
-      version: match[2],
-      tweet: tweet
-    };
-  };
-  _removeDuplicates = function(changeSet) {
-    var index, obj, resultSet, tweet, _i, _len;
-    resultSet = [];
-    for (_i = 0, _len = changeSet.length; _i < _len; _i++) {
-      tweet = changeSet[_i];
-      obj = makeObject(tweet);
-      index = _.findIndex(resultSet, {
-        name: obj.name
-      });
-      if (index === -1) {
-        resultSet.push(obj);
-      }
-      if (index > -1 && semver.gt(obj.version, resultSet[index].version)) {
-        resultSet[index] = obj;
-      }
-    }
-    return resultSet;
-  };
-  updatedSet = _removeDuplicates(changeSet["UPDATE"]);
-  newSet = _removeDuplicates(changeSet["NEW"]);
-  for (_i = 0, _len = updatedSet.length; _i < _len; _i++) {
-    tweet = updatedSet[_i];
-    index = _.findIndex(newSet, {
-      name: tweet.name
-    });
-    if (index > -1) {
-      newSet[index] = false;
-    }
-  }
-  return {
-    "NEW": _.map(_.compact(newSet), function(obj) {
-      return obj.tweet;
-    }),
-    "UPDATE": _.map(updatedSet, function(obj) {
-      return obj.tweet;
-    })
-  };
+transformChangeset = function(changeSet) {
+  var formatter;
+  formatter = new TweetFormatter();
+  return formatter.transform(changeSet);
 };
 
-transformChangeset = function(changeSet) {
-  var cleanedChangeSet, formatTweet, formatUrl, header, newTweets, result, tweet, updatedTweets;
-  header = "| Name | Version | Description | Download |\n|------|---------|-------------|----------|";
-  formatUrl = function(url) {
-    return "<a href=\"" + url + "\"><div class=\"imageHolder\"><img src=\"images/cloud_download.svg\" class=\"image\"/></div></a>";
-  };
-  formatTweet = function(tweet) {
-    var downloadURL, homePageURL, match, urls;
-    match = tweet.text.match(tweetRE);
-    urls = tweet.entities.urls;
-    if (urls.length === 2) {
-      homePageURL = urls != null ? urls[0].expanded_url : void 0;
-      downloadURL = urls != null ? urls[1].expanded_url : void 0;
-    } else {
-      homePageURL = downloadURL = urls != null ? urls[0].expanded_url : void 0;
-    }
-    return "|[" + match[1] + "](" + homePageURL + ")|" + match[2] + "|N/A|" + (formatUrl(downloadURL)) + "|";
-  };
-  cleanedChangeSet = removeDuplicatesFromChangeset(changeSet);
-  newTweets = (function() {
-    var _i, _len, _ref, _results;
-    _ref = cleanedChangeSet["NEW"];
-    _results = [];
-    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-      tweet = _ref[_i];
-      _results.push(formatTweet(tweet));
-    }
-    return _results;
-  })();
-  updatedTweets = (function() {
-    var _i, _len, _ref, _results;
-    _ref = cleanedChangeSet["UPDATE"];
-    _results = [];
-    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-      tweet = _ref[_i];
-      _results.push(formatTweet(tweet));
-    }
-    return _results;
-  })();
-  result = "";
-  if (newTweets.length) {
-    result = "## New Extensions" + "\n" + header + "\n" + newTweets.join("\n");
-  }
-  if (newTweets.length && updatedTweets.length) {
-    result += "\n";
-  }
-  if (updatedTweets.length) {
-    return result += "## Updated Extensions" + "\n" + header + "\n" + updatedTweets.join("\n");
-  }
+transfromRegistryChangeset = function(changeSet) {
+  var formatter;
+  formatter = new RegistryFormatter();
+  return formatter.transform(changeSet);
 };
 
 exports.createChangeSet = createChangeSet;
 
+exports.createChangeSetFromRegistry = createChangeSetFromRegistry;
+
 exports.extractChangesFromTweets = extractChangesFromTweets;
 
+exports.extractChangesFromRegistry = extractChangesFromRegistry;
+
+exports.filterRegistry = filterRegistry;
+
 exports.getTweets = getTweets;
+
+exports.getJSON = getJSON;
 
 exports.search = search;
 
 exports.timeline = timeline;
 
 exports.transformChangeset = transformChangeset;
+
+exports.transfromRegistryChangeset = transfromRegistryChangeset;

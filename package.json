@@ -1,6 +1,6 @@
 {
   "name": "bracketsextensiontweetbot",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "lib/bracketsextensiontweetbot.js",
   "description": "Tweet about new and updated Brackets extensions",
   "homepage": "http://github.com/ingorichter/BracketsExtensionTweetBot",
