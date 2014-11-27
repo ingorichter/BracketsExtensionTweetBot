@@ -1,5 +1,9 @@
-/node_modules/
-npm-debug.log
-.oldExtensionRegistries
-/test/dist/
+.DS_Store
+Thumbs.db
+db.json
+debug.log
+node_modules/
+public/
+.deploy/
 /coverage/
+/test/dist/
