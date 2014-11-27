@@ -41,6 +41,7 @@
     "sinon-chai": "~2.6.0"
   },
   "dependencies": {
+    "semver": "^4.1.0",
     "bluebird": "~2.3.11",
     "coffee-script": "^1.8.0",
     "lodash": "~2.4.1",
