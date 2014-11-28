@@ -7,9 +7,9 @@
  * Licensed under the MIT license.
  */
 'use strict';
-var Promise, Twit, TwitterPublisher;
+var Twit, TwitterPublisher, promise;
 
-Promise = require('bluebird');
+promise = require('bluebird');
 
 Twit = require('twit');
 
@@ -23,59 +23,56 @@ module.exports = TwitterPublisher = (function() {
   };
 
   TwitterPublisher.prototype.post = function(tweet) {
-    return new Promise(function(resolve, reject) {
-      return this.twitterClient.post('statuses/update', {
-        status: tweet
-      }, function(err, reply, response) {
-        if (err) {
-          return reject(err);
-        } else {
-          return resolve(reply);
-        }
-      });
+    var deferred;
+    deferred = promise.defer();
+    this.twitterClient.post('statuses/update', {
+      status: tweet
+    }, function(err, reply, response) {
+      if (err) {
+        return deferred.reject(err);
+      } else {
+        return deferred.resolve(reply);
+      }
     });
+    return deferred.promise;
   };
 
   TwitterPublisher.prototype.userTimeLine = function(max_id, count) {
-    return new Promise((function(_this) {
-      return function(resolve, reject) {
-        var options;
-        options = {};
-        if (max_id != null) {
-          options.max_id = max_id;
-        }
-        if (count != null) {
-          options.count = count;
-        }
-        return _this.twitterClient.get('statuses/home_timeline', options, function(err, reply, response) {
-          if (err) {
-            return reject(err);
-          } else {
-            return resolve(reply);
-          }
-        });
-      };
-    })(this));
+    var deferred, options;
+    deferred = promise.defer();
+    options = {};
+    if (max_id != null) {
+      options.max_id = max_id;
+    }
+    if (count != null) {
+      options.count = count;
+    }
+    this.twitterClient.get('statuses/home_timeline', options, function(err, reply, response) {
+      if (err) {
+        return deferred.reject(err);
+      } else {
+        return deferred.resolve(reply);
+      }
+    });
+    return deferred.promise;
   };
 
   TwitterPublisher.prototype.search = function(query, untilDate) {
-    return new Promise((function(_this) {
-      return function(resolve, reject) {
-        var options;
-        options = {};
-        options.q = query;
-        if (untilDate) {
-          options.until = untilDate;
-        }
-        return _this.twitterClient.get('search/tweets', options, function(err, reply, response) {
-          if (err) {
-            return reject(err);
-          } else {
-            return resolve(reply);
-          }
-        });
-      };
-    })(this));
+    var deferred, options;
+    deferred = promise.defer();
+    options = {};
+    options.q = query;
+    if (untilDate) {
+      options.until = untilDate;
+    }
+    this.twitterClient.get('search/tweets', options, function(err, reply, response) {
+      if (err) {
+        return deferred.reject(err);
+      } else {
+        return deferred.resolve(reply);
+      }
+    });
+    return deferred.promise;
   };
 
   return TwitterPublisher;
