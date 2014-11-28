@@ -12,8 +12,8 @@
 path = require 'path'
 zlib = require 'zlib'
 https = require 'https'
-promise = require 'bluebird'
-fs = promise.promisifyAll(require 'fs')
+Promise = require 'bluebird'
+fs = Promise.promisifyAll(require 'fs')
 request = require 'request'
 TwitterPublisher = require './TwitterPublisher'
 
@@ -28,35 +28,29 @@ TWITTER_CONFIG = path.resolve(__dirname, '../twitterconfig.json')
 REGISTRY_JSON = path.resolve(__dirname, '../extensionRegistry.json')
 
 loadLocalRegistry = (registry) ->
-  deferred = promise.defer()
+  new Promise (resolve, reject) ->
+    registry = registry || REGISTRY_JSON
+    p = fs.readFileAsync(registry).then (data) -> resolve JSON.parse(data)
 
-  registry = registry || REGISTRY_JSON
-  p = fs.readFileAsync(registry).then (data) -> deferred.resolve JSON.parse(data)
-
-  p.catch (err) ->
-    ## file doesn't exist
-    if (err.cause.errno is 34)
-      deferred.resolve {}
-    else
-      deferred.reject err
-
-  return deferred.promise
+    p.catch (err) ->
+      ## file doesn't exist
+      if (err.cause.errno is 34)
+        resolve {}
+      else
+        reject err
 
 downloadExtensionRegistry = ->
-  deferred = promise.defer()
-
-  request {uri: BRACKETS_REGISTRY_JSON, json: true, encoding: null}, (err, resp, body) ->
-    if err
-      deferred.reject err
-    else
-      zlib.gunzip body, (err, buffer) ->
-        if err
-          console.error err
-          deferred.reject err
-        else
-          deferred.resolve(JSON.parse(buffer.toString()))
-
-  deferred.promise
+  new Promise (resolve, reject) ->
+    request {uri: BRACKETS_REGISTRY_JSON, json: true, encoding: null}, (err, resp, body) ->
+      if err
+        reject err
+      else
+        zlib.gunzip body, (err, buffer) ->
+          if err
+            console.error err
+            reject err
+          else
+            resolve JSON.parse buffer.toString()
 
 downloadUrl = (extension) ->
   "#{REGISTRY_BASEURL}/#{extension.metadata.name}/#{extension.metadata.name}-#{extension.metadata.version}.zip"
@@ -118,12 +112,12 @@ rockAndRoll = ->
         createNotification changeRecord
 
       # read twitter config file
-      twitterConf = JSON.parse(fs.readFileSync(TWITTER_CONFIG))
+      twitterConf = JSON.parse fs.readFileSync(TWITTER_CONFIG)
 
       twitterPublisher = new TwitterPublisher twitterConf
       twitterPublisher.post notification for notification in notifications
 
-      swapRegistryFiles(newRegistry)
+      swapRegistryFiles newRegistry
 
 # API
 exports.createChangeset = createChangeset
