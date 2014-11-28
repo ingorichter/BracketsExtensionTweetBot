@@ -1,6 +1,6 @@
 rewire = require 'rewire'
-#es = rewire '../../../dist/ExtensionStats'
-es = rewire '../../../src/ExtensionStats.coffee'
+es = rewire '../../../dist/ExtensionStats'
+#es = rewire '../../../src/ExtensionStats.coffee'
 fs = require 'fs'
 path = require 'path'
 Promise = require 'bluebird'
@@ -53,14 +53,16 @@ describe "ExtensionStats", ->
 
   describe "Registry JSON", ->
     beforeEach ->
-      es.__set__('downloadExtensionRegistry', =>
-        Promise.resolve(@registry))
+      es.__set__ 'RegistryUtils', {
+        downloadExtensionRegistry: =>
+          Promise.resolve @registry
+      }
 
     it "should download the registry", (done) ->
-      p = es.getJSON()
-      p.then (json) ->
-        expect(json).to.not.be.null
-        expect(Object.keys(json).length).to.equal(349)
+      p = es.getRegistry()
+      p.then (registry) ->
+        expect(registry).to.not.be.null
+        expect(Object.keys(registry).length).to.equal(349)
         done()
 
     describe "Create Changeset", ->
@@ -136,10 +138,13 @@ describe "ExtensionStats", ->
         markdown = es.transfromRegistryChangeset(changeSet)
 
         expected = """
+    ## 1 new Extensions
+    ## 2 updated Extensions
     ## New Extensions
     | Name | Version | Description | Download |
     |------|---------|-------------|----------|
     |[Fi Compiler](https://github.com/FinalDevStudio/ficompiler)|1.3.1|Compile LESS and JavaScript (Browserify & Uglify) on save.|<a href=\"https://s3.amazonaws.com/extend.brackets/ficompiler/ficompiler-1.3.1.zip\"><div class=\"imageHolder\"><img src=\"images/cloud_download.svg\" class=\"image\"/></div></a>|
+
     ## Updated Extensions
     | Name | Version | Description | Download |
     |------|---------|-------------|----------|
@@ -247,10 +252,13 @@ describe "ExtensionStats", ->
       markdown = es.transformChangeset(changeSet)
 
       expected = """
+## 1 new Extensions
+## 2 updated Extensions
 ## New Extensions
 | Name | Version | Description | Download |
 |------|---------|-------------|----------|
 |[Fi Compiler](https://github.com/FinalDevStudio/ficompiler)|1.3.1|N/A|<a href=\"https://s3.amazonaws.com/extend.brackets/ficompiler/ficompiler-1.3.1.zip\"><div class=\"imageHolder\"><img src=\"images/cloud_download.svg\" class=\"image\"/></div></a>|
+
 ## Updated Extensions
 | Name | Version | Description | Download |
 |------|---------|-------------|----------|
@@ -279,6 +287,7 @@ describe "ExtensionStats", ->
       markdown = es.transformChangeset(changeSet)
 
       expected = """
+## 1 updated Extensions
 ## Updated Extensions
 | Name | Version | Description | Download |
 |------|---------|-------------|----------|
