@@ -100,7 +100,7 @@ rockAndRoll = ->
       twitterConf = JSON.parse fs.readFileSync(TWITTER_CONFIG)
 
       twitterPublisher = new TwitterPublisher twitterConf
-      # twitterPublisher.post notification for notification in notifications
+      twitterPublisher.post notification for notification in notifications
 
       swapRegistryFiles newRegistry
 
