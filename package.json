@@ -23,10 +23,13 @@
     "btb": "bin/bracketsextensiontweetbot.js"
   },
   "scripts": {
-    "test": "grunt test"
+    "test": "grunt test",
+    "weekly-update": "./node_modules/.bin/coffee src/WeeklyStats.coffee",
+    "download-stats": "./node_modules/.bin/coffee src/DownloadStats.coffee"
   },
   "devDependencies": {
     "chai": "~1.10.0",
+    "coffee-script": "^1.8.0",
     "grunt-coffeelint": "0.0.13",
     "grunt-contrib-clean": "~0.6.0",
     "grunt-contrib-coffee": "~0.12.0",
@@ -41,12 +44,13 @@
     "sinon-chai": "~2.6.0"
   },
   "dependencies": {
-    "semver": "^4.1.0",
     "bluebird": "~2.3.11",
     "coffee-script": "^1.8.0",
     "lodash": "~2.4.1",
+    "moment": "^2.8.4",
     "request": "~2.48.0",
     "request-json": "~0.5.0",
+    "semver": "^4.1.0",
     "twit": "~1.1.18"
   }
 }
