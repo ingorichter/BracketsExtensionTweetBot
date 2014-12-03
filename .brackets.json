@@ -4,7 +4,7 @@
     "useTabChar": false,
     "language": {
         "coffeescript": {
-            "spaceUnits": 4,
+            "spaceUnits": 2,
             "bracketsEditorBookmarks.panelVisible": false,
             "hirse.outline.enabled": true,
             "showLineNumbers": true,
