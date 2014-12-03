@@ -5,7 +5,6 @@
  * Copyright (c) 2014 Ingo Richter
  * Licensed under the MIT license.
 ###
-# jslint vars: true, plusplus: true, devel: true, node: true, nomen: true, indent: 4, maxerr: 50
 
 'use strict'
 

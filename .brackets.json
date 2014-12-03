@@ -1,4 +1,18 @@
 {
-    "spaceUnits": 2,
-    "useTabChar": false
+    "bracketsEditorBookmarks.panelVisible": false,
+    "spaceUnits": 4,
+    "useTabChar": false,
+    "language": {
+        "coffeescript": {
+            "spaceUnits": 4,
+            "bracketsEditorBookmarks.panelVisible": false,
+            "hirse.outline.enabled": true,
+            "showLineNumbers": true,
+            "fonts.fontSize": "16px"
+        },
+        "javascript": {
+          "spaceUnits": 4,
+            "linting.prefer": "JSHint, ESLint, JSLint"
+        }
+    }
 }
