@@ -4,6 +4,7 @@
 // functions and properties for testing
 process.env.NODE_ENV = 'test';
 
+var rewire = require('rewire');
 var path = require('path');
 var chai = require('chai');
 var sinonChai = require('sinon-chai');
@@ -18,10 +19,17 @@ global.sinon = require('sinon');
 // can be used by test modules to require production modules,
 // relative to the base path (where the Gruntfile.js also lives)
 global.source = function (src) {
-  console.log('source loading: ' +  src)
+  console.log('source loading: ' +  src);
   var resource = path.normalize('../../dist/' + src);
 
   return require(resource);
+};
+
+global.rewiresource = function (src) {
+  console.log('rewire source loading: ' +  src);
+  var resource = path.normalize('../../dist/' + src);
+
+  return rewire(resource);
 };
 
 // can be used when you expect a function to throw an error

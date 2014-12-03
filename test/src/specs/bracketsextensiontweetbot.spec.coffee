@@ -1,9 +1,10 @@
 'use strict'
 
-bracketsextensiontweetbot = source("bracketsextensiontweetbot")
+bracketsextensiontweetbot = rewiresource("bracketsextensiontweetbot")
 
 fs = require "fs"
 path = require "path"
+Promise = require "bluebird"
 
 oldRegistry = JSON.parse('{"de.richter.brackets.jsonlint":{"metadata":{"name":"de.richter.brackets.jsonlint","version":"0.1.1","description":"JSONLint Extension for Brackets","title":"JSONLint Extension for Brackets","scripts":{"test":"mocha unittests.js"},"repository":{"type":"git","url":"https://github.com/ingorichter/de.richter.brackets.jsonlint"},"keywords":["jsonlint","brackets","javascript","linting","codequality","inspection"],"engines":{"brackets":">=0.30.0"},"author":{"name":"Ingo Richter","email":"ingo.richter+github@gmail.com"},"license":"MIT","bugs":{"url":"https://github.com/ingorichter/de.richter.brackets.jsonlint/issues"}},"owner":"github:ingorichter","versions":[{"version":"0.1.0","published":"2013-09-19T01:15:36.391Z","brackets":">=0.30.0"},{"version":"0.1.1","published":"2013-09-19T01:19:12.447Z","brackets":">=0.30.0"}]}}')
 
@@ -158,3 +159,27 @@ describe "Extension Registry Update Notifications", ->
         Object.keys(json).length.should.equal 214
 
       done()
+
+    describe "Rock and Roll", ->
+      it "should call all functions before tweeting the updates", (done) ->
+        llrStub = sinon.stub().returns(Promise.resolve({}))
+        derStub = sinon.stub().returns(Promise.resolve({}))
+        ccrStub = sinon.stub().returns([1])
+        srfSpy = sinon.spy()
+
+        tw = (config) ->
+          console.log "TwitterPublisher created"
+
+        tw.prototype = Object.create(Object.prototype)
+        tw.prototype.post = (data) ->
+          console.log data
+
+        bracketsextensiontweetbot.__set__("loadLocalRegistry", llrStub)
+        bracketsextensiontweetbot.__set__("downloadExtensionRegistry", derStub)
+        bracketsextensiontweetbot.__set__("createChangeset", ccrStub)
+        bracketsextensiontweetbot.__set__("TwitterPublisher", tw)
+        bracketsextensiontweetbot.__set__("swapRegistryFiles", srfSpy)
+
+        bracketsextensiontweetbot.rockAndRoll().then ->
+          expect(srfSpy.calledOnce).to.be.true
+          done()
