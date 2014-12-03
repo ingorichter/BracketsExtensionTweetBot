@@ -5,6 +5,7 @@
 'use strict';
 
 module.exports = function (grunt) {
+  require('time-grunt')(grunt);
   // load all grunt tasks
   require('matchdep').filterDev('grunt-*').forEach(function (contrib) {
     grunt.log.ok([contrib + " is loaded"]);
