@@ -166,6 +166,9 @@ describe "Extension Registry Update Notifications", ->
         derStub = sinon.stub().returns(Promise.resolve({}))
         ccrStub = sinon.stub().returns([1])
         srfSpy = sinon.spy()
+        ruSpy = {downloadExtensionRegistry: ->
+            Promise.resolve()
+        }
 
         tw = (config) ->
           console.log "TwitterPublisher created"
@@ -175,7 +178,7 @@ describe "Extension Registry Update Notifications", ->
           console.log data
 
         bracketsextensiontweetbot.__set__("loadLocalRegistry", llrStub)
-        bracketsextensiontweetbot.__set__("downloadExtensionRegistry", derStub)
+        bracketsextensiontweetbot.__set__("RegistryUtils", ruSpy)
         bracketsextensiontweetbot.__set__("createChangeset", ccrStub)
         bracketsextensiontweetbot.__set__("TwitterPublisher", tw)
         bracketsextensiontweetbot.__set__("swapRegistryFiles", srfSpy)

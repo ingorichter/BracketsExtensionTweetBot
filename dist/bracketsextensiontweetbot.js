@@ -7,12 +7,10 @@
  * Licensed under the MIT license.
  */
 'use strict';
-var BRACKETS_REGISTRY_JSON, NOTIFICATION_TYPE, Promise, REGISTRY_BASEURL, REGISTRY_JSON, TWITTER_CONFIG, TwitterPublisher, createChangeset, createNotification, downloadExtensionRegistry, downloadUrl, fs, https, loadLocalRegistry, path, request, rockAndRoll, swapRegistryFiles, zlib,
+var NOTIFICATION_TYPE, Promise, REGISTRY_BASEURL, REGISTRY_JSON, RegistryUtils, TWITTER_CONFIG, TwitterPublisher, createChangeset, createNotification, downloadUrl, fs, https, loadLocalRegistry, path, rockAndRoll, swapRegistryFiles,
   __hasProp = {}.hasOwnProperty;
 
 path = require('path');
-
-zlib = require('zlib');
 
 https = require('https');
 
@@ -20,9 +18,9 @@ Promise = require('bluebird');
 
 fs = Promise.promisifyAll(require('fs'));
 
-request = require('request');
-
 TwitterPublisher = require('./TwitterPublisher');
+
+RegistryUtils = require('./RegistryUtils');
 
 NOTIFICATION_TYPE = {
   'UPDATE': 'UPDATE',
@@ -30,8 +28,6 @@ NOTIFICATION_TYPE = {
 };
 
 REGISTRY_BASEURL = 'https://s3.amazonaws.com/extend.brackets';
-
-BRACKETS_REGISTRY_JSON = "" + REGISTRY_BASEURL + "/registry.json";
 
 TWITTER_CONFIG = path.resolve(__dirname, '../twitterconfig.json');
 
@@ -49,29 +45,6 @@ loadLocalRegistry = function(registry) {
         return resolve({});
       } else {
         return reject(err);
-      }
-    });
-  });
-};
-
-downloadExtensionRegistry = function() {
-  return new Promise(function(resolve, reject) {
-    return request({
-      uri: BRACKETS_REGISTRY_JSON,
-      json: true,
-      encoding: null
-    }, function(err, resp, body) {
-      if (err) {
-        return reject(err);
-      } else {
-        return zlib.gunzip(body, function(err, buffer) {
-          if (err) {
-            console.error(err);
-            return reject(err);
-          } else {
-            return resolve(JSON.parse(buffer.toString()));
-          }
-        });
       }
     });
   });
@@ -134,20 +107,20 @@ swapRegistryFiles = function(newContent) {
 };
 
 rockAndRoll = function() {
-  return loadLocalRegistry().then(function(oldRegistry) {
-    return downloadExtensionRegistry().then(function(newRegistry) {
-      var notification, notifications, twitterConf, twitterPublisher, _i, _len;
-      notifications = createChangeset(oldRegistry, newRegistry).map(function(changeRecord) {
-        return createNotification(changeRecord);
-      });
-      twitterConf = JSON.parse(fs.readFileSync(TWITTER_CONFIG));
-      twitterPublisher = new TwitterPublisher(twitterConf);
-      for (_i = 0, _len = notifications.length; _i < _len; _i++) {
-        notification = notifications[_i];
-        twitterPublisher.post(notification);
-      }
-      return swapRegistryFiles(newRegistry);
+  return Promise.join(loadLocalRegistry(), RegistryUtils.downloadExtensionRegistry(), function(oldRegistry, newRegistry) {
+    var notification, notifications, twitterConf, twitterPublisher, _i, _len;
+    notifications = createChangeset(oldRegistry, newRegistry).map(function(changeRecord) {
+      return createNotification(changeRecord);
     });
+    twitterConf = JSON.parse(fs.readFileSync(TWITTER_CONFIG));
+    twitterPublisher = new TwitterPublisher(twitterConf);
+    for (_i = 0, _len = notifications.length; _i < _len; _i++) {
+      notification = notifications[_i];
+      twitterPublisher.post(notification);
+    }
+    return swapRegistryFiles(newRegistry);
+  })["catch"](function(err) {
+    return console.log(err);
   });
 };
 

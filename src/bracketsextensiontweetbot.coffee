@@ -91,18 +91,19 @@ swapRegistryFiles = (newContent) ->
 
 # This is the main function
 rockAndRoll = ->
-  loadLocalRegistry().then (oldRegistry) ->
-    RegistryUtils.downloadExtensionRegistry().then (newRegistry) ->
-      notifications = createChangeset(oldRegistry, newRegistry).map (changeRecord) ->
-        createNotification changeRecord
+  Promise.join(loadLocalRegistry(), RegistryUtils.downloadExtensionRegistry(), (oldRegistry, newRegistry) ->
+    notifications = createChangeset(oldRegistry, newRegistry).map (changeRecord) ->
+      createNotification changeRecord
 
-      # read twitter config file
-      twitterConf = JSON.parse fs.readFileSync(TWITTER_CONFIG)
+    # read twitter config file
+    twitterConf = JSON.parse fs.readFileSync(TWITTER_CONFIG)
 
-      twitterPublisher = new TwitterPublisher twitterConf
-      twitterPublisher.post notification for notification in notifications
+    twitterPublisher = new TwitterPublisher twitterConf
+    twitterPublisher.post notification for notification in notifications
 
-      swapRegistryFiles newRegistry
+    swapRegistryFiles newRegistry
+  ).catch (err)->
+    console.log err
 
 # API
 exports.createChangeset     = createChangeset
