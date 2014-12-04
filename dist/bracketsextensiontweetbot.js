@@ -7,7 +7,7 @@
  * Licensed under the MIT license.
  */
 'use strict';
-var NOTIFICATION_TYPE, Promise, REGISTRY_BASEURL, REGISTRY_JSON, RegistryUtils, TWITTER_CONFIG, TwitterPublisher, createChangeset, createNotification, downloadUrl, fs, https, loadLocalRegistry, path, rockAndRoll, swapRegistryFiles,
+var NOTIFICATION_TYPE, Promise, REGISTRY_BASEURL, REGISTRY_JSON, RegistryUtils, TWITTER_CONFIG, TwitterPublisher, createChangeset, createNotification, downloadUrl, fs, https, loadLocalRegistry, loadTwitterConfig, path, rockAndRoll, swapRegistryFiles, _,
   __hasProp = {}.hasOwnProperty;
 
 path = require('path');
@@ -21,6 +21,8 @@ fs = Promise.promisifyAll(require('fs'));
 TwitterPublisher = require('./TwitterPublisher');
 
 RegistryUtils = require('./RegistryUtils');
+
+_ = require("lodash");
 
 NOTIFICATION_TYPE = {
   'UPDATE': 'UPDATE',
@@ -36,6 +38,23 @@ REGISTRY_JSON = path.resolve(__dirname, '../extensionRegistry.json');
 loadLocalRegistry = function(registry) {
   return new Promise(function(resolve, reject) {
     var p;
+    registry = registry || REGISTRY_JSON;
+    p = fs.readFileAsync(registry).then(function(data) {
+      return resolve(JSON.parse(data));
+    });
+    return p["catch"](function(err) {
+      if (err.cause.errno === 34) {
+        return resolve({});
+      } else {
+        return reject(err);
+      }
+    });
+  });
+};
+
+loadTwitterConfig = function() {
+  return new Promise(function(resolve, reject) {
+    var p, registry;
     registry = registry || REGISTRY_JSON;
     p = fs.readFileAsync(registry).then(function(data) {
       return resolve(JSON.parse(data));
@@ -107,20 +126,29 @@ swapRegistryFiles = function(newContent) {
 };
 
 rockAndRoll = function() {
-  return Promise.join(loadLocalRegistry(), RegistryUtils.downloadExtensionRegistry(), function(oldRegistry, newRegistry) {
-    var notification, notifications, twitterConf, twitterPublisher, _i, _len;
-    notifications = createChangeset(oldRegistry, newRegistry).map(function(changeRecord) {
-      return createNotification(changeRecord);
+  return new Promise(function(resolve, reject) {
+    return Promise.join(loadLocalRegistry(), RegistryUtils.downloadExtensionRegistry(), function(oldRegistry, newRegistry) {
+      var notifications;
+      notifications = createChangeset(oldRegistry, newRegistry).map(function(changeRecord) {
+        return createNotification(changeRecord);
+      });
+      return fs.readFile(TWITTER_CONFIG, function(err, data) {
+        var notification, twitterConf, twitterPublisher, _i, _len;
+        if (err && err.errno === 34) {
+          data = "{\"empty\": true}";
+        } else {
+          reject(err);
+        }
+        twitterConf = JSON.parse(data);
+        twitterPublisher = new TwitterPublisher(twitterConf);
+        for (_i = 0, _len = notifications.length; _i < _len; _i++) {
+          notification = notifications[_i];
+          twitterPublisher.post(notification);
+        }
+        swapRegistryFiles(newRegistry);
+        return resolve();
+      });
     });
-    twitterConf = JSON.parse(fs.readFileSync(TWITTER_CONFIG));
-    twitterPublisher = new TwitterPublisher(twitterConf);
-    for (_i = 0, _len = notifications.length; _i < _len; _i++) {
-      notification = notifications[_i];
-      twitterPublisher.post(notification);
-    }
-    return swapRegistryFiles(newRegistry);
-  })["catch"](function(err) {
-    return console.log(err);
   });
 };
 

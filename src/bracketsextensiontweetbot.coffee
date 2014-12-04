@@ -15,6 +15,7 @@ Promise           = require 'bluebird'
 fs                = Promise.promisifyAll(require 'fs')
 TwitterPublisher  = require './TwitterPublisher'
 RegistryUtils     = require './RegistryUtils'
+_                 = require "lodash"
 
 NOTIFICATION_TYPE = {
   'UPDATE': 'UPDATE',
@@ -26,6 +27,18 @@ TWITTER_CONFIG = path.resolve(__dirname, '../twitterconfig.json')
 REGISTRY_JSON = path.resolve(__dirname, '../extensionRegistry.json')
 
 loadLocalRegistry = (registry) ->
+  new Promise (resolve, reject) ->
+    registry = registry || REGISTRY_JSON
+    p = fs.readFileAsync(registry).then (data) -> resolve JSON.parse(data)
+
+    p.catch (err) ->
+      ## file doesn't exist
+      if (err.cause.errno is 34)
+        resolve {}
+      else
+        reject err
+
+loadTwitterConfig = ->
   new Promise (resolve, reject) ->
     registry = registry || REGISTRY_JSON
     p = fs.readFileAsync(registry).then (data) -> resolve JSON.parse(data)
@@ -91,19 +104,27 @@ swapRegistryFiles = (newContent) ->
 
 # This is the main function
 rockAndRoll = ->
-  Promise.join(loadLocalRegistry(), RegistryUtils.downloadExtensionRegistry(), (oldRegistry, newRegistry) ->
-    notifications = createChangeset(oldRegistry, newRegistry).map (changeRecord) ->
-      createNotification changeRecord
+  new Promise (resolve, reject) ->
+    Promise.join(loadLocalRegistry(), RegistryUtils.downloadExtensionRegistry(), (oldRegistry, newRegistry) ->
+      notifications = createChangeset(oldRegistry, newRegistry).map (changeRecord) ->
+        createNotification changeRecord
 
-    # read twitter config file
-    twitterConf = JSON.parse fs.readFileSync(TWITTER_CONFIG)
+      # read twitter config file
+      fs.readFile TWITTER_CONFIG, (err, data) ->
+        # file not found, return empty object
+        if (err && err.errno is 34)
+          data = "{\"empty\": true}"
+        else
+          reject(err)
 
-    twitterPublisher = new TwitterPublisher twitterConf
-    twitterPublisher.post notification for notification in notifications
+        twitterConf = JSON.parse data
+        twitterPublisher = new TwitterPublisher twitterConf
+        twitterPublisher.post notification for notification in notifications
 
-    swapRegistryFiles newRegistry
-  ).catch (err)->
-    console.log err
+        swapRegistryFiles newRegistry
+
+        resolve()
+    )
 
 # API
 exports.createChangeset     = createChangeset
