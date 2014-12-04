@@ -23,17 +23,19 @@ module.exports = TwitterPublisher = (function() {
   };
 
   TwitterPublisher.prototype.post = function(tweet) {
-    return new Promise(function(resolve, reject) {
-      return this.twitterClient.post('statuses/update', {
-        status: tweet
-      }, function(err, reply, response) {
-        if (err) {
-          return reject(err);
-        } else {
-          return resolve(reply);
-        }
-      });
-    });
+    return new Promise((function(_this) {
+      return function(resolve, reject) {
+        return _this.twitterClient.post('statuses/update', {
+          status: tweet
+        }, function(err, reply, response) {
+          if (err) {
+            return reject(err);
+          } else {
+            return resolve(reply);
+          }
+        });
+      };
+    })(this));
   };
 
   TwitterPublisher.prototype.userTimeLine = function(max_id, count) {

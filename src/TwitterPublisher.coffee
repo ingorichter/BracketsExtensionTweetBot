@@ -21,7 +21,7 @@ module.exports =
       @twitterClient = client
 
     post: (tweet) ->
-      new Promise (resolve, reject) ->
+      new Promise (resolve, reject) =>
         @twitterClient.post 'statuses/update', { status: tweet }, (err, reply, response) ->
           if err
             reject err
