@@ -9,13 +9,13 @@
 
 'use strict'
 
-path = require 'path'
-zlib = require 'zlib'
-https = require 'https'
-Promise = require 'bluebird'
-fs = Promise.promisifyAll(require 'fs')
-request = require 'request'
-TwitterPublisher = require './TwitterPublisher'
+path              = require 'path'
+https             = require 'https'
+Promise           = require 'bluebird'
+fs                = Promise.promisifyAll(require 'fs')
+TwitterPublisher  = require './TwitterPublisher'
+RegistryUtils     = require './RegistryUtils'
+_                 = require "lodash"
 
 NOTIFICATION_TYPE = {
   'UPDATE': 'UPDATE',
@@ -23,7 +23,6 @@ NOTIFICATION_TYPE = {
 }
 
 REGISTRY_BASEURL = 'https://s3.amazonaws.com/extend.brackets'
-BRACKETS_REGISTRY_JSON = "#{REGISTRY_BASEURL}/registry.json"
 TWITTER_CONFIG = path.resolve(__dirname, '../twitterconfig.json')
 REGISTRY_JSON = path.resolve(__dirname, '../extensionRegistry.json')
 
@@ -34,23 +33,10 @@ loadLocalRegistry = (registry) ->
 
     p.catch (err) ->
       ## file doesn't exist
-      if (err.cause.errno is 34)
+      if (err.cause.code is "ENOENT")
         resolve {}
       else
         reject err
-
-downloadExtensionRegistry = ->
-  new Promise (resolve, reject) ->
-    request {uri: BRACKETS_REGISTRY_JSON, json: true, encoding: null}, (err, resp, body) ->
-      if err
-        reject err
-      else
-        zlib.gunzip body, (err, buffer) ->
-          if err
-            console.error err
-            reject err
-          else
-            resolve JSON.parse buffer.toString()
 
 downloadUrl = (extension) ->
   "#{REGISTRY_BASEURL}/#{extension.metadata.name}/#{extension.metadata.name}-#{extension.metadata.version}.zip"
@@ -106,21 +92,30 @@ swapRegistryFiles = (newContent) ->
 
 # This is the main function
 rockAndRoll = ->
-  loadLocalRegistry().then (oldRegistry) ->
-    downloadExtensionRegistry().then (newRegistry) ->
+  new Promise (resolve, reject) ->
+    Promise.join(loadLocalRegistry(), RegistryUtils.downloadExtensionRegistry(), (oldRegistry, newRegistry) ->
       notifications = createChangeset(oldRegistry, newRegistry).map (changeRecord) ->
         createNotification changeRecord
 
       # read twitter config file
-      twitterConf = JSON.parse fs.readFileSync(TWITTER_CONFIG)
+      fs.readFile TWITTER_CONFIG, (err, data) ->
+        # file not found, return empty object
+        if (err && err.code is "ENOENT")
+          data = "{\"empty\": true}"
+        else
+          reject(err)
 
-      twitterPublisher = new TwitterPublisher twitterConf
-      twitterPublisher.post notification for notification in notifications
+        twitterConf = JSON.parse data
+        twitterPublisher = new TwitterPublisher twitterConf
+        twitterPublisher.post notification for notification in notifications
 
-      swapRegistryFiles newRegistry
+        swapRegistryFiles newRegistry
+
+        resolve()
+    )
 
 # API
-exports.createChangeset = createChangeset
-exports.createNotification = createNotification
-exports.rockAndRoll = rockAndRoll
-exports.loadLocalRegistry = loadLocalRegistry
+exports.createChangeset     = createChangeset
+exports.createNotification  = createNotification
+exports.rockAndRoll         = rockAndRoll
+exports.loadLocalRegistry   = loadLocalRegistry

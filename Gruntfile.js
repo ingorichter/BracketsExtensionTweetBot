@@ -2,175 +2,175 @@
 /*jshint strict:false */
 /*jslint node: true */
 
-'use strict';
+"use strict";
 
 module.exports = function (grunt) {
-  require('time-grunt')(grunt);
-  // load all grunt tasks
-  require('matchdep').filterDev('grunt-*').forEach(function (contrib) {
-    grunt.log.ok([contrib + " is loaded"]);
-    grunt.loadNpmTasks(contrib);
-  });
+    require("time-grunt")(grunt);
+    // load all grunt tasks
+    require("matchdep").filterDev("grunt-*").forEach(function (contrib) {
+        grunt.log.ok([contrib + " is loaded"]);
+        grunt.loadNpmTasks(contrib);
+    });
 
-  var config = {
-    dist: 'dist',
-    src: 'src',
-    distTest: 'test/dist',
-    srcTest: 'test/src'
-  };
-
-  // Project configuration.
-  grunt.initConfig({
-    config: config,
-    clean: {
-      dist: {
-        files: [
-          {
-            dot: true,
-            src: [
-              '<%= config.dist %>/*',
-              '<%= config.distTest %>/*',
-              '!<%= config.dist %>/.git*'
-            ]
-          }
-        ]
-      }
-    },
-    coffee: {
-      dist: {
-        options: {
-          bare: true
-        },
-        files: [{
-          expand: true,
-          cwd: '<%= config.src %>',
-          src: '{,*/}*.coffee',
-          dest: '<%= config.dist %>',
-          ext: '.js'
-        }]
-      },
-      test: {
-        files: [{
-          expand: true,
-          cwd: '<%= config.srcTest %>',
-          src: '{,*/}*.spec.coffee',
-          dest: '<%= config.distTest %>',
-          ext: '.spec.js'
-        }]
-      }
-    },
-    jshint: {
-      options: {
-        jshintrc: '.jshintrc'
-      },
-      gruntfile: {
-        src: 'Gruntfile.js'
-      }
-    },
-    watch: {
-      gruntfile: {
-        files: '<%= jshint.gruntfile.src %>',
-        tasks: ['jshint:gruntfile']
-      },
-      dist: {
-        files: '<%= config.src %>/*',
-        tasks: ['coffee:dist', 'simplemocha:backend']
-      },
-      test: {
-        files: '<%= config.srcTest %>/specs/*',
-        tasks: ['coffee:test', 'simplemocha:backend']
-      }
-    },
-    simplemocha: {
-      options: {
-        globals: [
-          'sinon',
-          'chai',
-          'should',
-          'expect',
-          'assert',
-          'AssertionError'
-        ],
-        timeout: 3000,
-        ignoreLeaks: true,
-        // grep: '*.spec',
-        ui: 'bdd',
-        reporter: 'spec'
-      },
-      backend: {
-        src: [
-          // add chai and sinon globally
-          'test/support/globals.js',
-
-          // tests
-          'test/dist/**/*.spec.js'
-        ]
-      }
-    },
-    coffeelint: {
-      app: ['src/*.coffee', 'test/*.coffee'],
-      tests: {
-        files: {
-          src: ['tests/*.coffee']
-        }
-      },
-      options: {
-        configFile: '.coffeelintrc'
-      }
-    }
-  });
-
-  grunt.registerTask('coverageBackend', 'Test backend files as well as code coverage.', function () {
-    var done = this.async();
-
-    var path = './test/support/runner.js';
-
-    var options = {
-      cmd: './node_modules/.bin/istanbul',
-      grunt: false,
-      args: [
-        'cover',
-        '--default-excludes',
-        '-x', 'app/**',
-        '--report', 'lcov',
-        '--dir', './coverage/backend',
-        path
-      ],
-      opts: {
-        // preserve colors for stdout in terminal
-        stdio: 'inherit'
-      }
+    var config = {
+        dist: "dist",
+        src: "src",
+        distTest: "test/dist",
+        srcTest: "test/src"
     };
 
-    function doneFunction(error, result) {
-      if (result && result.stderr) {
-        process.stderr.write(result.stderr);
-      }
+    // Project configuration.
+    grunt.initConfig({
+        config: config,
+        clean: {
+            dist: {
+                files: [
+                    {
+                        dot: true,
+                        src: [
+                            "<%= config.dist %>/*",
+                            "<%= config.distTest %>/*",
+                            "!<%= config.dist %>/.git*"
+                        ]
+                    }
+                ]
+            }
+        },
+        coffee: {
+            dist: {
+                options: {
+                    bare: true
+                },
+                files: [{
+                    expand: true,
+                    cwd: "<%= config.src %>",
+                    src: "{,*/}*.coffee",
+                    dest: "<%= config.dist %>",
+                    ext: ".js"
+                }]
+            },
+            test: {
+                files: [{
+                    expand: true,
+                    cwd: "<%= config.srcTest %>",
+                    src: "{,*/}*.spec.coffee",
+                    dest: "<%= config.distTest %>",
+                    ext: ".spec.js"
+                }]
+            }
+        },
+        jshint: {
+            options: {
+                jshintrc: ".jshintrc"
+            },
+            gruntfile: {
+                src: "Gruntfile.js"
+            }
+        },
+        watch: {
+            gruntfile: {
+                files: "<%= jshint.gruntfile.src %>",
+                tasks: ["jshint:gruntfile"]
+            },
+            dist: {
+                files: "<%= config.src %>/*",
+                tasks: ["coffee:dist", "simplemocha:backend"]
+            },
+            test: {
+                files: "<%= config.srcTest %>/specs/*",
+                tasks: ["coffee:test", "simplemocha:backend"]
+            }
+        },
+        simplemocha: {
+            options: {
+                globals: [
+                    "sinon",
+                    "chai",
+                    "should",
+                    "expect",
+                    "assert",
+                    "AssertionError"
+                ],
+                timeout: 3000,
+                ignoreLeaks: true,
+                // grep: "*.spec",
+                ui: "bdd",
+                reporter: "spec"
+            },
+            backend: {
+                src: [
+                    // add chai and sinon globally
+                    "test/support/globals.js",
 
-      if (result && result.stdout) {
-        grunt.log.writeln(result.stdout);
-      }
+                    // tests
+                    "test/dist/**/*.spec.js"
+                ]
+            }
+        },
+        coffeelint: {
+            app: ["src/*.coffee", "test/*.coffee"],
+            tests: {
+                files: {
+                    src: ["tests/*.coffee"]
+                }
+            },
+            options: {
+                configFile: ".coffeelintrc"
+            }
+        }
+    });
 
-      // abort tasks in queue if there's an error
-      done(error);
-    }
+    grunt.registerTask("coverageBackend", "Test backend files as well as code coverage.", function () {
+        var done = this.async();
 
-    grunt.util.spawn(options, doneFunction);
-  });
+        var path = "./test/support/runner.js";
+
+        var options = {
+            cmd: "./node_modules/.bin/istanbul",
+            grunt: false,
+            args: [
+                "cover",
+                "--default-excludes",
+                "-x", "app/**",
+                "--report", "lcov",
+                "--dir", "./coverage/backend",
+                path
+            ],
+            opts: {
+                // preserve colors for stdout in terminal
+                stdio: "inherit"
+            }
+        };
+
+        function doneFunction(error, result) {
+            if (result && result.stderr) {
+                process.stderr.write(result.stderr);
+            }
+
+            if (result && result.stdout) {
+                grunt.log.writeln(result.stdout);
+            }
+
+            // abort tasks in queue if there"s an error
+            done(error);
+        }
+
+        grunt.util.spawn(options, doneFunction);
+    });
 
 
-  // Default task.
-  grunt.registerTask('default', ['coffeelint', 'coffee', 'jshint']);
+    // Default task.
+    grunt.registerTask("default", ["coffeelint", "coffee", "jshint"]);
 
-  grunt.registerTask('test', [
-    'clean',
-    'coffee',
-    'simplemocha:backend'
-  ]);
+    grunt.registerTask("test", [
+        "clean",
+        "coffee",
+        "simplemocha:backend"
+    ]);
 
-  grunt.registerTask('coverage', [
-    'clean',
-    'coffee',
-    'coverageBackend'
-  ]);
+    grunt.registerTask("coverage", [
+        "clean",
+        "coffee",
+        "coverageBackend"
+    ]);
 };

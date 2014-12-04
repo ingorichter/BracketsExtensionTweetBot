@@ -1,5 +1,5 @@
 ###
- * BracketsExtensionTweetBot
+ * ExtensionStats
  * http://github.com/ingorichter/BracketsExtensionTweetBot
  *
  * Copyright (c) 2014 Ingo Richter
@@ -17,6 +17,7 @@ zlib = require 'zlib'
 TwitterPublisher = require './TwitterPublisher'
 TweetFormatter = require './TweetFormatter'
 RegistryFormatter = require './RegistryFormatter'
+RegistryUtils = require './RegistryUtils'
 _ = require 'lodash'
 
 TWITTER_CONFIG = path.resolve(__dirname, '../twitterconfig.json')
@@ -35,22 +36,6 @@ class DateRange
 
   contains: (date) ->
     @from.getTime() <= date.getTime() <= @to.getTime()
-
-downloadExtensionRegistry = ->
-  deferred = Promise.defer()
-
-  request {uri: BRACKETS_REGISTRY_JSON, json: true, encoding: null}, (err, resp, body) ->
-    if err
-      deferred.reject err
-    else
-      zlib.gunzip body, (err, buffer) ->
-        if err
-          console.error err
-          deferred.reject err
-        else
-          deferred.resolve(JSON.parse(buffer.toString()))
-
-  deferred.promise
 
 createChangeSet = (tweets) ->
   newExtensions = (tweet for tweet in tweets when tweet.text.indexOf("(NEW)") > -1)
@@ -110,13 +95,8 @@ getTweets = (from, to) ->
 
   getTweetsFromRange(from, to)
 
-getJSON = ->
-  new Promise (resolve, reject) ->
-    p = downloadExtensionRegistry()
-    p.then (json) ->
-      resolve json
-    p.catch (err) ->
-      reject err
+getRegistry = ->
+  RegistryUtils.downloadExtensionRegistry()
 
 filter = (from, to, json) ->
   to ?= new Date()
@@ -140,7 +120,7 @@ createChangeSetFromRegistry = (registry) ->
 
 filterRegistry = (from, to) ->
   new Promise (resolve, reject) ->
-    getJSON().then (json) ->
+    getRegistry().then (json) ->
       resolve filter(from, to, json)
 
 extractChangesFromTweets = (from, to) ->
@@ -186,7 +166,7 @@ exports.extractChangesFromTweets   = extractChangesFromTweets
 exports.extractChangesFromRegistry = extractChangesFromRegistry
 exports.filterRegistry             = filterRegistry
 exports.getTweets                  = getTweets
-exports.getJSON                    = getJSON
+exports.getRegistry                = getRegistry
 exports.search                     = search
 exports.timeline                   = timeline
 exports.transformChangeset         = transformChangeset

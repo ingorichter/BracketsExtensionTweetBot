@@ -5,7 +5,6 @@
  * Copyright (c) 2014 Ingo Richter
  * Licensed under the MIT license.
 ###
-# jslint vars: true, plusplus: true, devel: true, node: true, nomen: true, indent: 4, maxerr: 50
 
 'use strict'
 
@@ -22,6 +21,10 @@ module.exports =
     formatResult: (newExtensions, updatedExtensions) ->
       # format result
       result = ""
-      result = "## New Extensions" + "\n" + header + "\n" + newExtensions.join("\n") if newExtensions.length
-      result += "\n" if newExtensions.length and updatedExtensions.length
+      result += "## #{newExtensions.length} new Extensions" if newExtensions.length
+      result += "\n" if newExtensions.length
+      result += "## #{updatedExtensions.length} updated Extensions" if updatedExtensions.length
+      result += "\n" if updatedExtensions.length
+      result += "## New Extensions" + "\n" + header + "\n" + newExtensions.join("\n") if newExtensions.length
+      result += "\n\n" if newExtensions.length and updatedExtensions.length
       result += "## Updated Extensions" + "\n" + header + "\n" + updatedExtensions.join("\n") if updatedExtensions.length
