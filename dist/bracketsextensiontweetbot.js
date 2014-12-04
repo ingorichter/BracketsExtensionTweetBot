@@ -7,7 +7,7 @@
  * Licensed under the MIT license.
  */
 'use strict';
-var NOTIFICATION_TYPE, Promise, REGISTRY_BASEURL, REGISTRY_JSON, RegistryUtils, TWITTER_CONFIG, TwitterPublisher, createChangeset, createNotification, downloadUrl, fs, https, loadLocalRegistry, loadTwitterConfig, path, rockAndRoll, swapRegistryFiles, _,
+var NOTIFICATION_TYPE, Promise, REGISTRY_BASEURL, REGISTRY_JSON, RegistryUtils, TWITTER_CONFIG, TwitterPublisher, createChangeset, createNotification, downloadUrl, fs, https, loadLocalRegistry, path, rockAndRoll, swapRegistryFiles, _,
   __hasProp = {}.hasOwnProperty;
 
 path = require('path');
@@ -43,24 +43,7 @@ loadLocalRegistry = function(registry) {
       return resolve(JSON.parse(data));
     });
     return p["catch"](function(err) {
-      if (err.cause.errno === 34) {
-        return resolve({});
-      } else {
-        return reject(err);
-      }
-    });
-  });
-};
-
-loadTwitterConfig = function() {
-  return new Promise(function(resolve, reject) {
-    var p, registry;
-    registry = registry || REGISTRY_JSON;
-    p = fs.readFileAsync(registry).then(function(data) {
-      return resolve(JSON.parse(data));
-    });
-    return p["catch"](function(err) {
-      if (err.cause.errno === 34) {
+      if (err.cause.code === "ENOENT") {
         return resolve({});
       } else {
         return reject(err);
@@ -134,7 +117,7 @@ rockAndRoll = function() {
       });
       return fs.readFile(TWITTER_CONFIG, function(err, data) {
         var notification, twitterConf, twitterPublisher, _i, _len;
-        if (err && err.errno === 34) {
+        if (err && err.code === "ENOENT") {
           data = "{\"empty\": true}";
         } else {
           reject(err);

@@ -33,19 +33,7 @@ loadLocalRegistry = (registry) ->
 
     p.catch (err) ->
       ## file doesn't exist
-      if (err.cause.errno is 34)
-        resolve {}
-      else
-        reject err
-
-loadTwitterConfig = ->
-  new Promise (resolve, reject) ->
-    registry = registry || REGISTRY_JSON
-    p = fs.readFileAsync(registry).then (data) -> resolve JSON.parse(data)
-
-    p.catch (err) ->
-      ## file doesn't exist
-      if (err.cause.errno is 34)
+      if (err.cause.code is "ENOENT")
         resolve {}
       else
         reject err
@@ -112,7 +100,7 @@ rockAndRoll = ->
       # read twitter config file
       fs.readFile TWITTER_CONFIG, (err, data) ->
         # file not found, return empty object
-        if (err && err.errno is 34)
+        if (err && err.code is "ENOENT")
           data = "{\"empty\": true}"
         else
           reject(err)
