@@ -100,10 +100,11 @@ rockAndRoll = ->
       # read twitter config file
       fs.readFile TWITTER_CONFIG, (err, data) ->
         # file not found, return empty object
-        if (err && err.code is "ENOENT")
-          data = "{\"empty\": true}"
-        else
-          reject(err)
+        if (err)
+          if (err.code is "ENOENT")
+            data = "{\"empty\": true}"
+          else
+            reject(err)
 
         twitterConf = JSON.parse data
         twitterPublisher = new TwitterPublisher twitterConf

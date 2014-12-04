@@ -117,10 +117,12 @@ rockAndRoll = function() {
       });
       return fs.readFile(TWITTER_CONFIG, function(err, data) {
         var notification, twitterConf, twitterPublisher, _i, _len;
-        if (err && err.code === "ENOENT") {
-          data = "{\"empty\": true}";
-        } else {
-          reject(err);
+        if (err) {
+          if (err.code === "ENOENT") {
+            data = "{\"empty\": true}";
+          } else {
+            reject(err);
+          }
         }
         twitterConf = JSON.parse(data);
         twitterPublisher = new TwitterPublisher(twitterConf);
