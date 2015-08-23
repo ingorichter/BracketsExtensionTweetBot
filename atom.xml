@@ -4,7 +4,7 @@
   <subtitle><![CDATA[New and updated stuff to improve your Brackets experience]]></subtitle>
   <link href="/BracketsExtensionTweetBot/atom.xml" rel="self"/>
   <link href="https://ingorichter.github.io/BracketsExtensionTweetBot/"/>
-  <updated>2015-08-11T07:09:46.000Z</updated>
+  <updated>2015-08-23T17:31:55.000Z</updated>
   <id>https://ingorichter.github.io/BracketsExtensionTweetBot/</id>
   
   <author>
@@ -13,6 +13,330 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[Weekly Brackets Extension Update - 15/20]]></title>
+    <link href="https://ingorichter.github.io/BracketsExtensionTweetBot/2015/05/11/weekly-brackets-extension-update-15-20-from-05032015-05102015/"/>
+    <id>https://ingorichter.github.io/BracketsExtensionTweetBot/2015/05/11/weekly-brackets-extension-update-15-20-from-05032015-05102015/</id>
+    <published>2015-05-12T03:22:38.000Z</published>
+    <updated>2015-08-23T17:31:55.000Z</updated>
+    <content type="html"><![CDATA[<p>Welcome to <strong>This Week’s Brackets Extension Updates</strong>, Issue 15/20.</p>
+<p>Added or updated <a href="https://twitter.com/brackets" target="_blank" rel="external">@Brackets</a> extensions in the week from 05/04/2015 to 05/11/2015.</p>
+<p>Last week there were 1 new Extensions and 17 updates. This includes themes and other extensions.</p>
+<h2 id="What’s_going_on?">What’s going on?</h2><p>I’m late, late, late and still catching up with the previous weeks. Too much things going on at the same time. New projects and maintenance of old projects :-)</p>
+<p>Have a great week!</p>
+<p>In the meantime, you can find us on these social networks</p>
+<ul>
+<li><a href="https://www.facebook.com/codebrackets" target="_blank" rel="external">Facebook</a></li>
+<li><a href="https://plus.google.com/b/115365194873502050036/" target="_blank" rel="external">Google Plus</a></li>
+<li><a href="https://twitter.com/brackets" target="_blank" rel="external">twitter</a></li>
+</ul>
+<p>Share your thoughts and stories, ask questions and get in touch with the team.</p>
+<p>As usual, you can download the latest <a href="https://brackets.io" target="_blank" rel="external">Brackets</a> release. Please let us know what you think.</p>
+<h2 id="Top_11_Extension_Downloads_of_last_week">Top 11 Extension Downloads of last week</h2><p>Find an overview of extensions that moved up and down the list.</p>
+<table>
+<thead>
+<tr>
+<th>Rank #</th>
+<th>Name</th>
+<th>Downloads</th>
+<th>Previous Week</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><a href="https://github.com/zaggino/brackets-git" target="_blank" rel="external">Brackets Git</a></td>
+<td>4818</td>
+<td>#5 &#8657;</td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="http://emmet.io" target="_blank" rel="external">Emmet</a></td>
+<td>4754</td>
+<td>&#8660;</td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="https://github.com/drewhjava/brackets-beautify" target="_blank" rel="external">Beautify</a></td>
+<td>3680</td>
+<td>&#8660;</td>
+</tr>
+<tr>
+<td>4</td>
+<td><a href="https://github.com/mikaeljorhult/brackets-autoprefixer" target="_blank" rel="external">Autoprefixer</a></td>
+<td>3463</td>
+<td>&#9788;</td>
+</tr>
+<tr>
+<td>5</td>
+<td><a href="https://github.com/redmunds/brackets-display-shortcuts" target="_blank" rel="external">Display Shortcuts</a></td>
+<td>2467</td>
+<td>&#9788;</td>
+</tr>
+<tr>
+<td>6</td>
+<td><a href="https://github.com/ivogabe/Brackets-Icons" target="_blank" rel="external">Brackets Icons</a></td>
+<td>2393</td>
+<td>#1 &#8659;</td>
+</tr>
+<tr>
+<td>7</td>
+<td><a href="https://github.com/talmand/Brackets-HTML-Templates" target="_blank" rel="external">HTML Templates</a></td>
+<td>2359</td>
+<td>&#9788;</td>
+</tr>
+<tr>
+<td>8</td>
+<td><a href="https://github.com/Jacse/themes-for-brackets" target="_blank" rel="external">Themes for Brackets</a></td>
+<td>1967</td>
+<td>#7 &#8659;</td>
+</tr>
+<tr>
+<td>9</td>
+<td><a href="https://github.com/Brackets-PHP-SIG/Brackets-PHP-SmartHints" target="_blank" rel="external">PHP SmartHints</a></td>
+<td>1819</td>
+<td>&#9788;</td>
+</tr>
+<tr>
+<td>10</td>
+<td><a href="https://github.com/caphodel/brackets-additional-right-click-menu" target="_blank" rel="external">Brackets Additional Right Click Menu</a></td>
+<td>1751</td>
+<td>&#8660;</td>
+</tr>
+<tr>
+<td>11</td>
+<td><a href="https://github.com/cfjedimaster/brackets-w3cvalidation" target="_blank" rel="external">W3CValidation</a></td>
+<td>1464</td>
+<td>#6 &#8659;</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Top_11_Theme_Downloads_of_last_week">Top 11 Theme Downloads of last week</h2><p>Find an overview of themes that moved up and down the list.</p>
+<table>
+<thead>
+<tr>
+<th>Rank #</th>
+<th>Name</th>
+<th>Downloads</th>
+<th>Previous Week</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><a href="https://github.com/rainje/Monokai-Dark-Soda" target="_blank" rel="external">Monokai Dark Soda</a></td>
+<td>2035</td>
+<td>#4 &#8657;</td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="https://github.com/cheesypoof/QuickDark" target="_blank" rel="external">Quick Dark</a></td>
+<td>1995</td>
+<td>#1 &#8659;</td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="https://github.com/ant7/ant-brackets-theme" target="_blank" rel="external">Ant Theme</a></td>
+<td>970</td>
+<td>&#9788;</td>
+</tr>
+<tr>
+<td>4</td>
+<td><a href="https://github.com/cheesypoof/QuickLight" target="_blank" rel="external">Quick Light</a></td>
+<td>857</td>
+<td>#3 &#8659;</td>
+</tr>
+<tr>
+<td>5</td>
+<td><a href="https://github.com/Brackets-Themes/DarkSoda" target="_blank" rel="external">DarkSoda</a></td>
+<td>790</td>
+<td>#2 &#8659;</td>
+</tr>
+<tr>
+<td>6</td>
+<td><a href="https://github.com/dustindowell22/neon-brackets-theme" target="_blank" rel="external">Neon</a></td>
+<td>585</td>
+<td>&#9788;</td>
+</tr>
+<tr>
+<td>7</td>
+<td><a href="https://github.com/Brackets-Themes/Monokai" target="_blank" rel="external">Monokai</a></td>
+<td>512</td>
+<td>#10 &#8657;</td>
+</tr>
+<tr>
+<td>8</td>
+<td><a href="https://github.com/AriShPryme/brackets_pryme" target="_blank" rel="external">Brackets Pryme Theme</a></td>
+<td>484</td>
+<td>&#9788;</td>
+</tr>
+<tr>
+<td>9</td>
+<td><a href="https://github.com/ostranme/flat-attack-dark" target="_blank" rel="external">Flat Attack Dark</a></td>
+<td>434</td>
+<td>#6 &#8659;</td>
+</tr>
+<tr>
+<td>10</td>
+<td><a href="https://github.com/Brackets-Themes/Earth" target="_blank" rel="external">Earth</a></td>
+<td>411</td>
+<td>#5 &#8659;</td>
+</tr>
+<tr>
+<td>11</td>
+<td><a href="https://github.com/floatinghotpot/brackets-eclipse-theme" target="_blank" rel="external">Eclipse Theme Light</a></td>
+<td>339</td>
+<td>&#8660;</td>
+</tr>
+</tbody>
+</table>
+<h2 id="New_Extensions">New Extensions</h2><table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Version</th>
+<th>Description</th>
+<th>Download</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/warapitiya/Neptune" target="_blank" rel="external">Neptune</a></td>
+<td>1.0.0</td>
+<td>Take your code to another world.</td>
+<td><a href="https://s3.amazonaws.com/extend.brackets/warapitiya.neptune/warapitiya.neptune-1.0.0.zip" target="_blank" rel="external"><div class="imageHolder"><img src="images/cloud_download.svg" class="image"></div></a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="Updated_Extensions">Updated Extensions</h2><table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Version</th>
+<th>Description</th>
+<th>Download</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/redmunds/brackets-display-shortcuts" target="_blank" rel="external">Display Shortcuts</a></td>
+<td>1.3.4</td>
+<td>Display current shortcuts in a bottom panel that can be sorted and filtered. Add and disable shortcuts from context menu.</td>
+<td><a href="https://s3.amazonaws.com/extend.brackets/brackets-display-shortcuts/brackets-display-shortcuts-1.3.4.zip" target="_blank" rel="external"><div class="imageHolder"><img src="images/cloud_download.svg" class="image"></div></a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/mikaeljorhult/brackets-autoprefixer" target="_blank" rel="external">Autoprefixer</a></td>
+<td>0.6.0</td>
+<td>Parse CSS and add vendor prefixes automatically.</td>
+<td><a href="https://s3.amazonaws.com/extend.brackets/mikaeljorhult.brackets-autoprefixer/mikaeljorhult.brackets-autoprefixer-0.6.0.zip" target="_blank" rel="external"><div class="imageHolder"><img src="images/cloud_download.svg" class="image"></div></a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/vhornets/brackets-builder" target="_blank" rel="external">Brackets Builder</a></td>
+<td>0.0.5</td>
+<td>Allow to run build programs (such as running Python/Ruby/Node/etc scripts) from Brackets and display results in panel. It is possible to create own build systems via ‘Edit&gt;Edit Builder’ menu item and editing opened JSON-file (you need to restart Brackets). Press Ctrl(Cmd)-B to build current file.</td>
+<td><a href="https://s3.amazonaws.com/extend.brackets/brackets-builder/brackets-builder-0.0.5.zip" target="_blank" rel="external"><div class="imageHolder"><img src="images/cloud_download.svg" class="image"></div></a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/khornberg/brackets-cardboard" target="_blank" rel="external">Cardboard</a></td>
+<td>0.4.0</td>
+<td>Manage packages/dependencies for your project.</td>
+<td><a href="https://s3.amazonaws.com/extend.brackets/brackets-cardboard/brackets-cardboard-0.4.0.zip" target="_blank" rel="external"><div class="imageHolder"><img src="images/cloud_download.svg" class="image"></div></a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/MiguelCastillo/Brackets-wsSanitizer" target="_blank" rel="external">White Space Sanitizer</a></td>
+<td>1.1.1</td>
+<td>Bring sanity to your white spaces and tabs leveraging Brackets settings</td>
+<td><a href="https://s3.amazonaws.com/extend.brackets/ws-sanitizer/ws-sanitizer-1.1.1.zip" target="_blank" rel="external"><div class="imageHolder"><img src="images/cloud_download.svg" class="image"></div></a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/rainje/Monokai-Dark-Soda" target="_blank" rel="external">Monokai Dark Soda</a></td>
+<td>1.0.6</td>
+<td>Dark theme based on Dark Soda and Monokai color schemes.</td>
+<td><a href="https://s3.amazonaws.com/extend.brackets/rain.monokai-dark-soda/rain.monokai-dark-soda-1.0.6.zip" target="_blank" rel="external"><div class="imageHolder"><img src="images/cloud_download.svg" class="image"></div></a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/ant7/ant-brackets-theme" target="_blank" rel="external">Ant Theme</a></td>
+<td>1.0.6</td>
+<td>Dark color theme meant to be easy on the eyes</td>
+<td><a href="https://s3.amazonaws.com/extend.brackets/ant7.ant-theme/ant7.ant-theme-1.0.6.zip" target="_blank" rel="external"><div class="imageHolder"><img src="images/cloud_download.svg" class="image"></div></a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/cheesypoof/QuickDark" target="_blank" rel="external">Quick Dark</a></td>
+<td>1.1.3</td>
+<td>A dark theme (based on Easy Dark) that makes your code pretty and readable.</td>
+<td><a href="https://s3.amazonaws.com/extend.brackets/quick-dark/quick-dark-1.1.3.zip" target="_blank" rel="external"><div class="imageHolder"><img src="images/cloud_download.svg" class="image"></div></a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/cheesypoof/QuickLight" target="_blank" rel="external">Quick Light</a></td>
+<td>1.1.3</td>
+<td>A light theme that makes your code pretty and readable.</td>
+<td><a href="https://s3.amazonaws.com/extend.brackets/quick-light/quick-light-1.1.3.zip" target="_blank" rel="external"><div class="imageHolder"><img src="images/cloud_download.svg" class="image"></div></a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/dnbard/brackets-projects" target="_blank" rel="external">Projects</a></td>
+<td>0.1.7</td>
+<td>Open your projects from handy modal dialog. Really helpful if you have a lot of projects.</td>
+<td><a href="https://s3.amazonaws.com/extend.brackets/dnbard.projects/dnbard.projects-0.1.7.zip" target="_blank" rel="external"><div class="imageHolder"><img src="images/cloud_download.svg" class="image"></div></a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/giovannicalo/brackets-coffeescript" target="_blank" rel="external">CoffeeScript</a></td>
+<td>1.1.7</td>
+<td>Improves syntax highlighting for CoffeeScript and CJSX.</td>
+<td><a href="https://s3.amazonaws.com/extend.brackets/giovannicalo.brackets-coffeescript/giovannicalo.brackets-coffeescript-1.1.7.zip" target="_blank" rel="external"><div class="imageHolder"><img src="images/cloud_download.svg" class="image"></div></a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/DH3ALEJANDRO/Show-Recently-Used" target="_blank" rel="external">Show Recently Used Items</a></td>
+<td>0.5.7</td>
+<td>Add a menu at the top of the editor with a list of all the files shown recently</td>
+<td><a href="https://s3.amazonaws.com/extend.brackets/open.recent.file/open.recent.file-0.5.7.zip" target="_blank" rel="external"><div class="imageHolder"><img src="images/cloud_download.svg" class="image"></div></a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/caphodel/brackets-additional-right-click-menu" target="_blank" rel="external">Brackets Additional Right Click Menu</a></td>
+<td>0.5.1</td>
+<td>A Brackets extension that add additional functionality to Brackets editor right menu, like cut, copy, paste, select all, Camel Case, UPPERCASE, lowercase, fix indentation and some functionality from edit menu. changelog: added a shortcuts to some menu items, Fixed some bugs with brackets 1.3 paste, added fix indentation, bug fix for uppercase, lowercase and camelcase selection behaviour and change it’s short cut key</td>
+<td><a href="https://s3.amazonaws.com/extend.brackets/deddy.additional-right-click-menu/deddy.additional-right-click-menu-0.5.1.zip" target="_blank" rel="external"><div class="imageHolder"><img src="images/cloud_download.svg" class="image"></div></a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/dag0310/tab-out" target="_blank" rel="external">Tab Out</a></td>
+<td>1.0.2</td>
+<td>Use the Tab key to jump out of nested elements surrounded by characters “, ‘, ), ] or } like in Eclipse.</td>
+<td><a href="https://s3.amazonaws.com/extend.brackets/dag0310.tab-out/dag0310.tab-out-1.0.2.zip" target="_blank" rel="external"><div class="imageHolder"><img src="images/cloud_download.svg" class="image"></div></a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/dnbard/brackets-old-terminal" target="_blank" rel="external">Vintage Terminal Effect</a></td>
+<td>1.1.0</td>
+<td>Enhance your editor area with visual effects of Vintage Terminal. Supporting any dark theme for Brackets.</td>
+<td><a href="https://s3.amazonaws.com/extend.brackets/dnbard.old-teminal/dnbard.old-teminal-1.1.0.zip" target="_blank" rel="external"><div class="imageHolder"><img src="images/cloud_download.svg" class="image"></div></a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/quape/brackets-selectword" target="_blank" rel="external">Select Word</a></td>
+<td>1.0.1</td>
+<td>Select the word at the current cursor postion like if you double-click there.</td>
+<td><a href="https://s3.amazonaws.com/extend.brackets/quape.selectword/quape.selectword-1.0.1.zip" target="_blank" rel="external"><div class="imageHolder"><img src="images/cloud_download.svg" class="image"></div></a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/ghaxx/brackets-script-builder" target="_blank" rel="external">Brackets Script Builder</a></td>
+<td>0.0.8</td>
+<td>Allows to run programs contained in one file (can be used for Scala, Java, Python, Ruby, Node, C++, Bash) from Brackets and display results in panel.<br>It is possible to create own build systems via ‘Edit &gt; Script Builder Configuration’ menu item and editing opened JSON file (you need to restart Brackets afterwards).<br>Based on Brackets Builder (<a href="http://github.com/Vhornets/brackets-builder" target="_blank" rel="external">http://github.com/Vhornets/brackets-builder</a>).<br><br>Keyboard shortcuts:<br> <em> F9 to run current file as a script.<br> </em> F10 to compile current file.<br> * F11 to run compilation result.</td>
+<td><a href="https://s3.amazonaws.com/extend.brackets/brackets-script-builder/brackets-script-builder-0.0.8.zip" target="_blank" rel="external"><div class="imageHolder"><img src="images/cloud_download.svg" class="image"></div></a></td>
+</tr>
+</tbody>
+</table>]]></content>
+    <summary type="html">
+    <![CDATA[<p>Welcome to <strong>This Week’s Brackets Extension Updates</strong>, Issue 15/20.</p>
+<p>Added or updated <a href="https://twitter.com/bra]]>
+    </summary>
+    
+      <category term="Extension" scheme="https://ingorichter.github.io/BracketsExtensionTweetBot/tags/Extension/"/>
+    
+      <category term="New" scheme="https://ingorichter.github.io/BracketsExtensionTweetBot/tags/New/"/>
+    
+      <category term="Update" scheme="https://ingorichter.github.io/BracketsExtensionTweetBot/tags/Update/"/>
+    
+      <category term="Update" scheme="https://ingorichter.github.io/BracketsExtensionTweetBot/categories/Update/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[Weekly Brackets Extension Update - 15/19]]></title>
@@ -6072,353 +6396,6 @@
 </table>]]></content>
     <summary type="html">
     <![CDATA[<p>Welcome to <strong>This Week’s Brackets Extension Updates</strong>, Issue 15/01.</p>
-<p>Added or updated <a href="https://twitter.com/bra]]>
-    </summary>
-    
-      <category term="Extension" scheme="https://ingorichter.github.io/BracketsExtensionTweetBot/tags/Extension/"/>
-    
-      <category term="New" scheme="https://ingorichter.github.io/BracketsExtensionTweetBot/tags/New/"/>
-    
-      <category term="Update" scheme="https://ingorichter.github.io/BracketsExtensionTweetBot/tags/Update/"/>
-    
-      <category term="Update" scheme="https://ingorichter.github.io/BracketsExtensionTweetBot/categories/Update/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Weekly Brackets Extension Update - 14/52]]></title>
-    <link href="https://ingorichter.github.io/BracketsExtensionTweetBot/2014/12/22/weekly-brackets-extension-update-14-52-from-12152014-121222014/"/>
-    <id>https://ingorichter.github.io/BracketsExtensionTweetBot/2014/12/22/weekly-brackets-extension-update-14-52-from-12152014-121222014/</id>
-    <published>2014-12-22T21:39:04.000Z</published>
-    <updated>2014-12-31T05:06:22.000Z</updated>
-    <content type="html"><![CDATA[<p>Welcome to <strong>This Week’s Brackets Extension Updates</strong>, Issue 14/52.</p>
-<p>Added or updated <a href="https://twitter.com/brackets" target="_blank" rel="external">@Brackets</a> extensions in the week from 12/15/2014 to 12/22/2014.</p>
-<p>This week there were 4 new Extensions and 23 updates. This includes themes and other extensions.</p>
-<h2 id="What’s_going_on">What’s going on</h2><p>Yeah, we finally released Brackets 1.1! With the help of our great community, we were able to release Brackets before the christmas break. Have a look at <a href="http://blog.brackets.io/2014/12/18/brackets-1-1-and-extract-for-brackets-0-6-now-available/" target="_blank" rel="external">the blog post</a> that provides detailed information about the release.</p>
-<p>For now, we are going to prepare for the 1.3 release end of January 2015. But until we get back to work around 1/5/2015, we will participate in the holiday shutdown here at Adobe. Things will slow down a bit. Let’s take some rest and look back at an awesome year for Brackets.<br>Hope to see everyone back beginning of next year. Refreshed, energetic and ready to make Brackets the best tool webdev’s have seen so far.</p>
-<p>As usual, you can download the latest <a href="https://brackets.io" target="_blank" rel="external">Brackets</a> release and let us know what you think.<br>Have a great week and happy holidays!</p>
-<h2 id="Top_11_Extension_Downloads_from_last_week">Top 11 Extension Downloads from last week</h2><p>Find an overview of extensions that moved up and down the list.</p>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Downloads</th>
-<th>Previous Week</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="http://www.adobe.com/go/e4b_help" target="_blank" rel="external">Extract for Brackets (Preview)</a></td>
-<td>7583</td>
-<td>&#9788;</td>
-</tr>
-<tr>
-<td><a href="https://github.com/zaggino/brackets-git" target="_blank" rel="external">Brackets Git</a></td>
-<td>7160</td>
-<td>#1 &#8659;</td>
-</tr>
-<tr>
-<td><a href="https://github.com/ivogabe/Brackets-Icons" target="_blank" rel="external">Brackets Icons</a></td>
-<td>4951</td>
-<td>#9 &#8657;</td>
-</tr>
-<tr>
-<td><a href="http://www.oslibrary.in/brackets/" target="_blank" rel="external">PHP Syntax Hint</a></td>
-<td>4330</td>
-<td>#11 &#8657;</td>
-</tr>
-<tr>
-<td><a href="https://github.com/drewhjava/brackets-beautify" target="_blank" rel="external">Beautify</a></td>
-<td>3169</td>
-<td>#3 &#8659;</td>
-</tr>
-<tr>
-<td><a href="https://github.com/Wikunia/brackets-QuickDocsJS" target="_blank" rel="external">QuickDocsJS</a></td>
-<td>2988</td>
-<td>&#9788;</td>
-</tr>
-<tr>
-<td><a href="http://emmet.io" target="_blank" rel="external">Emmet</a></td>
-<td>2917</td>
-<td>#2 &#8659;</td>
-</tr>
-<tr>
-<td><a href="https://github.com/Hirse/brackets-outline-list" target="_blank" rel="external">Brackets Outline List</a></td>
-<td>2656</td>
-<td>#6 &#8659;</td>
-</tr>
-<tr>
-<td><a href="https://github.com/thehogfather/brackets-code-folding" target="_blank" rel="external">Code Folding</a></td>
-<td>2197</td>
-<td>#7 &#8659;</td>
-</tr>
-<tr>
-<td><a href="https://github.com/cfjedimaster/brackets-jshint" target="_blank" rel="external">JSHint</a></td>
-<td>2051</td>
-<td>#4 &#8659;</td>
-</tr>
-<tr>
-<td><a href="https://github.com/sathyamoorthi/brackets-sidebar-plus" target="_blank" rel="external">Sidebar Plus</a></td>
-<td>2021</td>
-<td>&#9788;</td>
-</tr>
-</tbody>
-</table>
-<h2 id="Top_11_Theme_Downloads_from_last_week">Top 11 Theme Downloads from last week</h2><p>Find an overview of themes that moved up and down the list.</p>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Downloads</th>
-<th>Previous Week</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="https://github.com/fergaldoyle/brackets-visual-studio-dark" target="_blank" rel="external">Visual Studio Dark</a></td>
-<td>1396</td>
-<td>&#9788;</td>
-</tr>
-<tr>
-<td><a href="https://github.com/tremendus/tremendus-dark-theme" target="_blank" rel="external">Tremendus Dark Theme</a></td>
-<td>766</td>
-<td>&#9788;</td>
-</tr>
-<tr>
-<td><a href="https://github.com/georapbox/brackets-github-theme" target="_blank" rel="external">Github Theme</a></td>
-<td>747</td>
-<td>#7 &#8657;</td>
-</tr>
-<tr>
-<td><a href="https://github.com/cithukyaw/DreamPHP" target="_blank" rel="external">Dream PHP</a></td>
-<td>678</td>
-<td>#8 &#8657;</td>
-</tr>
-<tr>
-<td><a href="https://github.com/JulienMcJay/blackmint-theme" target="_blank" rel="external">Black Mint Theme</a></td>
-<td>575</td>
-<td>#1 &#8659;</td>
-</tr>
-<tr>
-<td><a href="https://github.com/Brackets-Themes/Chrome" target="_blank" rel="external">Chrome</a></td>
-<td>562</td>
-<td>#3 &#8659;</td>
-</tr>
-<tr>
-<td><a href="https://github.com/yangodev/Flattark" target="_blank" rel="external">Flattark Dark</a></td>
-<td>525</td>
-<td>#2 &#8659;</td>
-</tr>
-<tr>
-<td><a href="https://github.com/Brackets-Themes/DarkSoda" target="_blank" rel="external">DarkSoda</a></td>
-<td>497</td>
-<td>#5 &#8659;</td>
-</tr>
-<tr>
-<td><a href="https://github.com/rubenrme/frackets" target="_blank" rel="external">Frackets Theme</a></td>
-<td>481</td>
-<td>&#9788;</td>
-</tr>
-<tr>
-<td><a href="https://github.com/rainje/Monokai-Dark-Soda" target="_blank" rel="external">Monokai Dark Soda</a></td>
-<td>453</td>
-<td>#11 &#8657;</td>
-</tr>
-<tr>
-<td><a href="https://github.com/Brackets-Themes/Monokai" target="_blank" rel="external">Monokai</a></td>
-<td>416</td>
-<td>#10 &#8659;</td>
-</tr>
-</tbody>
-</table>
-<h2 id="New_Extensions">New Extensions</h2><table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Version</th>
-<th>Description</th>
-<th>Download</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="https://github.com/mitchellmebane/brackets-es6asjs" target="_blank" rel="external">ES6 As JS</a></td>
-<td>1.0.0</td>
-<td>Treat files with a .es6 extension as JavaScript</td>
-<td><a href="https://s3.amazonaws.com/extend.brackets/mitchellmebane.es6asjs/mitchellmebane.es6asjs-1.0.0.zip" target="_blank" rel="external"><div class="imageHolder"><img src="images/cloud_download.svg" class="image"></div></a></td>
-</tr>
-<tr>
-<td><a href="https://github.com/rubenrme/frackets" target="_blank" rel="external">Frackets Theme</a></td>
-<td>1.0.0</td>
-<td>A brackets theme based upon flat colors</td>
-<td><a href="https://s3.amazonaws.com/extend.brackets/com.rubenengelbrecht.frackets/com.rubenengelbrecht.frackets-1.0.0.zip" target="_blank" rel="external"><div class="imageHolder"><img src="images/cloud_download.svg" class="image"></div></a></td>
-</tr>
-<tr>
-<td><a href="https://github.com/monirulalom/woocommerce-hints-for-brackets/" target="_blank" rel="external">WooCommerce Hints for Brackets</a></td>
-<td>1.0.0</td>
-<td>WooCommerce Hints for Brackets - plugin for Brackets, which will help you in writing WooCommerce themes/plugins with WordPress</td>
-<td><a href="https://s3.amazonaws.com/extend.brackets/woocommerce-hints-for-brackets/woocommerce-hints-for-brackets-1.0.0.zip" target="_blank" rel="external"><div class="imageHolder"><img src="images/cloud_download.svg" class="image"></div></a></td>
-</tr>
-<tr>
-<td><a href="https://github.com/fredserva/zeedijk" target="_blank" rel="external">Zeedijk</a></td>
-<td>0.1.0</td>
-<td>Light theme for Adobe Brackets</td>
-<td><a href="https://s3.amazonaws.com/extend.brackets/zeedijk/zeedijk-0.1.0.zip" target="_blank" rel="external"><div class="imageHolder"><img src="images/cloud_download.svg" class="image"></div></a></td>
-</tr>
-</tbody>
-</table>
-<h2 id="Updated_Extensions">Updated Extensions</h2><table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Version</th>
-<th>Description</th>
-<th>Download</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="https://github.com/gruehle/MarkdownPreview" target="_blank" rel="external">Markdown Preview</a></td>
-<td>1.0.9</td>
-<td>Live preview of markdown documents</td>
-<td><a href="https://s3.amazonaws.com/extend.brackets/gruehle.markdown-preview/gruehle.markdown-preview-1.0.9.zip" target="_blank" rel="external"><div class="imageHolder"><img src="images/cloud_download.svg" class="image"></div></a></td>
-</tr>
-<tr>
-<td><a href="https://github.com/sathyamoorthi/brackets-sidebar-plus" target="_blank" rel="external">Sidebar Plus</a></td>
-<td>2.0.3</td>
-<td>Hide sidebar using View-&gt;Hide Sidebar Or Ctrl+Alt+H. For immediate access, click at the left corner to open it and click on editor to collapse it. You can also open sidebar by mouse over at the left corner. For that, you should set triggermode in brakets.json preference file.</td>
-<td><a href="https://s3.amazonaws.com/extend.brackets/sidebar-plus/sidebar-plus-2.0.3.zip" target="_blank" rel="external"><div class="imageHolder"><img src="images/cloud_download.svg" class="image"></div></a></td>
-</tr>
-<tr>
-<td><a href="https://github.com/ingorichter/brackets-sort-text/" target="_blank" rel="external">Brackets Sort Text</a></td>
-<td>0.1.3</td>
-<td>Sort Text extension for Brackets. Provide operations to sort, reverse, randomize and remove duplicate lines.</td>
-<td><a href="https://s3.amazonaws.com/extend.brackets/brackets-sort-text/brackets-sort-text-0.1.3.zip" target="_blank" rel="external"><div class="imageHolder"><img src="images/cloud_download.svg" class="image"></div></a></td>
-</tr>
-<tr>
-<td><a href="https://github.com/talmand/Brackets-HTML-Templates" target="_blank" rel="external">HTML Templates</a></td>
-<td>1.2.4</td>
-<td>Inserts HTML from a pre-made list of templates.</td>
-<td><a href="https://s3.amazonaws.com/extend.brackets/talmand.html-templates/talmand.html-templates-1.2.4.zip" target="_blank" rel="external"><div class="imageHolder"><img src="images/cloud_download.svg" class="image"></div></a></td>
-</tr>
-<tr>
-<td><a href="https://github.com/Acconut/brackets-nodejs" target="_blank" rel="external">Node.js bindings</a></td>
-<td>1.4.0</td>
-<td>Execute node scripts and common npm commands inside Brackets.</td>
-<td><a href="https://s3.amazonaws.com/extend.brackets/brackets-nodejs/brackets-nodejs-1.4.0.zip" target="_blank" rel="external"><div class="imageHolder"><img src="images/cloud_download.svg" class="image"></div></a></td>
-</tr>
-<tr>
-<td><a href="https://github.com/ivogabe/Brackets-Icons" target="_blank" rel="external">Brackets Icons</a></td>
-<td>1.3.0</td>
-<td>File icons in Brackets’ file tree.</td>
-<td><a href="https://s3.amazonaws.com/extend.brackets/ivogabe.icons/ivogabe.icons-1.3.0.zip" target="_blank" rel="external"><div class="imageHolder"><img src="images/cloud_download.svg" class="image"></div></a></td>
-</tr>
-<tr>
-<td><a href="https://github.com/Equals182/eqFTP" target="_blank" rel="external">eqFTP</a></td>
-<td>0.6.2</td>
-<td>FTP client for Brackets. Please restart Brackets manually after update.</td>
-<td><a href="https://s3.amazonaws.com/extend.brackets/equals182.eqftp/equals182.eqftp-0.6.2.zip" target="_blank" rel="external"><div class="imageHolder"><img src="images/cloud_download.svg" class="image"></div></a></td>
-</tr>
-<tr>
-<td><a href="http://www.oslibrary.in/brackets/" target="_blank" rel="external">PHP Syntax Hint</a></td>
-<td>1.1.3</td>
-<td>PHP Syntax Hint is a plugin for Brackets, which will help you alot in writing php SYNTAX, MYSQL Queries as this will auto suggest Syntax while coding, within Brackets software. The best part of it is that if you want to write some words again and again, just go to Help &gt; Show Extensions Folder. Once folder opens up, open folder user &gt; brackets-php-syntax-hint. There you will get php-syntax.txt, open that file and go on adding syntax and words you require and reload Brackets to enjoy writing codes(words you have added).  They will appear in the dropdown as HINT, press ENTER and that is done.</td>
-<td><a href="https://s3.amazonaws.com/extend.brackets/brackets-php-syntax-hint/brackets-php-syntax-hint-1.1.3.zip" target="_blank" rel="external"><div class="imageHolder"><img src="images/cloud_download.svg" class="image"></div></a></td>
-</tr>
-<tr>
-<td><a href="https://github.com/drewbkoch/Brackets-File-Icons" target="_blank" rel="external">Brackets File Icons</a></td>
-<td>1.2.1</td>
-<td>File icons in Brackets’ file tree.</td>
-<td><a href="https://s3.amazonaws.com/extend.brackets/drewkoch.icons/drewkoch.icons-1.2.1.zip" target="_blank" rel="external"><div class="imageHolder"><img src="images/cloud_download.svg" class="image"></div></a></td>
-</tr>
-<tr>
-<td><a href="https://github.com/sprintr/brackets-svg-code-hints" target="_blank" rel="external">Brackets SVG Code Hints</a></td>
-<td>1.1.0</td>
-<td>Provides code hints for your SVG documents</td>
-<td><a href="https://s3.amazonaws.com/extend.brackets/io.brackets.svg-code-hints/io.brackets.svg-code-hints-1.1.0.zip" target="_blank" rel="external"><div class="imageHolder"><img src="images/cloud_download.svg" class="image"></div></a></td>
-</tr>
-<tr>
-<td><a href="https://github.com/globexdesigns/brackets-jsxhint" target="_blank" rel="external">JSXHint</a></td>
-<td>0.0.6</td>
-<td>Adds JSXHint support to Brackets. It’s a wrapper around JSHint for linting React JSX files. 100% compatible with existing tools using JSHint.</td>
-<td><a href="https://s3.amazonaws.com/extend.brackets/globexdesigns.brackets-jsxhint/globexdesigns.brackets-jsxhint-0.0.6.zip" target="_blank" rel="external"><div class="imageHolder"><img src="images/cloud_download.svg" class="image"></div></a></td>
-</tr>
-<tr>
-<td><a href="http://github.com/ingorichter/de.richter.brackets.diagnostics" target="_blank" rel="external">Brackets Diagnostic Report</a></td>
-<td>0.0.4</td>
-<td>Collect diagnostic information about Brackets and installed Extensions</td>
-<td><a href="https://s3.amazonaws.com/extend.brackets/de.richter.brackets.diagnostics/de.richter.brackets.diagnostics-0.0.4.zip" target="_blank" rel="external"><div class="imageHolder"><img src="images/cloud_download.svg" class="image"></div></a></td>
-</tr>
-<tr>
-<td><a href="https://github.com/tjeffree/Brackets-ExtensionHighlight" target="_blank" rel="external">Extension Highlighter</a></td>
-<td>1.2.2</td>
-<td>File extension colours in Brackets’ file tree.</td>
-<td><a href="https://s3.amazonaws.com/extend.brackets/tjeffree.extensionhighlighter/tjeffree.extensionhighlighter-1.2.2.zip" target="_blank" rel="external"><div class="imageHolder"><img src="images/cloud_download.svg" class="image"></div></a></td>
-</tr>
-<tr>
-<td><a href="http://caferati.me/labs/brackets-html-wrapper" target="_blank" rel="external">HTML Wrapper</a></td>
-<td>1.0.0</td>
-<td>Format &lt;ul&gt;, &lt;ol&gt;, &lt;nav&gt;, &lt;select&gt; and &lt;tr&gt; children tags with a single command. NOW with advanced options.</td>
-<td><a href="https://s3.amazonaws.com/extend.brackets/brackets-html-wrapper/brackets-html-wrapper-1.0.0.zip" target="_blank" rel="external"><div class="imageHolder"><img src="images/cloud_download.svg" class="image"></div></a></td>
-</tr>
-<tr>
-<td><a href="http://www.adobe.com/go/e4b_help" target="_blank" rel="external">Extract for Brackets (Preview)</a></td>
-<td>0.6.1-1719-release</td>
-<td>Preview of Extract functionality inside Brackets. Extract design information and assets from a design comp via contextual code hints for CSS.</td>
-<td><a href="https://s3.amazonaws.com/extend.brackets/adobe.brackets.extract/adobe.brackets.extract-0.6.1-1719-release.zip" target="_blank" rel="external"><div class="imageHolder"><img src="images/cloud_download.svg" class="image"></div></a></td>
-</tr>
-<tr>
-<td><a href="https://github.com/zaggino/brackets-snippets" target="_blank" rel="external">Brackets Snippets (by zaggino)</a></td>
-<td>0.4.0</td>
-<td>Snippets extension for Brackets</td>
-<td><a href="https://s3.amazonaws.com/extend.brackets/zaggino.brackets-snippets/zaggino.brackets-snippets-0.4.0.zip" target="_blank" rel="external"><div class="imageHolder"><img src="images/cloud_download.svg" class="image"></div></a></td>
-</tr>
-<tr>
-<td><a href="https://github.com/nicolo-ribaudo/brackets-svg-font" target="_blank" rel="external">Svg Font</a></td>
-<td>0.2.1</td>
-<td>This extensions displays Svg and TrueType fonts</td>
-<td><a href="https://s3.amazonaws.com/extend.brackets/nicolo-ribaudo.brackets-svg-font/nicolo-ribaudo.brackets-svg-font-0.2.1.zip" target="_blank" rel="external"><div class="imageHolder"><img src="images/cloud_download.svg" class="image"></div></a></td>
-</tr>
-<tr>
-<td><a href="https://github.com/fergaldoyle/brackets-visual-studio-dark" target="_blank" rel="external">Visual Studio Dark</a></td>
-<td>1.1.1</td>
-<td>Visual Studio Dark theme for Brackets. Has language specific syntax colouring by using addModeClass=true.</td>
-<td><a href="https://s3.amazonaws.com/extend.brackets/visual-studio-dark/visual-studio-dark-1.1.1.zip" target="_blank" rel="external"><div class="imageHolder"><img src="images/cloud_download.svg" class="image"></div></a></td>
-</tr>
-<tr>
-<td><a href="https://github.com/Hirse/brackets-outline-list" target="_blank" rel="external">Brackets Outline List</a></td>
-<td>0.4.3</td>
-<td>Displays a list of the functions or definitions in the currently opened document. Works with JavaScript, CoffeeScript, CSS, SCSS, LESS, XML, HTML, SVG, Markdown and PHP. Now with Icons!</td>
-<td><a href="https://s3.amazonaws.com/extend.brackets/hirse.outline-list/hirse.outline-list-0.4.3.zip" target="_blank" rel="external"><div class="imageHolder"><img src="images/cloud_download.svg" class="image"></div></a></td>
-</tr>
-<tr>
-<td><a href="https://github.com/szdc/brackets-cdn-suggestions" target="_blank" rel="external">JavaScript &amp; CSS CDN Suggestions</a></td>
-<td>2.0.2</td>
-<td>Provides JavaScript and CSS suggestions/hints for libraries hosted on CDNs by Google, CDNJS and jsDelivr.</td>
-<td><a href="https://s3.amazonaws.com/extend.brackets/szdc.cdn-suggestions/szdc.cdn-suggestions-2.0.2.zip" target="_blank" rel="external"><div class="imageHolder"><img src="images/cloud_download.svg" class="image"></div></a></td>
-</tr>
-<tr>
-<td><a href="https://github.com/rafaelstz/brackets-magento-hint" target="_blank" rel="external">Magento Hint</a></td>
-<td>1.0.3</td>
-<td>Ideal for developing Magento themes, get hints of the main functions, classes and methods.</td>
-<td><a href="https://s3.amazonaws.com/extend.brackets/brackets-mg-functions-hint/brackets-mg-functions-hint-1.0.3.zip" target="_blank" rel="external"><div class="imageHolder"><img src="images/cloud_download.svg" class="image"></div></a></td>
-</tr>
-<tr>
-<td><a href="https://github.com/tremendus/tremendus-dark-theme" target="_blank" rel="external">Tremendus Dark Theme</a></td>
-<td>1.0.2</td>
-<td>A dark syntax theme with muted pastel colors great for those long or late night coding sessions :)</td>
-<td><a href="https://s3.amazonaws.com/extend.brackets/tremendus-dark-theme/tremendus-dark-theme-1.0.2.zip" target="_blank" rel="external"><div class="imageHolder"><img src="images/cloud_download.svg" class="image"></div></a></td>
-</tr>
-<tr>
-<td><a href="https://github.com/johnhidey/hdy.brackets-shell/" target="_blank" rel="external">Brackets Shell</a></td>
-<td>0.0.12</td>
-<td>Shell access within Brackets. Want to run some shell command, install a node package, install from bower the list goes on and on. Well then, this extension is for you.</td>
-<td><a href="https://s3.amazonaws.com/extend.brackets/hdy.brackets-shell/hdy.brackets-shell-0.0.12.zip" target="_blank" rel="external"><div class="imageHolder"><img src="images/cloud_download.svg" class="image"></div></a></td>
-</tr>
-</tbody>
-</table>]]></content>
-    <summary type="html">
-    <![CDATA[<p>Welcome to <strong>This Week’s Brackets Extension Updates</strong>, Issue 14/52.</p>
 <p>Added or updated <a href="https://twitter.com/bra]]>
     </summary>
     
