@@ -5,6 +5,7 @@ bracketsextensiontweetbot = rewiresource("bracketsextensiontweetbot")
 fs = require "fs"
 path = require "path"
 Promise = require "bluebird"
+zlib = require "zlib"
 
 oldRegistry = JSON.parse('{"de.richter.brackets.jsonlint":{"metadata":{"name":"de.richter.brackets.jsonlint","version":"0.1.1","description":"JSONLint Extension for Brackets","title":"JSONLint Extension for Brackets","scripts":{"test":"mocha unittests.js"},"repository":{"type":"git","url":"https://github.com/ingorichter/de.richter.brackets.jsonlint"},"keywords":["jsonlint","brackets","javascript","linting","codequality","inspection"],"engines":{"brackets":">=0.30.0"},"author":{"name":"Ingo Richter","email":"ingo.richter+github@gmail.com"},"license":"MIT","bugs":{"url":"https://github.com/ingorichter/de.richter.brackets.jsonlint/issues"}},"owner":"github:ingorichter","versions":[{"version":"0.1.0","published":"2013-09-19T01:15:36.391Z","brackets":">=0.30.0"},{"version":"0.1.1","published":"2013-09-19T01:19:12.447Z","brackets":">=0.30.0"}]}}')
 
@@ -80,7 +81,7 @@ describe "Extension Registry Update Notifications", ->
       done()
 
     it "should generate lots of change record", (done) ->
-      oldRegistryObject = JSON.parse(fs.readFileSync(path.join(path.dirname(module.filename), "../../testdata/extensionRegistry.json")))
+      oldRegistryObject = JSON.parse(zlib.gunzipSync(fs.readFileSync(path.join(path.dirname(module.filename), "../../testdata/extensionRegistry.json.gz"))))
 
       newRegistryObject = JSON.parse(fs.readFileSync(path.join(path.dirname(module.filename), "../../testdata/extensionRegistryNew.json")))
 
@@ -153,7 +154,7 @@ describe "Extension Registry Update Notifications", ->
       done()
 
     it "should return the extension registry json object", (done) ->
-      promise = bracketsextensiontweetbot.loadLocalRegistry path.join(path.dirname(module.filename), "../../testdata/extensionRegistry.json")
+      promise = bracketsextensiontweetbot.loadLocalRegistry path.join(path.dirname(module.filename), "../../testdata/extensionRegistry.json.gz")
 
       promise.then (json) ->
         Object.keys(json).length.should.equal 214
@@ -165,7 +166,7 @@ describe "Extension Registry Update Notifications", ->
         llrStub = sinon.stub().returns(Promise.resolve({}))
         derStub = sinon.stub().returns(Promise.resolve({}))
         ccrStub = sinon.stub().returns([1])
-        srfSpy = sinon.spy()
+        srfSpy = sinon.stub().returns(Promise.resolve({}))
         ruSpy = {downloadExtensionRegistry: ->
             Promise.resolve()
         }
@@ -175,7 +176,7 @@ describe "Extension Registry Update Notifications", ->
 
         tw.prototype = Object.create(Object.prototype)
         tw.prototype.post = (data) ->
-          console.log data
+          console.log "Debug: #{data}"
 
         bracketsextensiontweetbot.__set__("loadLocalRegistry", llrStub)
         bracketsextensiontweetbot.__set__("RegistryUtils", ruSpy)
