@@ -1,13 +1,13 @@
 
 /*
- * BracketsExtensionTweetBot
+ * ExtensionStats
  * http://github.com/ingorichter/BracketsExtensionTweetBot
  *
  * Copyright (c) 2014 Ingo Richter
  * Licensed under the MIT license.
  */
 'use strict';
-var BRACKETS_REGISTRY_JSON, DEFAULT_NUMBER_OF_DAYS, DateRange, NEW_KEY, Promise, REGISTRY_BASEURL, RegistryFormatter, TWITTER_CONFIG, TweetFormatter, TwitterPublisher, UPDATE_KEY, createChangeSet, createChangeSetFromRegistry, downloadExtensionRegistry, extractChangesFromRegistry, extractChangesFromTweets, filter, filterRegistry, fs, getJSON, getTweets, getTweetsFromRange, path, request, search, timeline, transformChangeset, transfromRegistryChangeset, twitterPublisher, zlib, _;
+var BRACKETS_REGISTRY_JSON, DEFAULT_NUMBER_OF_DAYS, DateRange, NEW_KEY, Promise, REGISTRY_BASEURL, RegistryFormatter, RegistryUtils, TWITTER_CONFIG, TweetFormatter, TwitterPublisher, UPDATE_KEY, _, createChangeSet, createChangeSetFromRegistry, extractChangesFromRegistry, extractChangesFromTweets, filter, filterRegistry, fs, getRegistry, getTweets, getTweetsFromRange, path, request, search, timeline, transformChangeset, transfromRegistryChangeset, twitterPublisher, zlib;
 
 path = require('path');
 
@@ -25,6 +25,8 @@ TweetFormatter = require('./TweetFormatter');
 
 RegistryFormatter = require('./RegistryFormatter');
 
+RegistryUtils = require('./RegistryUtils');
+
 _ = require('lodash');
 
 TWITTER_CONFIG = path.resolve(__dirname, '../twitterconfig.json');
@@ -39,70 +41,46 @@ NEW_KEY = "NEW";
 
 REGISTRY_BASEURL = 'https://s3.amazonaws.com/extend.brackets';
 
-BRACKETS_REGISTRY_JSON = "" + REGISTRY_BASEURL + "/registry.json";
+BRACKETS_REGISTRY_JSON = REGISTRY_BASEURL + "/registry.json";
 
 DateRange = (function() {
-  function DateRange(from, to) {
-    this.from = from;
-    this.to = to;
+  function DateRange(from1, to1) {
+    this.from = from1;
+    this.to = to1;
   }
 
   DateRange.prototype.contains = function(date) {
-    var _ref;
-    return (this.from.getTime() <= (_ref = date.getTime()) && _ref <= this.to.getTime());
+    var ref;
+    return (this.from.getTime() <= (ref = date.getTime()) && ref <= this.to.getTime());
   };
 
   return DateRange;
 
 })();
 
-downloadExtensionRegistry = function() {
-  var deferred;
-  deferred = Promise.defer();
-  request({
-    uri: BRACKETS_REGISTRY_JSON,
-    json: true,
-    encoding: null
-  }, function(err, resp, body) {
-    if (err) {
-      return deferred.reject(err);
-    } else {
-      return zlib.gunzip(body, function(err, buffer) {
-        if (err) {
-          console.error(err);
-          return deferred.reject(err);
-        } else {
-          return deferred.resolve(JSON.parse(buffer.toString()));
-        }
-      });
-    }
-  });
-  return deferred.promise;
-};
-
 createChangeSet = function(tweets) {
   var newExtensions, tweet, updatedExtensions;
   newExtensions = (function() {
-    var _i, _len, _results;
-    _results = [];
-    for (_i = 0, _len = tweets.length; _i < _len; _i++) {
-      tweet = tweets[_i];
+    var i, len, results;
+    results = [];
+    for (i = 0, len = tweets.length; i < len; i++) {
+      tweet = tweets[i];
       if (tweet.text.indexOf("(NEW)") > -1) {
-        _results.push(tweet);
+        results.push(tweet);
       }
     }
-    return _results;
+    return results;
   })();
   updatedExtensions = (function() {
-    var _i, _len, _results;
-    _results = [];
-    for (_i = 0, _len = tweets.length; _i < _len; _i++) {
-      tweet = tweets[_i];
+    var i, len, results;
+    results = [];
+    for (i = 0, len = tweets.length; i < len; i++) {
+      tweet = tweets[i];
       if (tweet.text.indexOf("(UPDATE)") > -1) {
-        _results.push(tweet);
+        results.push(tweet);
       }
     }
-    return _results;
+    return results;
   })();
   return {
     "NEW": newExtensions,
@@ -124,7 +102,7 @@ timeline = function(max_id, count) {
 };
 
 getTweetsFromRange = function(endDate, numberOfDays) {
-  var allTweets, deferred, lastTweetDate, startDate, _tweets;
+  var _tweets, allTweets, deferred, lastTweetDate, startDate;
   deferred = Promise.defer();
   if (!endDate) {
     endDate = new Date(Date.now());
@@ -138,17 +116,17 @@ getTweetsFromRange = function(endDate, numberOfDays) {
     var promise;
     promise = timeline(max_id, count);
     return promise.then(function(tweets) {
-      var tweet, _i, _j, _len, _len1;
+      var i, j, len, len1, tweet;
       lastTweetDate = new Date(tweets[tweets.length - 1].created_at).getTime();
       if (lastTweetDate > startDate) {
-        for (_i = 0, _len = tweets.length; _i < _len; _i++) {
-          tweet = tweets[_i];
+        for (i = 0, len = tweets.length; i < len; i++) {
+          tweet = tweets[i];
           allTweets.push(tweet);
         }
         return _tweets(tweets[tweets.length - 1].id, count);
       } else {
-        for (_j = 0, _len1 = tweets.length; _j < _len1; _j++) {
-          tweet = tweets[_j];
+        for (j = 0, len1 = tweets.length; j < len1; j++) {
+          tweet = tweets[j];
           if (new Date(tweet.created_at).getTime() > startDate) {
             allTweets.push(tweet);
           }
@@ -168,17 +146,8 @@ getTweets = function(from, to) {
   return getTweetsFromRange(from, to);
 };
 
-getJSON = function() {
-  return new Promise(function(resolve, reject) {
-    var p;
-    p = downloadExtensionRegistry();
-    p.then(function(json) {
-      return resolve(json);
-    });
-    return p["catch"](function(err) {
-      return reject(err);
-    });
-  });
+getRegistry = function() {
+  return RegistryUtils.downloadExtensionRegistry();
 };
 
 filter = function(from, to, json) {
@@ -214,7 +183,7 @@ createChangeSetFromRegistry = function(registry) {
 
 filterRegistry = function(from, to) {
   return new Promise(function(resolve, reject) {
-    return getJSON().then(function(json) {
+    return getRegistry().then(function(json) {
       return resolve(filter(from, to, json));
     });
   });
@@ -273,7 +242,7 @@ exports.filterRegistry = filterRegistry;
 
 exports.getTweets = getTweets;
 
-exports.getJSON = getJSON;
+exports.getRegistry = getRegistry;
 
 exports.search = search;
 
