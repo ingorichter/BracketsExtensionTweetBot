@@ -28,7 +28,7 @@
     "download-stats": "./node_modules/.bin/coffee src/DownloadStats.coffee"
   },
   "devDependencies": {
-    "chai": "~3.3.0",
+    "chai": "~3.4.0",
     "core-util-is": "^1.0.1",
     "grunt-coffeelint": "0.0.13",
     "grunt-contrib-clean": "~0.6.0",
@@ -36,25 +36,25 @@
     "grunt-contrib-jshint": "~0.11.3",
     "grunt-contrib-watch": "~0.6.1",
     "grunt-simple-mocha": "~0.4.0",
-    "handlebars": "^4.0.3",
+    "handlebars": "^4.0.4",
     "inherits": "^2.0.1",
     "istanbul": "~0.4.0",
     "matchdep": "~1.0.0",
     "mocha": "~2.3.3",
     "process-nextick-args": "^1.0.3",
     "rewire": "^2.3.4",
-    "sinon": "~1.17.1",
+    "sinon": "~1.17.2",
     "sinon-chai": "~2.8.0",
-    "time-grunt": "^1.2.1"
+    "time-grunt": "^1.2.2"
   },
   "dependencies": {
-    "bluebird": "~2.10.2",
+    "bluebird": "~3.0.2",
     "coffee-script": "^1.10.0",
     "lodash": "~3.10.1",
     "moment": "^2.10.6",
     "request": "~2.65.0",
     "request-json": "~0.5.3",
     "semver": "^5.0.3",
-    "twit": "~2.1.0"
+    "twit": "~2.1.1"
   }
 }
