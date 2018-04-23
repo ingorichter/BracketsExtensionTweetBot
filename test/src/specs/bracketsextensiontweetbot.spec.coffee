@@ -186,3 +186,4 @@ describe "Extension Registry Update Notifications", ->
         bracketsextensiontweetbot.rockAndRoll().then ->
           expect(srfSpy.calledOnce).to.be.true
           done()
+        return

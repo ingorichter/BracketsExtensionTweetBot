@@ -24,33 +24,35 @@
   },
   "scripts": {
     "test": "grunt test",
-    "weekly-update": "./node_modules/.bin/coffee src/WeeklyStats.coffee",
-    "download-stats": "./node_modules/.bin/coffee src/DownloadStats.coffee"
+    "weekly-update": "coffee src/WeeklyStats.coffee",
+    "download-stats": "coffee src/DownloadStats.coffee"
   },
   "devDependencies": {
-    "chai": "~1.10.0",
-    "grunt-coffeelint": "0.0.13",
-    "grunt-contrib-clean": "~0.6.0",
-    "grunt-contrib-coffee": "~0.12.0",
-    "grunt-contrib-jshint": "~0.10.0",
-    "grunt-contrib-watch": "~0.6.1",
+    "chai": "^4.1.2",
+    "coffeescript": "^2.2.4",
+    "grunt": "^1.0.2",
+    "grunt-cli": "^1.2.0",
+    "grunt-coffeelint": "^0.0.16",
+    "grunt-contrib-clean": "^1.1.0",
+    "grunt-contrib-coffee": "^2.0.0",
+    "grunt-contrib-jshint": "^1.1.0",
+    "grunt-contrib-watch": "^1.0.1",
     "grunt-simple-mocha": "~0.4.0",
-    "istanbul": "~0.3.2",
-    "matchdep": "~0.3.0",
-    "mocha": "~2.0.1",
-    "rewire": "^2.1.3",
-    "sinon": "~1.12.1",
-    "sinon-chai": "~2.6.0",
+    "istanbul": "^0.4.5",
+    "matchdep": "^2.0.0",
+    "mocha": "^5.1.1",
+    "rewire": "4",
+    "sinon": "^5.0.0",
+    "sinon-chai": "^3.0.0",
     "time-grunt": "^1.0.0"
   },
   "dependencies": {
-    "bluebird": "~2.3.11",
-    "coffee-script": "^1.8.0",
-    "lodash": "~2.4.1",
+    "bluebird": "^3.5.1",
+    "lodash": "^4.17.5",
     "moment": "^2.8.4",
-    "request": "~2.48.0",
-    "request-json": "~0.5.0",
-    "semver": "^4.1.0",
-    "twit": "~1.1.18"
+    "request": "^2.85.0",
+    "request-json": "^0.6.3",
+    "semver": "^5.5.0",
+    "twit": "^2.2.9"
   }
 }
