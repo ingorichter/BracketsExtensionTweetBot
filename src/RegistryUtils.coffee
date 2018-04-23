@@ -11,6 +11,7 @@
 Promise = require 'bluebird'
 request = require 'request'
 zlib = require 'zlib'
+fs = require 'fs'
 
 REGISTRY_BASEURL = 'https://s3.amazonaws.com/extend.brackets'
 BRACKETS_REGISTRY_JSON = "#{REGISTRY_BASEURL}/registry.json"
@@ -21,11 +22,15 @@ downloadExtensionRegistry = ->
       if err
         reject err
       else
-        zlib.gunzip body, (err, buffer) ->
+        fs.writeFile './extensionRegistry.json.gz', body, (err) ->
           if err
             reject err
           else
-            resolve JSON.parse buffer.toString()
+            zlib.gunzip body, (err, buffer) ->
+              if err
+                reject err
+              else
+                resolve JSON.parse buffer.toString()
 
 # API
 exports.downloadExtensionRegistry = downloadExtensionRegistry
