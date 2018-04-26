@@ -15,7 +15,8 @@ Promise           = require 'bluebird'
 fs                = Promise.promisifyAll(require 'fs')
 TwitterPublisher  = require './TwitterPublisher'
 RegistryUtils     = require './RegistryUtils'
-_                 = require "lodash"
+_                 = require 'lodash'
+zlib              = require 'zlib'
 
 NOTIFICATION_TYPE = {
   'UPDATE': 'UPDATE',
@@ -24,12 +25,17 @@ NOTIFICATION_TYPE = {
 
 REGISTRY_BASEURL = 'https://s3.amazonaws.com/extend.brackets'
 TWITTER_CONFIG = path.resolve(__dirname, '../twitterconfig.json')
-REGISTRY_JSON = path.resolve(__dirname, '../extensionRegistry.json')
+REGISTRY_JSON = path.resolve(__dirname, '../extensionRegistry.json.gz')
 
 loadLocalRegistry = (registry) ->
   new Promise (resolve, reject) ->
     registry = registry || REGISTRY_JSON
-    p = fs.readFileAsync(registry).then (data) -> resolve JSON.parse(data)
+    p = fs.readFileAsync(registry).then (data) ->
+      zlib.gunzip data, (err, buffer) ->
+        if err
+          reject err
+        else
+          resolve JSON.parse buffer.toString()
 
     p.catch (err) ->
       ## file doesn't exist
@@ -80,15 +86,27 @@ createNotification = (changeRecord) ->
  (#{changeRecord.type}) #{changeRecord.homepage} #{changeRecord.downloadUrl} @brackets"
 
 swapRegistryFiles = (newContent) ->
-  extRegBackupDir = path.resolve(__dirname, "../.oldExtensionRegistries")
-  fs.mkdirSync(extRegBackupDir) if not fs.existsSync(extRegBackupDir)
+  new Promise (resolve, reject) ->
+    extRegBackupDir = path.resolve(__dirname, "../.oldExtensionRegistries")
+    fs.mkdirSync(extRegBackupDir) if not fs.existsSync(extRegBackupDir)
 
-  d = new Date()
+    d = new Date()
 
-  fs.createReadStream(REGISTRY_JSON).pipe(
-    fs.createWriteStream(path.join(extRegBackupDir, "#{d.getTime()}-extensionRegistry.json")))
+    gzip = zlib.createGzip()
 
-  fs.writeFileSync(REGISTRY_JSON, JSON.stringify(newContent))
+    fs.createReadStream(REGISTRY_JSON).pipe(gzip).pipe(
+      fs.createWriteStream(path.join(extRegBackupDir, "#{d.getTime()}-extensionRegistry.json.gz")))
+
+    zlib.gzip JSON.stringify(newContent), (err, buffer) ->
+      if (err)
+        reject(err)
+      else
+        fs.writeFile(REGISTRY_JSON, buffer, (err) ->
+          if (err)
+            reject(err)
+          else
+            resolve()
+        )
 
 # This is the main function
 rockAndRoll = ->
@@ -110,9 +128,8 @@ rockAndRoll = ->
         twitterPublisher = new TwitterPublisher twitterConf
         twitterPublisher.post notification for notification in notifications
 
-        swapRegistryFiles newRegistry
-
-        resolve()
+        swapRegistryFiles(newRegistry).then ->
+          resolve()
     )
 
 # API

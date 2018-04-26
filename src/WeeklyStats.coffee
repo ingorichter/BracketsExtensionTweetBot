@@ -4,7 +4,7 @@ moment = require 'moment'
 process.exit 1 if process.argv.length < 3
 
 # expect argv[2] to be a date in the format mm/dd/yyyy, 11/27/2014
-dateTo = moment(new Date(process.argv[2]))
+dateTo = moment(new Date(process.argv[3]))
 dateTo.hours(2)
 dateTo.minutes(0)
 dateTo.seconds(0)
