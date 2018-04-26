@@ -17,14 +17,17 @@ TwitterPublisher  = require './TwitterPublisher'
 RegistryUtils     = require './RegistryUtils'
 _                 = require 'lodash'
 zlib              = require 'zlib'
+dotenv            = require 'dotenv-safe'
+
+dotenv.config()
 
 NOTIFICATION_TYPE = {
   'UPDATE': 'UPDATE',
   'NEW': 'NEW'
 }
 
-REGISTRY_BASEURL = 'https://s3.amazonaws.com/extend.brackets'
-TWITTER_CONFIG = path.resolve(__dirname, '../twitterconfig.json')
+# config
+REGISTRY_BASEURL = process.env.REGISTRY_BASEURL
 REGISTRY_JSON = path.resolve(__dirname, '../extensionRegistry.json.gz')
 
 loadLocalRegistry = (registry) ->
@@ -115,21 +118,17 @@ rockAndRoll = ->
       notifications = createChangeset(oldRegistry, newRegistry).map (changeRecord) ->
         createNotification changeRecord
 
-      # read twitter config file
-      fs.readFile TWITTER_CONFIG, (err, data) ->
-        # file not found, return empty object
-        if (err)
-          if (err.code is "ENOENT")
-            data = "{\"empty\": true}"
-          else
-            reject(err)
+      twitterConf = {}
+      twitterConf.consumer_key = process.env.TWITTER_CONSUMER_KEY
+      twitterConf.consumer_secret = process.env.TWITTER_CONSUMER_SECRET
+      twitterConf.access_token = process.env.TWITTER_ACCESS_TOKEN
+      twitterConf.access_token_secret = process.env.TWITTER_ACCESS_TOKEN_SECRET
 
-        twitterConf = JSON.parse data
-        twitterPublisher = new TwitterPublisher twitterConf
-        twitterPublisher.post notification for notification in notifications
+      twitterPublisher = new TwitterPublisher twitterConf
+      twitterPublisher.post notification for notification in notifications
 
-        swapRegistryFiles(newRegistry).then ->
-          resolve()
+      swapRegistryFiles(newRegistry).then ->
+        resolve()
     )
 
 # API

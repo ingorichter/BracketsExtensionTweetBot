@@ -9,6 +9,9 @@ var path = require('path');
 var chai = require('chai');
 var sinonChai = require('sinon-chai');
 
+const dotenv = require('dotenv-safe');
+dotenv.config({path: path.join(__dirname, '.env')});
+
 global.chai = chai;
 global.should = chai.should();
 global.expect = chai.expect;
