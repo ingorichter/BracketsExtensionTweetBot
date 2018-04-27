@@ -10,14 +10,13 @@
 'use strict'
 
 Formatter = require './Formatter'
-
-REGISTRY_BASEURL = 'https://s3.amazonaws.com/extend.brackets'
+registryUtils = source 'RegistryUtils'
 
 module.exports =
   class RegistryFormatter extends Formatter
     formatExtensionEntry: (extensionEntry) ->
       extensionMetadata = extensionEntry.metadata
-      downloadURL = "#{REGISTRY_BASEURL}/#{extensionMetadata.name}/#{extensionMetadata.name}-#{extensionMetadata.version}.zip"
+      downloadURL = registryUtils.extensionDownloadURL extensionEntry
 
       "|[#{extensionMetadata.title ?= extensionMetadata.name}](#{extensionMetadata.homepage})|#{extensionMetadata.version}|#{extensionMetadata.description}|#{this.formatUrl(downloadURL)}|"
 

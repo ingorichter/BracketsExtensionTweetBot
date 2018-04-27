@@ -9,14 +9,9 @@
 
 'use strict'
 
-path              = require 'path'
-https             = require 'https'
 Promise           = require 'bluebird'
-fs                = Promise.promisifyAll(require 'fs')
 TwitterPublisher  = require './TwitterPublisher'
 RegistryUtils     = require './RegistryUtils'
-_                 = require 'lodash'
-zlib              = require 'zlib'
 dotenv            = require 'dotenv-safe'
 
 dotenv.config()
@@ -28,27 +23,6 @@ NOTIFICATION_TYPE = {
 
 # config
 REGISTRY_BASEURL = process.env.REGISTRY_BASEURL
-REGISTRY_JSON = path.resolve(__dirname, '../extensionRegistry.json.gz')
-
-loadLocalRegistry = (registry) ->
-  new Promise (resolve, reject) ->
-    registry = registry || REGISTRY_JSON
-    p = fs.readFileAsync(registry).then (data) ->
-      zlib.gunzip data, (err, buffer) ->
-        if err
-          reject err
-        else
-          resolve JSON.parse buffer.toString()
-
-    p.catch (err) ->
-      ## file doesn't exist
-      if (err.cause.code is "ENOENT")
-        resolve {}
-      else
-        reject err
-
-downloadUrl = (extension) ->
-  "#{REGISTRY_BASEURL}/#{extension.metadata.name}/#{extension.metadata.name}-#{extension.metadata.version}.zip"
 
 createChangeset = (oldRegistry, newRegistry) ->
   changesets = []
@@ -72,7 +46,7 @@ createChangeset = (oldRegistry, newRegistry) ->
         type: type,
         title: extension.metadata.title ? extension.metadata.name,
         version: extension.metadata.version,
-        downloadUrl: downloadUrl(extension),
+        downloadUrl: RegistryUtils.extensionDownloadURL(extension),
         description: extension.metadata.description,
         homepage: _homepage ? ""
       }
@@ -88,51 +62,28 @@ createNotification = (changeRecord) ->
   "#{changeRecord.title} - #{changeRecord.version}
  (#{changeRecord.type}) #{changeRecord.homepage} #{changeRecord.downloadUrl} @brackets"
 
-swapRegistryFiles = (newContent) ->
-  new Promise (resolve, reject) ->
-    extRegBackupDir = path.resolve(__dirname, "../.oldExtensionRegistries")
-    fs.mkdirSync(extRegBackupDir) if not fs.existsSync(extRegBackupDir)
-
-    d = new Date()
-
-    gzip = zlib.createGzip()
-
-    fs.createReadStream(REGISTRY_JSON).pipe(gzip).pipe(
-      fs.createWriteStream(path.join(extRegBackupDir, "#{d.getTime()}-extensionRegistry.json.gz")))
-
-    zlib.gzip JSON.stringify(newContent), (err, buffer) ->
-      if (err)
-        reject(err)
-      else
-        fs.writeFile(REGISTRY_JSON, buffer, (err) ->
-          if (err)
-            reject(err)
-          else
-            resolve()
-        )
-
 # This is the main function
 rockAndRoll = ->
   new Promise (resolve, reject) ->
-    Promise.join(loadLocalRegistry(), RegistryUtils.downloadExtensionRegistry(), (oldRegistry, newRegistry) ->
-      notifications = createChangeset(oldRegistry, newRegistry).map (changeRecord) ->
-        createNotification changeRecord
+    Promise.join(RegistryUtils.loadLocalRegistry(), RegistryUtils.downloadExtensionRegistry(),
+      (oldRegistry, newRegistry) ->
+        notifications = createChangeset(oldRegistry, newRegistry).map (changeRecord) ->
+          createNotification changeRecord
 
-      twitterConf = {}
-      twitterConf.consumer_key = process.env.TWITTER_CONSUMER_KEY
-      twitterConf.consumer_secret = process.env.TWITTER_CONSUMER_SECRET
-      twitterConf.access_token = process.env.TWITTER_ACCESS_TOKEN
-      twitterConf.access_token_secret = process.env.TWITTER_ACCESS_TOKEN_SECRET
+        twitterConf = {}
+        twitterConf.consumer_key = process.env.TWITTER_CONSUMER_KEY
+        twitterConf.consumer_secret = process.env.TWITTER_CONSUMER_SECRET
+        twitterConf.access_token = process.env.TWITTER_ACCESS_TOKEN
+        twitterConf.access_token_secret = process.env.TWITTER_ACCESS_TOKEN_SECRET
 
-      twitterPublisher = new TwitterPublisher twitterConf
-      twitterPublisher.post notification for notification in notifications
+        twitterPublisher = new TwitterPublisher twitterConf
+        twitterPublisher.post notification for notification in notifications
 
-      swapRegistryFiles(newRegistry).then ->
-        resolve()
-    )
+        RegistryUtils.swapRegistryFiles(newRegistry).then ->
+          resolve()
+      )
 
 # API
 exports.createChangeset     = createChangeset
 exports.createNotification  = createNotification
 exports.rockAndRoll         = rockAndRoll
-exports.loadLocalRegistry   = loadLocalRegistry

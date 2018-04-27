@@ -1,5 +1,5 @@
 ###
- * ExtensionStats
+ * DownloadStats
  * http://github.com/ingorichter/BracketsExtensionTweetBot
  *
  * Copyright (c) 2014 Ingo Richter

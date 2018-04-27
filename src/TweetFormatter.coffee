@@ -52,7 +52,7 @@ module.exports =
         index = _.findIndex(newSet, {name: tweet.name})
         newSet[index] = false if index > -1
 
-      {"NEW": _.map(_.compact(newSet), (obj) -> obj.tweet), "UPDATE": _.map(updatedSet, (obj) -> obj.tweet)}
+      { "NEW": _.map(_.compact(newSet), (obj) -> obj.tweet), "UPDATE": _.map(updatedSet, (obj) -> obj.tweet) }
 
     transform: (changeSet) ->
       cleanedChangeSet = @removeDuplicatesFromChangeset changeSet

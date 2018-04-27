@@ -144,31 +144,18 @@ describe "Extension Registry Update Notifications", ->
 
       done()
 
-  describe "Local Registry", ->
-    it "should return an empty object if no local registry is available", (done) ->
-      promise = bracketsextensiontweetbot.loadLocalRegistry "notavailable.json"
-
-      promise.then (json) ->
-        expect(json).to.be.empty
-
-      done()
-
-    it "should return the extension registry json object", (done) ->
-      promise = bracketsextensiontweetbot.loadLocalRegistry path.join(path.dirname(module.filename), "../../testdata/extensionRegistry.json.gz")
-
-      promise.then (json) ->
-        Object.keys(json).length.should.equal 214
-
-      done()
-
     describe "Rock and Roll", ->
       it "should call all functions before tweeting the updates", (done) ->
-        llrStub = sinon.stub().returns(Promise.resolve({}))
-        derStub = sinon.stub().returns(Promise.resolve({}))
         ccrStub = sinon.stub().returns([1])
-        srfSpy = sinon.stub().returns(Promise.resolve({}))
-        ruSpy = {downloadExtensionRegistry: ->
+        srfStub = sinon.stub().returns(Promise.resolve())
+        ruSpy = {
+          downloadExtensionRegistry: ->
             Promise.resolve()
+
+          loadLocalRegistry: ->
+            Promise.resolve()
+
+          swapRegistryFiles: srfStub
         }
 
         tw = (config) ->
@@ -178,13 +165,11 @@ describe "Extension Registry Update Notifications", ->
         tw.prototype.post = (data) ->
           console.log "Debug: #{data}"
 
-        bracketsextensiontweetbot.__set__("loadLocalRegistry", llrStub)
         bracketsextensiontweetbot.__set__("RegistryUtils", ruSpy)
         bracketsextensiontweetbot.__set__("createChangeset", ccrStub)
         bracketsextensiontweetbot.__set__("TwitterPublisher", tw)
-        bracketsextensiontweetbot.__set__("swapRegistryFiles", srfSpy)
 
         bracketsextensiontweetbot.rockAndRoll().then ->
-          expect(srfSpy.calledOnce).to.be.true
+          expect(ruSpy.swapRegistryFiles.calledOnce).to.be.true
           done()
         return
