@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "chai": "^4.1.2",
-    "coffeescript": "^2.2.4",
+    "coffeescript": "^2.3.0",
     "grunt": "^1.0.2",
     "grunt-cli": "^1.2.0",
     "grunt-coffeelint": "^0.0.16",
@@ -48,12 +48,11 @@
     "time-grunt": "^1.0.0"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "bluebird": "^3.5.1",
     "dotenv-safe": "^5.0.1",
     "lodash": "^4.17.10",
     "moment": "^2.8.4",
-    "request": "^2.85.0",
-    "request-json": "^0.6.3",
     "semver": "^5.5.0",
     "twit": "^2.2.9"
   }

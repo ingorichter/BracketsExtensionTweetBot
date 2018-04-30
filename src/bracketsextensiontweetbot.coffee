@@ -21,9 +21,6 @@ NOTIFICATION_TYPE = {
   'NEW': 'NEW'
 }
 
-# config
-REGISTRY_BASEURL = process.env.REGISTRY_BASEURL
-
 createChangeset = (oldRegistry, newRegistry) ->
   changesets = []
 
@@ -55,6 +52,15 @@ createChangeset = (oldRegistry, newRegistry) ->
 
   changesets
 
+createTwitterConfig = ->
+  twitterConf = {}
+  twitterConf.consumer_key = process.env.TWITTER_CONSUMER_KEY
+  twitterConf.consumer_secret = process.env.TWITTER_CONSUMER_SECRET
+  twitterConf.access_token = process.env.TWITTER_ACCESS_TOKEN
+  twitterConf.access_token_secret = process.env.TWITTER_ACCESS_TOKEN_SECRET
+
+  twitterConf
+
 #
 # createNotification
 #
@@ -70,11 +76,7 @@ rockAndRoll = ->
         notifications = createChangeset(oldRegistry, newRegistry).map (changeRecord) ->
           createNotification changeRecord
 
-        twitterConf = {}
-        twitterConf.consumer_key = process.env.TWITTER_CONSUMER_KEY
-        twitterConf.consumer_secret = process.env.TWITTER_CONSUMER_SECRET
-        twitterConf.access_token = process.env.TWITTER_ACCESS_TOKEN
-        twitterConf.access_token_secret = process.env.TWITTER_ACCESS_TOKEN_SECRET
+        twitterConf = createTwitterConfig()
 
         twitterPublisher = new TwitterPublisher twitterConf
         twitterPublisher.post notification for notification in notifications
@@ -86,4 +88,5 @@ rockAndRoll = ->
 # API
 exports.createChangeset     = createChangeset
 exports.createNotification  = createNotification
+exports.createTwitterConfig = createTwitterConfig
 exports.rockAndRoll         = rockAndRoll

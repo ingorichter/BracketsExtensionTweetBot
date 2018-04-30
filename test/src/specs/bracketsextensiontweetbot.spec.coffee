@@ -111,6 +111,17 @@ describe "Extension Registry Update Notifications", ->
 
       done()
 
+    it "should create a twitter config object", (done) ->
+      twitterConfig = bracketsextensiontweetbot.createTwitterConfig()
+
+      expect(twitterConfig).to.eql({
+        "access_token": "twitter_access_token"
+        "access_token_secret": "twitter_access_token_secret"
+        "consumer_key": "twitter_key"
+        "consumer_secret": "twitter_secret" })
+
+      done()
+
     describe "Create twitter Notification", ->
       it "should generate notification for new extension", (done) ->
         changeRecord = {
