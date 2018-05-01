@@ -174,7 +174,9 @@ describe "Extension Registry Update Notifications", ->
 
         tw.prototype = Object.create(Object.prototype)
         tw.prototype.post = (data) ->
-          console.log "Debug: #{data}"
+          # console.log "Debug: #{data}"
+        tw.prototype.setClient = (client) ->
+          # console.log "setClient to #{client}"
 
         bracketsextensiontweetbot.__set__("RegistryUtils", ruSpy)
         bracketsextensiontweetbot.__set__("createChangeset", ccrStub)

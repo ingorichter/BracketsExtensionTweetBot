@@ -13,6 +13,7 @@ Promise           = require 'bluebird'
 TwitterPublisher  = require './TwitterPublisher'
 RegistryUtils     = require './RegistryUtils'
 dotenv            = require 'dotenv-safe'
+process           = require 'process'
 
 dotenv.config()
 
@@ -20,6 +21,11 @@ NOTIFICATION_TYPE = {
   'UPDATE': 'UPDATE',
   'NEW': 'NEW'
 }
+
+dryRun = false
+
+if process.argv.length == 3 && process.argv[2] == 'dryRun'
+  dryRun = true
 
 createChangeset = (oldRegistry, newRegistry) ->
   changesets = []
@@ -68,6 +74,17 @@ createNotification = (changeRecord) ->
   "#{changeRecord.title} - #{changeRecord.version}
  (#{changeRecord.type}) #{changeRecord.homepage} #{changeRecord.downloadUrl} @brackets"
 
+#
+# dryRunTwitterClient for debugging and dry run testing
+#
+dryRunTwitterClient = ->
+  dryRunTwitterClient = {
+    post: (endpoint, tweet) ->
+      # TODO(Ingo): replace with logging infrastructure
+      # console.log tweet.status
+      Promise.resolve(tweet.status)
+  }
+
 # This is the main function
 rockAndRoll = ->
   new Promise (resolve, reject) ->
@@ -79,6 +96,9 @@ rockAndRoll = ->
         twitterConf = createTwitterConfig()
 
         twitterPublisher = new TwitterPublisher twitterConf
+
+        twitterPublisher.setClient dryRunTwitterClient() if dryRun
+
         twitterPublisher.post notification for notification in notifications
 
         RegistryUtils.swapRegistryFiles(newRegistry).then ->

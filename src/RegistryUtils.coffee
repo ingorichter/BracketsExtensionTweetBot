@@ -9,7 +9,6 @@
 
 'use strict'
 Promise = require 'bluebird'
-request = require 'request'
 axios = require 'axios'
 zlib = require 'zlib'
 fs = Promise.promisifyAll(require 'fs')
@@ -29,23 +28,20 @@ REGISTRY_SNAPSHOT_FILE_PREVIOUS = path.resolve(REGISTRY_SNAPSHOT_LOCATION_DIR, "
 
 downloadExtensionRegistry = ->
   new Promise (resolve, reject) ->
-    # response defaults to json and the json is automatically ungzipped
-    req = axios.get(BRACKETS_REGISTRY_JSON_URL).then (response) ->
-      gzip = zlib.createGzip()
+    try
+      response = await axios.get(BRACKETS_REGISTRY_JSON_URL)
 
       zlib.gzip JSON.stringify(response.data), (err, buffer) ->
         if err
           reject err
         else
-          fs.writeFile(REGISTRY_SNAPSHOT_FILE_LATEST, buffer, (err) ->
-            if err
-              reject err
-            else
-              resolve response.data
-          )
-
-    req.catch (error) ->
-      reject error
+          try
+            err = await fs.writeFileAsync(REGISTRY_SNAPSHOT_FILE_LATEST, buffer)
+            resolve response.data
+          catch error
+            reject error
+    catch e
+      reject e
 
 # helper to create a canonical URL to download the extension
 extensionDownloadURL = (extension) ->
@@ -77,19 +73,16 @@ swapRegistryFiles = (newContent) ->
     d = new Date()
     archiveRegistryName = "#{d.getTime()}-extensionRegistry.json.gz"
 
-    # 1. move extensionRegistry.json.gz.previous to ${archiveRegistryName}
-    if fs.existsSync(REGISTRY_SNAPSHOT_FILE_PREVIOUS)
-      fs.renameAsync(REGISTRY_SNAPSHOT_FILE_PREVIOUS, path.join(REGISTRY_SNAPSHOT_LOCATION_DIR, archiveRegistryName)).then ->
-        # 2. move extensionRegistry.json.gz.new to extensionRegistry.json.gz.previous
-        if fs.existsSync(REGISTRY_SNAPSHOT_FILE_LATEST)
-          fs.renameAsync(REGISTRY_SNAPSHOT_FILE_LATEST, REGISTRY_SNAPSHOT_FILE_PREVIOUS).then ->
-            resolve()
+    try
+      await fs.renameAsync(REGISTRY_SNAPSHOT_FILE_PREVIOUS, path.join(REGISTRY_SNAPSHOT_LOCATION_DIR, archiveRegistryName))
+      await fs.renameAsync(REGISTRY_SNAPSHOT_FILE_LATEST, REGISTRY_SNAPSHOT_FILE_PREVIOUS)
+      resolve()
+    catch error
+      try
+        await fs.renameAsync(REGISTRY_SNAPSHOT_FILE_LATEST, REGISTRY_SNAPSHOT_FILE_PREVIOUS)
         resolve()
-    else
-        if fs.existsSync(REGISTRY_SNAPSHOT_FILE_LATEST)
-          fs.renameAsync(REGISTRY_SNAPSHOT_FILE_LATEST, REGISTRY_SNAPSHOT_FILE_PREVIOUS).then ->
-            resolve()
-        resolve()
+      catch error
+        resolve error
 
 # API
 exports.downloadExtensionRegistry = downloadExtensionRegistry
