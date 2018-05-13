@@ -36,7 +36,7 @@ downloadExtensionRegistry = ->
           reject err
         else
           try
-            err = await fs.writeFileAsync(REGISTRY_SNAPSHOT_FILE_LATEST, buffer)
+            await fs.writeFileAsync(REGISTRY_SNAPSHOT_FILE_LATEST, buffer)
             resolve response.data
           catch error
             reject error
