@@ -20,7 +20,9 @@ dotenv = require('dotenv-safe');
 
 process = require('process');
 
-dotenv.config();
+dotenv.config({
+  path: '/opt/betb/.env'
+});
 
 NOTIFICATION_TYPE = {
   'UPDATE': 'UPDATE',
@@ -95,7 +97,7 @@ dryRunTwitterClient = function() {
   return dryRunTwitterClient = {
     post: function(endpoint, tweet) {
       // TODO(Ingo): replace with logging infrastructure
-      console.log(tweet.status);
+      // console.log tweet.status
       return Promise.resolve(tweet.status);
     }
   };
