@@ -1,6 +1,6 @@
 # BracketsExtensionTweetBot
 
-[![Build Status](https://secure.travis-ci.org/ingorichter/BracketsExtensionTweetBot.svg?branch=master)](http://travis-ci.org/ingorichter/BracketsExtensionTweetBot)[![NPM Dependencies](https://david-dm.org/ingorichter/BracketsExtensionTweetBot.svg?style=flat)](https://david-dm.org/ingorichter/BracketsExtensionTweetBot)
+[![Build Status](https://travis-ci.org/ingorichter/BracketsExtensionTweetBot.svg?branch=master)](http://travis-ci.org/ingorichter/BracketsExtensionTweetBot)[![NPM Dependencies](https://david-dm.org/ingorichter/BracketsExtensionTweetBot.svg?style=flat)](https://david-dm.org/ingorichter/BracketsExtensionTweetBot)
 
 Tweet about new and updated Brackets extensions
 
