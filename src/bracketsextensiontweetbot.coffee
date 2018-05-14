@@ -13,6 +13,7 @@ Promise           = require 'bluebird'
 TwitterPublisher  = require './TwitterPublisher'
 RegistryUtils     = require './RegistryUtils'
 dotenv            = require 'dotenv-safe'
+process           = require 'process'
 
 dotenv.config()
 
@@ -21,8 +22,10 @@ NOTIFICATION_TYPE = {
   'NEW': 'NEW'
 }
 
-# config
-REGISTRY_BASEURL = process.env.REGISTRY_BASEURL
+dryRun = false
+
+if process.argv.length == 3 && process.argv[2] == 'dryRun'
+  dryRun = true
 
 createChangeset = (oldRegistry, newRegistry) ->
   changesets = []
@@ -55,12 +58,32 @@ createChangeset = (oldRegistry, newRegistry) ->
 
   changesets
 
+createTwitterConfig = ->
+  twitterConf = {}
+  twitterConf.consumer_key = process.env.TWITTER_CONSUMER_KEY
+  twitterConf.consumer_secret = process.env.TWITTER_CONSUMER_SECRET
+  twitterConf.access_token = process.env.TWITTER_ACCESS_TOKEN
+  twitterConf.access_token_secret = process.env.TWITTER_ACCESS_TOKEN_SECRET
+
+  twitterConf
+
 #
 # createNotification
 #
 createNotification = (changeRecord) ->
   "#{changeRecord.title} - #{changeRecord.version}
  (#{changeRecord.type}) #{changeRecord.homepage} #{changeRecord.downloadUrl} @brackets"
+
+#
+# dryRunTwitterClient for debugging and dry run testing
+#
+dryRunTwitterClient = ->
+  dryRunTwitterClient = {
+    post: (endpoint, tweet) ->
+      # TODO(Ingo): replace with logging infrastructure
+      # console.log tweet.status
+      Promise.resolve(tweet.status)
+  }
 
 # This is the main function
 rockAndRoll = ->
@@ -70,13 +93,12 @@ rockAndRoll = ->
         notifications = createChangeset(oldRegistry, newRegistry).map (changeRecord) ->
           createNotification changeRecord
 
-        twitterConf = {}
-        twitterConf.consumer_key = process.env.TWITTER_CONSUMER_KEY
-        twitterConf.consumer_secret = process.env.TWITTER_CONSUMER_SECRET
-        twitterConf.access_token = process.env.TWITTER_ACCESS_TOKEN
-        twitterConf.access_token_secret = process.env.TWITTER_ACCESS_TOKEN_SECRET
+        twitterConf = createTwitterConfig()
 
         twitterPublisher = new TwitterPublisher twitterConf
+
+        twitterPublisher.setClient dryRunTwitterClient() if dryRun
+
         twitterPublisher.post notification for notification in notifications
 
         RegistryUtils.swapRegistryFiles(newRegistry).then ->
@@ -86,4 +108,5 @@ rockAndRoll = ->
 # API
 exports.createChangeset     = createChangeset
 exports.createNotification  = createNotification
+exports.createTwitterConfig = createTwitterConfig
 exports.rockAndRoll         = rockAndRoll

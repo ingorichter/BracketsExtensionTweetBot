@@ -9,3 +9,4 @@ public/
 /test/dist/
 /site/
 /blogUpdate/
+.env
