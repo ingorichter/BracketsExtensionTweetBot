@@ -64,6 +64,7 @@ describe "ExtensionStats", ->
         expect(registry).to.not.be.null
         expect(Object.keys(registry).length).to.equal(349)
         done()
+      return
 
     describe "Create Changeset", ->
       it "should download the registry and create an empty changeset", (done) ->

@@ -116,7 +116,7 @@ createChangeSetFromRegistry = (registry) ->
     extension.versions.length != 1
 
   console.warn "Mismatch" if (newExtensions.length + updatedExtensions.length) != registry.length
-  {"NEW": newExtensions, "UPDATE": updatedExtensions}
+  { "NEW": newExtensions, "UPDATE": updatedExtensions }
 
 filterRegistry = (from, to) ->
   new Promise (resolve, reject) ->
@@ -160,14 +160,14 @@ transfromRegistryChangeset = (changeSet) ->
   formatter.transform changeSet
 
 # API
-exports.createChangeSet            = createChangeSet
-exports.createChangeSetFromRegistry= createChangeSetFromRegistry
-exports.extractChangesFromTweets   = extractChangesFromTweets
-exports.extractChangesFromRegistry = extractChangesFromRegistry
-exports.filterRegistry             = filterRegistry
-exports.getTweets                  = getTweets
-exports.getRegistry                = getRegistry
-exports.search                     = search
-exports.timeline                   = timeline
-exports.transformChangeset         = transformChangeset
-exports.transfromRegistryChangeset = transfromRegistryChangeset
+exports.createChangeSet              = createChangeSet
+exports.createChangeSetFromRegistry  = createChangeSetFromRegistry
+exports.extractChangesFromTweets     = extractChangesFromTweets
+exports.extractChangesFromRegistry   = extractChangesFromRegistry
+exports.filterRegistry               = filterRegistry
+exports.getTweets                    = getTweets
+exports.getRegistry                  = getRegistry
+exports.search                       = search
+exports.timeline                     = timeline
+exports.transformChangeset           = transformChangeset
+exports.transfromRegistryChangeset   = transfromRegistryChangeset

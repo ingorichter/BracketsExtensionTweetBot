@@ -9,43 +9,23 @@
 
 'use strict'
 
-path              = require 'path'
-https             = require 'https'
 Promise           = require 'bluebird'
-fs                = Promise.promisifyAll(require 'fs')
 TwitterPublisher  = require './TwitterPublisher'
 RegistryUtils     = require './RegistryUtils'
-_                 = require 'lodash'
-zlib              = require 'zlib'
+dotenv            = require 'dotenv-safe'
+process           = require 'process'
+
+dotenv.config()
 
 NOTIFICATION_TYPE = {
   'UPDATE': 'UPDATE',
   'NEW': 'NEW'
 }
 
-REGISTRY_BASEURL = 'https://s3.amazonaws.com/extend.brackets'
-TWITTER_CONFIG = path.resolve(__dirname, '../twitterconfig.json')
-REGISTRY_JSON = path.resolve(__dirname, '../extensionRegistry.json.gz')
+dryRun = false
 
-loadLocalRegistry = (registry) ->
-  new Promise (resolve, reject) ->
-    registry = registry || REGISTRY_JSON
-    p = fs.readFileAsync(registry).then (data) ->
-      zlib.gunzip data, (err, buffer) ->
-        if err
-          reject err
-        else
-          resolve JSON.parse buffer.toString()
-
-    p.catch (err) ->
-      ## file doesn't exist
-      if (err.cause.code is "ENOENT")
-        resolve {}
-      else
-        reject err
-
-downloadUrl = (extension) ->
-  "#{REGISTRY_BASEURL}/#{extension.metadata.name}/#{extension.metadata.name}-#{extension.metadata.version}.zip"
+if process.argv.length == 3 && process.argv[2] == 'dryRun'
+  dryRun = true
 
 createChangeset = (oldRegistry, newRegistry) ->
   changesets = []
@@ -69,7 +49,7 @@ createChangeset = (oldRegistry, newRegistry) ->
         type: type,
         title: extension.metadata.title ? extension.metadata.name,
         version: extension.metadata.version,
-        downloadUrl: downloadUrl(extension),
+        downloadUrl: RegistryUtils.extensionDownloadURL(extension),
         description: extension.metadata.description,
         homepage: _homepage ? ""
       }
@@ -78,6 +58,15 @@ createChangeset = (oldRegistry, newRegistry) ->
 
   changesets
 
+createTwitterConfig = ->
+  twitterConf = {}
+  twitterConf.consumer_key = process.env.TWITTER_CONSUMER_KEY
+  twitterConf.consumer_secret = process.env.TWITTER_CONSUMER_SECRET
+  twitterConf.access_token = process.env.TWITTER_ACCESS_TOKEN
+  twitterConf.access_token_secret = process.env.TWITTER_ACCESS_TOKEN_SECRET
+
+  twitterConf
+
 #
 # createNotification
 #
@@ -85,55 +74,39 @@ createNotification = (changeRecord) ->
   "#{changeRecord.title} - #{changeRecord.version}
  (#{changeRecord.type}) #{changeRecord.homepage} #{changeRecord.downloadUrl} @brackets"
 
-swapRegistryFiles = (newContent) ->
-  new Promise (resolve, reject) ->
-    extRegBackupDir = path.resolve(__dirname, "../.oldExtensionRegistries")
-    fs.mkdirSync(extRegBackupDir) if not fs.existsSync(extRegBackupDir)
-
-    d = new Date()
-
-    gzip = zlib.createGzip()
-
-    fs.createReadStream(REGISTRY_JSON).pipe(gzip).pipe(
-      fs.createWriteStream(path.join(extRegBackupDir, "#{d.getTime()}-extensionRegistry.json.gz")))
-
-    zlib.gzip JSON.stringify(newContent), (err, buffer) ->
-      if (err)
-        reject(err)
-      else
-        fs.writeFile(REGISTRY_JSON, buffer, (err) ->
-          if (err)
-            reject(err)
-          else
-            resolve()
-        )
+#
+# dryRunTwitterClient for debugging and dry run testing
+#
+dryRunTwitterClient = ->
+  dryRunTwitterClient = {
+    post: (endpoint, tweet) ->
+      # TODO(Ingo): replace with logging infrastructure
+      # console.log tweet.status
+      Promise.resolve(tweet.status)
+  }
 
 # This is the main function
 rockAndRoll = ->
   new Promise (resolve, reject) ->
-    Promise.join(loadLocalRegistry(), RegistryUtils.downloadExtensionRegistry(), (oldRegistry, newRegistry) ->
-      notifications = createChangeset(oldRegistry, newRegistry).map (changeRecord) ->
-        createNotification changeRecord
+    Promise.join(RegistryUtils.loadLocalRegistry(), RegistryUtils.downloadExtensionRegistry(),
+      (oldRegistry, newRegistry) ->
+        notifications = createChangeset(oldRegistry, newRegistry).map (changeRecord) ->
+          createNotification changeRecord
 
-      # read twitter config file
-      fs.readFile TWITTER_CONFIG, (err, data) ->
-        # file not found, return empty object
-        if (err)
-          if (err.code is "ENOENT")
-            data = "{\"empty\": true}"
-          else
-            reject(err)
+        twitterConf = createTwitterConfig()
 
-        twitterConf = JSON.parse data
         twitterPublisher = new TwitterPublisher twitterConf
+
+        twitterPublisher.setClient dryRunTwitterClient() if dryRun
+
         twitterPublisher.post notification for notification in notifications
 
-        swapRegistryFiles(newRegistry).then ->
+        RegistryUtils.swapRegistryFiles(newRegistry).then ->
           resolve()
-    )
+      )
 
 # API
 exports.createChangeset     = createChangeset
 exports.createNotification  = createNotification
+exports.createTwitterConfig = createTwitterConfig
 exports.rockAndRoll         = rockAndRoll
-exports.loadLocalRegistry   = loadLocalRegistry

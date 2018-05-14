@@ -28,6 +28,7 @@ describe "TwitterPublisher", ->
       promise.then (tweets) ->
         assert.lengthOf tweets, 20
         done()
+      return
 
     it "should return a timeline with 30 tweets", (done) ->
       # setup stub provider
@@ -40,6 +41,7 @@ describe "TwitterPublisher", ->
       promise.then (tweets) ->
         assert.lengthOf tweets, 20
         done()
+      return
 
   describe "Post", ->
     @tc
@@ -69,6 +71,7 @@ describe "TwitterPublisher", ->
         expect(result).to.equal(expectedResult)
 
         done()
+      return
 
     it "should post and handle the error", (done) ->
       expectedResult = {
@@ -87,3 +90,4 @@ describe "TwitterPublisher", ->
         expect(result).to.equal("Can't post")
 
         done()
+      return

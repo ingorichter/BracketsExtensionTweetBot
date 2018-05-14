@@ -1,4 +1,3 @@
-
 /*
  * ExtensionStats
  * http://github.com/ingorichter/BracketsExtensionTweetBot
@@ -6,6 +5,7 @@
  * Copyright (c) 2014 Ingo Richter
  * Licensed under the MIT license.
  */
+// jslint vars: true, plusplus: true, devel: true, node: true, nomen: true, indent: 4, maxerr: 50
 'use strict';
 var BRACKETS_REGISTRY_JSON, DEFAULT_NUMBER_OF_DAYS, DateRange, NEW_KEY, Promise, REGISTRY_BASEURL, RegistryFormatter, RegistryUtils, TWITTER_CONFIG, TweetFormatter, TwitterPublisher, UPDATE_KEY, _, createChangeSet, createChangeSetFromRegistry, extractChangesFromRegistry, extractChangesFromTweets, filter, filterRegistry, fs, getRegistry, getTweets, getTweetsFromRange, path, request, search, timeline, transformChangeset, transfromRegistryChangeset, twitterPublisher, zlib;
 
@@ -33,6 +33,7 @@ TWITTER_CONFIG = path.resolve(__dirname, '../twitterconfig.json');
 
 twitterPublisher = void 0;
 
+// Constant
 DEFAULT_NUMBER_OF_DAYS = 7;
 
 UPDATE_KEY = "UPDATE";
@@ -41,22 +42,20 @@ NEW_KEY = "NEW";
 
 REGISTRY_BASEURL = 'https://s3.amazonaws.com/extend.brackets';
 
-BRACKETS_REGISTRY_JSON = REGISTRY_BASEURL + "/registry.json";
+BRACKETS_REGISTRY_JSON = `${REGISTRY_BASEURL}/registry.json`;
 
-DateRange = (function() {
-  function DateRange(from1, to1) {
+DateRange = class DateRange {
+  constructor(from1, to1) {
     this.from = from1;
     this.to = to1;
   }
 
-  DateRange.prototype.contains = function(date) {
+  contains(date) {
     var ref;
     return (this.from.getTime() <= (ref = date.getTime()) && ref <= this.to.getTime());
-  };
+  }
 
-  return DateRange;
-
-})();
+};
 
 createChangeSet = function(tweets) {
   var newExtensions, tweet, updatedExtensions;
@@ -95,7 +94,7 @@ timeline = function(max_id, count) {
   promise.then(function(data) {
     return deferred.resolve(data);
   });
-  promise["catch"](function(err) {
+  promise.catch(function(err) {
     return deferred.reject(err);
   });
   return deferred.promise;
@@ -105,6 +104,10 @@ getTweetsFromRange = function(endDate, numberOfDays) {
   var _tweets, allTweets, deferred, lastTweetDate, startDate;
   deferred = Promise.defer();
   if (!endDate) {
+    // Range is [endDate - numberOfDays, endDate]
+    // while if date of last tweet > (startDate - numberOfDays)
+    // get a list of tweets
+    // Build a date range [startDate...endDate]
     endDate = new Date(Date.now());
   }
   endDate = endDate.getTime();
@@ -117,6 +120,7 @@ getTweetsFromRange = function(endDate, numberOfDays) {
     promise = timeline(max_id, count);
     return promise.then(function(tweets) {
       var i, j, len, len1, tweet;
+      // console.log("Tweet creation date #{tweets[tweets.length - 1].created_at}")
       lastTweetDate = new Date(tweets[tweets.length - 1].created_at).getTime();
       if (lastTweetDate > startDate) {
         for (i = 0, len = tweets.length; i < len; i++) {
@@ -139,8 +143,11 @@ getTweetsFromRange = function(endDate, numberOfDays) {
   return deferred.promise;
 };
 
+// return raw tweets for a specific range
+
 getTweets = function(from, to) {
   var twitterConf;
+  // read twitter config file
   twitterConf = JSON.parse(fs.readFileSync(TWITTER_CONFIG));
   twitterPublisher = new TwitterPublisher(twitterConf);
   return getTweetsFromRange(from, to);
@@ -161,6 +168,7 @@ filter = function(from, to, json) {
     pubDate = new Date(item.versions[versions - 1].published).getTime();
     return pubDate >= from.getTime() && pubDate <= to.getTime();
   });
+  //    console.log "#{item.metadata.title}-#{versions}-#{pubDate}"
   return filteredRegistry;
 };
 
@@ -199,6 +207,12 @@ extractChangesFromTweets = function(from, to) {
   });
 };
 
+//  deferred = Promise.defer()
+//  getTweets(from, to).then (tweets) ->
+//    cs = createChangeSet tweets
+//    deferred.resolve cs
+
+//  deferred.promise
 extractChangesFromRegistry = function(from, to) {
   return filterRegistry(from, to).then(function(filteredRegistry) {
     return createChangeSetFromRegistry(filteredRegistry);
@@ -207,13 +221,14 @@ extractChangesFromRegistry = function(from, to) {
 
 search = function(query, untilDate) {
   var promise, twitterConf;
+  // read twitter config file
   twitterConf = JSON.parse(fs.readFileSync(TWITTER_CONFIG));
   twitterPublisher = new TwitterPublisher(twitterConf);
   promise = twitterPublisher.search(query, untilDate);
   promise.then(function(data) {
     return fs.writeFileSync(path.resolve(__dirname, '../tweets.json'), JSON.stringify(data));
   });
-  return promise["catch"](function(err) {
+  return promise.catch(function(err) {
     return console.log(err);
   });
 };
@@ -230,6 +245,7 @@ transfromRegistryChangeset = function(changeSet) {
   return formatter.transform(changeSet);
 };
 
+// API
 exports.createChangeSet = createChangeSet;
 
 exports.createChangeSetFromRegistry = createChangeSetFromRegistry;

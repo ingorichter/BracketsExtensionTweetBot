@@ -7,3 +7,6 @@ public/
 .deploy/
 /coverage/
 /test/dist/
+/site/
+/blogUpdate/
+.env
