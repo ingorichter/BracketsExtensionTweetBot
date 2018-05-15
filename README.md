@@ -34,6 +34,13 @@ The file needs the following information:
 ### Cronjob
 I have a cronjob configured to run the Bot every hour of the day. This means the registry snapshots are all an hour apart from each other. This sort of granularity is enough to keep followers informed about updates without spamming them.
 
+## Docker
+Create Docker container
+`docker build -t brackets-extension-tweet-bot .`
+
+Run container
+`docker run -v  `pwd`:/opt/betb -v `pwd`/.env:/app/.env -v `pwd`/registrySnapshots:/app/registrySnapshots brackets-extension-tweet-bot`
+
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
