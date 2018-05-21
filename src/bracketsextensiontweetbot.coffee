@@ -15,7 +15,7 @@ RegistryUtils     = require './RegistryUtils'
 dotenv            = require 'dotenv-safe'
 process           = require 'process'
 
-dotenv.config()
+dotenv.config();
 
 NOTIFICATION_TYPE = {
   'UPDATE': 'UPDATE',

@@ -22,7 +22,7 @@ REGISTRY_BASEURL = "https://s3.amazonaws.com/extend.brackets"
 BRACKETS_REGISTRY_JSON_URL = "#{REGISTRY_BASEURL}/registry.json"
 
 # local
-REGISTRY_SNAPSHOT_LOCATION_DIR = process.env.REGISTRY_SNAPSHOT_LOCATION_DIR
+REGISTRY_SNAPSHOT_LOCATION_DIR = process.env.REGISTRY_SNAPSHOT_LOCATION_DIR || './registrySnapshots'
 REGISTRY_SNAPSHOT_FILE_LATEST = path.resolve(REGISTRY_SNAPSHOT_LOCATION_DIR, "extensionRegistry.json.gz.new")
 REGISTRY_SNAPSHOT_FILE_PREVIOUS = path.resolve(REGISTRY_SNAPSHOT_LOCATION_DIR, "extensionRegistry.json.gz.previous")
 
