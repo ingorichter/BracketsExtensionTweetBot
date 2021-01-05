@@ -50,7 +50,7 @@
     "time-grunt": "^1.0.0"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "bluebird": "^3.5.1",
     "dotenv-safe": "^5.0.1",
     "lodash": "^4.17.10",
